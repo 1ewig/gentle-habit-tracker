@@ -1,20 +1,52 @@
 <div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+  <br />
+  <h1>Gentle Habit Tracker</h1>
+  <p><b>A high-fidelity, high-momentum experience for building a better you.</b></p>
+  <br />
 </div>
 
-# Run and deploy your AI Studio app
+## ✨ Overview
+**Gentle** is a premium habit tracking application designed with a focus on high-momentum UI/UX and agency-grade modular architecture. It moves away from the clinical feel of traditional trackers, offering a vibrant, fluid, and "gentle" approach to personal growth.
 
-This contains everything you need to run your app locally.
+## 🚀 Key Features
+- **Momentum Dock**: A dedicated visualization hub for your weekly, monthly, and overall progress.
+- **Bento Settings**: A beautiful, clustered preference system for deep personalization.
+- **Dynamic Habit Cards**: 10+ high-fidelity card styles with integrated logging logic.
+- **Agency-Grade Orchestration**: A strictly modular codebase using the "Actor/Orchestrator" pattern for maximum performance.
 
-View your app in AI Studio: https://ai.studio/apps/f281f2a4-95cd-43c5-9976-700be40ce818
+## 🛠 Tech Stack
+- **Core**: React + TypeScript
+- **Motion**: Framer Motion (Optimized Variants)
+- **Styling**: Vanilla CSS (Modular Token System)
+- **Bundler**: Vite
 
-## Run Locally
+## 📦 Getting Started
 
-**Prerequisites:**  Node.js
+### Prerequisites
+- Node.js (v18+)
+- npm / yarn / pnpm
 
+### Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/1ewig/gentle-habit-tracker.git
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## 🏗 Architecture
+The project follows a strict **Orchestrator-Actor** model:
+- **Pages**: Act as Orchestrators (handling layout blueprints and global states).
+- **Components**: Act as Actors (handling local visuals and independent interactions).
+- **Styles**: Decoupled into Global Blueprints (`layout.css`) and Component Skins (`*.css`).
+
+---
+<div align="center">
+  <p>Built with momentum by 1ewig</p>
+</div>
