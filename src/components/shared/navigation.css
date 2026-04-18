@@ -1,0 +1,72 @@
+/**
+ * SHARED NAVIGATION
+ * Styles for the bottom navigation pill and route triggers.
+ * Engineered for mobile reachability and haptic-aligned transitions.
+ */
+
+#nav {
+
+  position: fixed;
+  bottom: calc(var(--s-24) + var(--safe-b));
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  z-index: 50;
+  pointer-events: none;
+  isolation: isolate;
+  /* Navigation isolation */
+}
+
+.nav-pill {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: color-mix(in srgb, var(--ui), transparent 30%);
+  border: 1px solid var(--rim);
+  border-top-color: color-mix(in srgb, var(--fg), transparent 85%);
+  border-radius: var(--r-pill);
+  padding: 6px 12px;
+  box-shadow: 0 24px 48px var(--nav-shadow);
+  transition: all 0.6s var(--bezier);
+}
+
+@supports (backdrop-filter: blur(12px)) {
+  .nav-pill {
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+    backdrop-filter: blur(12px) saturate(180%);
+  }
+}
+
+.nav-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  border-radius: var(--r-pill);
+  cursor: pointer;
+  transition: all 0.3s var(--bezier);
+  border: none;
+  background: transparent;
+}
+
+.nav-btn svg {
+  width: 21px;
+  height: 21px;
+  stroke: var(--muted);
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke 0.3s var(--bezier);
+}
+
+.nav-btn:hover,
+.nav-btn.active {
+  background: var(--raised);
+}
+
+.nav-btn.active svg {
+  stroke: var(--accent);
+}

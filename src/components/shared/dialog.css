@@ -1,0 +1,85 @@
+/**
+ * SHARED DIALOGS
+ * Base styles for overlays and modal containers.
+ * Layout and generic close buttons are defined here.
+ */
+
+/* Dialogs */
+.dialog-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  backdrop-filter: blur(20px) saturate(160%);
+  z-index: 100;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.dialog-overlay.active {
+  pointer-events: auto;
+}
+
+.dialog-box {
+  background: var(--bg);
+  width: 100%;
+  max-width: 480px;
+  border-radius: 32px 32px 0 0;
+  border-top: 1px solid var(--rim);
+  padding: var(--s-32) var(--s-24) calc(var(--s-32) + var(--safe-b));
+  max-height: 85vh;
+  max-height: 85dvh;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.dialog-box::-webkit-scrollbar {
+  display: none;
+}
+
+.dialog-overlay.active .dialog-box {
+  transform: translateY(0);
+}
+
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--s-24);
+}
+
+.dialog-title {
+  font-size: var(--t-md);
+  font-weight: var(--fw-reg);
+  line-height: var(--lh-tight);
+  color: var(--text);
+  text-wrap: balance;
+}
+
+.dialog-close {
+  width: var(--s-32);
+  height: var(--s-32);
+  border-radius: 50%;
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.2s var(--bezier);
+}
+
+.dialog-close:active {
+  transform: scale(0.9);
+}
+
+.dialog-close svg {
+  width: 16px;
+  height: 16px;
+  stroke: var(--muted);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+

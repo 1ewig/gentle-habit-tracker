@@ -1,0 +1,145 @@
+/**
+ * SETTINGS FEATURE
+ * Styles for the Bento grid dashboard, profile view,
+ * and habit management lists.
+ */
+
+/* Individual Settings Cards */
+.settings-card {
+  background: var(--surface);
+  border-radius: var(--r-card);
+  padding: var(--s-24);
+  border: 1px solid var(--rim);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-16);
+  transition: transform 0.3s var(--bezier), border-color 0.3s var(--bezier);
+}
+
+.settings-card:hover {
+  border-color: var(--accent);
+}
+
+.card-profile {
+  grid-column: span 2;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--s-24);
+}
+
+.card-appearance,
+.card-habits {
+  grid-column: span 1;
+  min-height: 120px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.bp-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--raised);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--t-xl);
+  font-weight: var(--fw-semi);
+  color: var(--accent);
+  flex-shrink: 0;
+  border: 1px solid var(--rim);
+}
+
+.bp-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+  min-width: 0;
+}
+
+.bp-name {
+  font-size: var(--t-lg);
+  font-weight: var(--fw-reg);
+  color: var(--text);
+  line-height: 1.1;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bp-bio {
+  font-size: var(--t-xs);
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bento-square {
+  min-height: 120px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.bs-title {
+  font-size: var(--t-xs);
+  color: var(--muted);
+  font-weight: var(--fw-med);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+
+.bs-val {
+  font-size: var(--t-md);
+  color: var(--text);
+  font-weight: var(--fw-light);
+}
+
+/* Settings List */
+.settings-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-8);
+  margin-top: var(--s-24);
+}
+
+.scard {
+  background: var(--surface);
+  border-radius: var(--s-16);
+  padding: var(--s-16) var(--s-24);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--rim);
+}
+
+.scard-name {
+  font-size: var(--t-sm);
+  color: var(--text);
+  min-width: 0;
+  text-wrap: pretty;
+}
+
+.scard-remove {
+  width: var(--s-32);
+  height: var(--s-32);
+  border-radius: 50%;
+  border: 1px solid var(--rim);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scard-remove svg {
+  width: 14px;
+  height: 14px;
+  stroke: var(--muted);
+  fill: none;
+  stroke-width: 2;
+}

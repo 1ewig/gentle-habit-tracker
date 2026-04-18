@@ -1,0 +1,313 @@
+/**
+ * MOMENTUM FEATURE
+ * Styles for the dock, weekly/monthly charts, and habit stats.
+ * This includes the Momentum Dock, Monthly Grid, and Day Detail Dialog extensions.
+ */
+
+/* Momentum Dock (Internal visual state only) */
+#momentum-dock {
+  isolation: isolate;
+}
+
+.momentum-card {
+  background: var(--surface);
+  border-radius: var(--r-card);
+  padding: var(--s-16) var(--s-24);
+  border: 1px solid var(--rim);
+  isolation: isolate;
+  /* Local stacking context */
+  box-shadow: none !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.momentum-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.momentum-title {
+  font-size: var(--t-sm);
+  font-weight: var(--fw-reg);
+  color: var(--text);
+}
+
+.momentum-tabs {
+  display: flex;
+  gap: 3px;
+  background: var(--raised);
+  border-radius: 999px;
+  padding: 4px;
+}
+
+.mtab {
+  background: none;
+  border: none;
+  padding: 5px 12px;
+  font-size: var(--t-xs);
+  color: var(--muted);
+  cursor: pointer;
+  border-radius: 999px;
+  transition: all 0.3s var(--bezier);
+  font-weight: var(--fw-reg);
+  text-transform: lowercase;
+}
+
+.mtab.active {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.mtab-panel {
+  display: none;
+  height: 154px;
+  overflow: visible;
+}
+
+.mtab-panel.active {
+  display: block;
+}
+
+/* Weekly Bar Chart */
+.weekly-chart {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+  height: 154px;
+  padding-top: var(--s-16);
+}
+
+.day-bar-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  height: 100%;
+  cursor: pointer;
+}
+
+.day-bar-track {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: relative;
+  overflow: visible;
+}
+
+.day-bar-fill {
+  width: 100%;
+  background: var(--accent);
+  transform-origin: bottom;
+  border-radius: 6px;
+}
+
+.day-bar-fill.is-stub {
+  background: var(--ghost);
+}
+
+
+
+.day-bar-label {
+  font-size: var(--t-xs);
+  color: var(--muted);
+  font-weight: var(--fw-med);
+  flex-shrink: 0;
+  text-transform: lowercase;
+  transition: color 0.3s;
+}
+
+.day-bar-label.is-today {
+  color: var(--accent);
+  text-shadow: 0 0 10px rgba(var(--glow-rgb), 0.3);
+}
+
+@keyframes barRise {
+  from {
+    transform: scaleY(0);
+  }
+
+  to {
+    transform: scaleY(1);
+  }
+}
+
+/* Monthly Dot Grid */
+.monthly-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  height: 154px;
+  align-content: end;
+}
+
+.month-day-lbl {
+  font-size: var(--t-xs);
+  color: var(--muted);
+  font-weight: var(--fw-med);
+  text-align: center;
+  text-transform: lowercase;
+  margin-bottom: 4px;
+  transition: color 0.3s;
+}
+
+.month-day-lbl.is-today {
+  color: var(--accent);
+}
+
+.month-dot {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--raised);
+  border: 1px solid var(--ghost);
+  transition: all 0.3s var(--bezier);
+  max-width: 19px;
+  margin: 0 auto;
+  display: block;
+}
+
+.month-dot[data-day-key] {
+  cursor: pointer;
+}
+
+.month-dot[data-day-key]:hover {
+  border-color: var(--accent);
+  background: var(--raised);
+}
+
+.month-dot.done {
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 8px rgba(var(--glow-rgb), 0.4);
+}
+
+.month-dot.partial {
+  background: var(--accent-lo);
+  border-color: var(--accent);
+  opacity: 0.8;
+}
+
+.month-dot.future {
+  cursor: default;
+  opacity: 0.3;
+}
+
+.month-dot.is-today {
+  border-color: var(--accent);
+  border-width: 2px;
+}
+
+.month-dot.empty-cell {
+  background: transparent;
+  border-color: transparent;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* Stats Panel */
+.stats-split {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  align-items: center;
+  height: 154px;
+}
+
+.stats-divider {
+  height: 60px;
+  background: var(--rim);
+}
+
+.stat-block {
+  text-align: center;
+  padding: var(--s-16);
+}
+
+.stat-big {
+  font-size: var(--t-display);
+  font-weight: var(--fw-light);
+  color: var(--text);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.stat-big .stat-unit {
+  font-size: var(--t-display-sm);
+  font-weight: var(--fw-light);
+  color: var(--muted);
+}
+
+.stat-big.accent {
+  color: var(--accent);
+}
+
+.stat-lbl {
+  font-size: var(--t-xs);
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: var(--fw-semi);
+}
+
+/* Day Detail Dialog Internal Content Styles */
+.day-summary-pill {
+  text-align: center;
+  text-wrap: pretty;
+}
+
+.day-habit-row {
+  display: flex;
+  align-items: center;
+  gap: var(--s-16);
+  padding: 14px var(--s-16);
+  background: var(--surface);
+  border-radius: 16px;
+  border: 1px solid transparent;
+  transition: border-color 0.3s var(--bezier);
+}
+
+.day-habit-row.done {
+  border-color: var(--rim);
+}
+
+.day-habit-dot {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--raised);
+  border: 1px solid var(--ghost);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.4s var(--bezier);
+}
+
+.day-habit-row.done .day-habit-dot {
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 12px rgba(var(--glow-rgb), 0.3);
+}
+
+.day-habit-dot svg {
+  width: 14px;
+  height: 14px;
+  stroke: var(--muted);
+  fill: none;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: all 0.4s var(--bezier);
+}
+
+.day-habit-row.done .day-habit-dot svg {
+  stroke: var(--bg);
+  opacity: 1;
+  transform: scale(1);
+}

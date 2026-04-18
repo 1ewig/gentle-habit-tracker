@@ -1,0 +1,47 @@
+/**
+ * SHARED LAYOUT
+ * Core page headers, sub-labels, and page-specific padding overrides.
+ */
+
+/* Shared Layout Components */
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--s-32) var(--s-24) var(--s-16);
+}
+
+.header-title {
+  font-size: var(--t-lg);
+  font-weight: var(--fw-med);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+  color: var(--text);
+  text-align: center;
+  text-wrap: balance;
+  transition: color 0.6s var(--bezier);
+}
+
+.header-sub {
+  font-size: var(--t-xs);
+  color: var(--muted);
+  margin-top: var(--s-8);
+  font-weight: var(--fw-reg);
+  line-height: var(--lh-base);
+  text-wrap: pretty;
+  transition: color 0.6s var(--bezier);
+}
+
+/* Page-specific padding overrides */
+.page.today {
+  padding-top: var(--safe-t);
+}
+
+.page.settings {
+  padding-top: var(--s-32);
+}
+
+.page.journal {
+  padding-top: var(--safe-t);
+}

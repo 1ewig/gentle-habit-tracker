@@ -1,0 +1,111 @@
+/**
+ * SHARED INTERACTIVE PRIMITIVES
+ * Master styles for buttons, inputs, and toggle states.
+ * Adheres to the 8-point grid for sizing and hit-targets.
+ */
+
+/* Shared Buttons & Interactive Primitives */
+
+.btn-primary {
+  background: var(--text);
+  color: var(--bg);
+  border: none;
+  border-radius: var(--s-16);
+  padding: var(--s-16);
+  font-family: 'Outfit', sans-serif;
+  font-size: var(--t-sm);
+  font-weight: var(--fw-reg);
+  cursor: pointer;
+  transition: transform 0.3s var(--bezier), opacity 0.3s var(--bezier);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-8);
+  min-height: 44px;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+  opacity: 0.9;
+}
+
+/* Customization Matrix Layout */
+.grid-5 {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--s-16);
+  margin-bottom: var(--s-32);
+}
+
+/* Customization Matrix Buttons */
+.theme-btn {
+  aspect-ratio: 1;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: transform 0.3s var(--bezier);
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.theme-btn.active {
+  transform: scale(1.1);
+  outline-color: var(--text);
+}
+
+.style-btn {
+  aspect-ratio: 1;
+  border-radius: 12px;
+  background: var(--surface);
+  border: 1.5px solid var(--rim);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--t-md);
+  font-weight: var(--fw-reg);
+  color: var(--muted);
+  transition: all 0.3s var(--bezier);
+}
+
+.style-btn.active {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--raised);
+}
+
+/* Forms */
+.add-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-16);
+}
+
+.add-form input {
+  background: var(--surface);
+  border: 1px solid var(--rim);
+  border-radius: var(--s-16);
+  padding: var(--s-16) var(--s-24);
+  font-family: 'Outfit', sans-serif;
+  font-size: var(--t-sm);
+  color: var(--text);
+  outline: none;
+  transition: all 0.3s var(--bezier);
+  width: 100%;
+}
+
+.add-form input:focus {
+  border-color: var(--accent);
+}
+
+.section-lbl {
+  font-size: var(--t-xs);
+  color: var(--muted);
+  margin-bottom: var(--s-16);
+  font-weight: var(--fw-reg);
+  letter-spacing: var(--ls-wide);
+  line-height: var(--lh-none);
+  text-transform: uppercase;
+}
