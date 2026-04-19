@@ -91,7 +91,7 @@
   font-weight: var(--fw-med);
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 .bs-val {
