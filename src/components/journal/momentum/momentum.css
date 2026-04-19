@@ -254,6 +254,12 @@
 }
 
 /* Day Detail Dialog Internal Content Styles */
+.day-habits-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-8);
+}
+
 .day-summary-pill {
   text-align: center;
   text-wrap: pretty;
