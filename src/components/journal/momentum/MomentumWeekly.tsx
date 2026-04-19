@@ -16,11 +16,11 @@ export const MomentumWeekly: React.FC = () => {
         const isFuture = d > TODAY;
         const { pct } = getDayStats(key);
         const isToday = i === TODAY_IDX;
-
+        
         // Mathematical constant for minimal visibility
         const MIN_VISIBILITY_PCT = totalHabits > 0 ? 10 : 2;
         const displayPct = isFuture ? MIN_VISIBILITY_PCT : Math.max(pct, MIN_VISIBILITY_PCT);
-        const isStub = pct === 0;
+        const isStub = !isFuture && pct === 0;
 
         return (
           <div
@@ -37,7 +37,7 @@ export const MomentumWeekly: React.FC = () => {
                 transition={MOMENTUM_TRANSITIONS.bar(i)}
               />
             </div>
-            <motion.div
+            <motion.div 
               className={cn("day-bar-label", isToday && "is-today")}
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
