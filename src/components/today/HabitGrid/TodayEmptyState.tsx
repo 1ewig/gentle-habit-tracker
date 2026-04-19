@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { useAppStore } from '../../store/useAppStore';
-import { GRID_ITEM_VARIANTS } from '../../lib/motion';
+import { useAppStore } from '../../../store/useAppStore';
+import { GRID_ITEM_VARIANTS } from '../../../lib/motion';
 
 export function TodayEmptyState() {
   const { setCurrentPage } = useAppStore();

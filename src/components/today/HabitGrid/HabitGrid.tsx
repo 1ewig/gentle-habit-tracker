@@ -1,9 +1,9 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { useAppStore } from '../../store/useAppStore';
-import { HabitCard } from './HabitCard/HabitCard';
+import { useAppStore } from '../../../store/useAppStore';
+import { HabitCard } from './HabitCard';
 import { TodayEmptyState } from './TodayEmptyState';
-import { GRID_VARIANTS } from '../../lib/motion';
+import { GRID_VARIANTS } from '../../../lib/motion';
 
 export function HabitGrid() {
   const { habits } = useAppStore();

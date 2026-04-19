@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { BLOOM_VARIANTS } from '../../lib/motion';
+import { BLOOM_VARIANTS } from '../../../lib/motion';
 
 interface BloomEffectProps {
   size?: number;

@@ -16,7 +16,7 @@
 @import "./components/shared/buttons.css";
 
 /* Feature: Today */
-@import "./components/today/habit-cards.css";
+@import "./components/today/HabitGrid/habit-cards.css";
 
 /* Feature: Momentum (Co-located in Journal) */
 @import "./components/journal/momentum/momentum.css";

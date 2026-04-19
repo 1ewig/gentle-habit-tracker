@@ -1,7 +1,7 @@
 import React from 'react';
 import { cn, WEEK, TODAY_IDX, dateKey, DAY_LABELS, YESTERDAY_KEY, TODAY_KEY, onCardKeyDown } from '../../../lib/utils';
 import { HabitStyleProps } from '../../../store/useAppStore';
-import { BloomEffect } from '../BloomEffect';
+import { BloomEffect } from './BloomEffect';
 
 // --- Style 1: Classic ---
 // Standard dots with a simple checkmark and Bloom Effect support.
