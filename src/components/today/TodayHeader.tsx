@@ -7,8 +7,10 @@ export function TodayHeader() {
 
   return (
     <div className="header">
-      <div className="header-title">{displayTitle}</div>
-      <div className="header-sub">{displaySub}</div>
+      <div className="header-info">
+        <div className="header-title">{displayTitle}</div>
+        <div className="header-sub">{displaySub}</div>
+      </div>
     </div>
   );
 }
