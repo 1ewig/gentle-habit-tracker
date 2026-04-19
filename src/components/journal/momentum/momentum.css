@@ -103,7 +103,7 @@
   width: 100%;
   background: var(--accent);
   transform-origin: bottom;
-  border-radius: 6px;
+  border-radius: 8px;
 }
 
 .day-bar-fill.is-stub {
