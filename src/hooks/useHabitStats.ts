@@ -7,7 +7,7 @@ export interface DayStats {
   pct: number;
 }
 
-export function useMomentum() {
+export function useHabitStats() {
   const { habits } = useAppStore();
   const totalHabits = habits.length;
 

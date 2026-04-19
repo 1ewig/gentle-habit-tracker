@@ -22,10 +22,9 @@ export const THEME_COLORS: Record<string, { bg: string, border: string }> = {
 
 export type Profile = { name: string; bio: string };
 export type Settings = { theme: string; style: number };
-export type Habit = { id: number; name: string; days: Record<string, boolean> };
 
 export interface HabitStyleProps {
-  habit: Habit;
+  habit: import('../hooks/useHabits').Habit;
   handleToggle: (key?: string) => void;
   justChecked: boolean;
 }
@@ -33,21 +32,21 @@ export interface HabitStyleProps {
 interface AppState {
   profile: Profile;
   settings: Settings;
-  habits: Habit[];
+  habits: import('../hooks/useHabits').Habit[];
   currentPage: 'today' | 'journal' | 'settings';
   selectedDay: string | null;
   
   // Actions
   setProfile: (profile: Profile) => void;
   setSettings: (settings: Settings) => void;
-  setHabits: (habits: Habit[]) => void;
+  setHabits: (habits: import('../hooks/useHabits').Habit[]) => void;
   setCurrentPage: (page: 'today' | 'journal' | 'settings') => void;
   setSelectedDay: (day: string | null) => void;
   
-  // Habit Logic
-  toggleHabit: (id: number, key?: string) => void;
-  addHabit: (name: string) => void;
-  removeHabit: (id: number) => void;
+  // Internal habit actions (used by useHabits hook)
+  _toggleHabit: (id: number, key?: string) => void;
+  _addHabit: (name: string) => void;
+  _removeHabit: (id: number) => void;
 }
 
 const STORE_NAME = 'gentle_habit_store_v1';
@@ -73,7 +72,7 @@ export const useAppStore = create<AppState>()(
       setCurrentPage: (currentPage) => set({ currentPage }),
       setSelectedDay: (selectedDay) => set({ selectedDay }),
 
-      toggleHabit: (id, key = TODAY_KEY) => 
+      _toggleHabit: (id: number, key: string = TODAY_KEY) => 
         set((state) => ({
           habits: state.habits.map((h) => {
             if (h.id === id) {
@@ -85,12 +84,12 @@ export const useAppStore = create<AppState>()(
           })
         })),
 
-      addHabit: (name) =>
+      _addHabit: (name: string) =>
         set((state) => ({
           habits: [...state.habits, { id: Date.now(), name, days: {} }]
         })),
 
-      removeHabit: (id) =>
+      _removeHabit: (id: number) =>
         set((state) => ({
           habits: state.habits.filter((h) => h.id !== id)
         })),

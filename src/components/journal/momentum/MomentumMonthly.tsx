@@ -1,12 +1,12 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { dateKey, TODAY, cn } from '../../../lib/utils';
-import { useMomentum } from '../../../hooks/useMomentum';
+import { useHabitStats } from '../../../hooks/useHabitStats';
 import { useAppStore } from '../../../store/useAppStore';
 import { MOMENTUM_TRANSITIONS } from '../../../lib/motion';
 
 export const MomentumMonthly: React.FC = () => {
-  const { totalHabits, getDayStats, getMonthMetadata } = useMomentum();
+  const { totalHabits, getDayStats, getMonthMetadata } = useHabitStats();
   const { setSelectedDay } = useAppStore();
   const { year, month, firstDay, daysInMonth } = getMonthMetadata();
   const todayKey = dateKey(TODAY);

@@ -1,8 +1,8 @@
 import React from 'react';
-import { useMomentum } from '../../../hooks/useMomentum';
+import { useHabitStats } from '../../../hooks/useHabitStats';
 
 export const MomentumStats: React.FC = () => {
-  const { getOverallConsistency, countPerfectDays } = useMomentum();
+  const { getOverallConsistency, countPerfectDays } = useHabitStats();
   
   const consistency = getOverallConsistency();
   const perfectDays = countPerfectDays();
