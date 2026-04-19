@@ -91,7 +91,13 @@
   font-weight: var(--fw-med);
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
+}
+
+.bs-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .bs-val {

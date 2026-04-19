@@ -28,8 +28,10 @@ export function HabitSection() {
         aria-label="Manage your habits list"
         whileTap={HOVER_TAP.tap}
       >
-        <div className="bs-title">habits</div>
-        <div className="bs-val">{habits.length} active</div>
+        <div className="bs-info">
+          <div className="bs-title">habits</div>
+          <div className="bs-val">{habits.length} active</div>
+        </div>
       </motion.div>
 
       <Dialog isOpen={isOpen} onClose={() => setIsOpen(false)} title="manage habits">

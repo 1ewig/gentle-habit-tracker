@@ -21,8 +21,10 @@ export function AppearanceSection() {
         aria-label="Customize interface atmosphere and card style"
         whileTap={HOVER_TAP.tap}
       >
-        <div className="bs-title">atmosphere</div>
-        <div className="bs-val">{settings.theme} · s{settings.style}</div>
+        <div className="bs-info">
+          <div className="bs-title">atmosphere</div>
+          <div className="bs-val">{settings.theme} · s{settings.style}</div>
+        </div>
       </motion.div>
 
       <Dialog isOpen={isOpen} onClose={() => setIsOpen(false)} title="customization">
