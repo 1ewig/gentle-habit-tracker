@@ -107,12 +107,12 @@
 }
 
 .day-bar-fill.is-empty {
-  background: var(--muted);
+  background: var(--ghost);
   border-radius: 8px;
 }
 
 .day-bar-fill.is-future {
-  background: var(--muted);
+  background: var(--ghost);
   border-radius: 8px;
 }
 
