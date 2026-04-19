@@ -106,13 +106,13 @@
   border-radius: 8px;
 }
 
-.day-bar-fill.is-stub {
-  background: var(--ghost);
+.day-bar-fill.is-empty {
+  background: var(--muted);
   border-radius: 8px;
 }
 
 .day-bar-fill.is-future {
-  opacity: 0.3;
+  background: var(--muted);
   border-radius: 8px;
 }
 
