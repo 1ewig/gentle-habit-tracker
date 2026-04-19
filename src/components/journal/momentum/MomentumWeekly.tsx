@@ -18,8 +18,8 @@ export const MomentumWeekly: React.FC = () => {
         const isToday = i === TODAY_IDX;
         
         // Mathematical constant for minimal visibility
-        const MIN_VISIBILITY_PCT = totalHabits > 0 ? 3 : 2;
-        const displayPct = isFuture ? 0 : Math.max(pct, MIN_VISIBILITY_PCT);
+        const MIN_VISIBILITY_PCT = totalHabits > 0 ? 10 : 2;
+        const displayPct = isFuture ? MIN_VISIBILITY_PCT : Math.max(pct, MIN_VISIBILITY_PCT);
         const isStub = !isFuture && pct === 0;
 
         return (
@@ -30,7 +30,7 @@ export const MomentumWeekly: React.FC = () => {
           >
             <div className="day-bar-track">
               <motion.div
-                className={cn("day-bar-fill", isStub && "is-stub")}
+                className={cn("day-bar-fill", isFuture && "is-future", isStub && "is-stub")}
                 initial={{ scaleY: 0 }}
                 animate={{ scaleY: displayPct / 100 }}
                 style={{ originY: 1, height: '100%' }}

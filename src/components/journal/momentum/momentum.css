@@ -110,6 +110,9 @@
   background: var(--ghost);
 }
 
+.day-bar-fill.is-future {
+  opacity: 0.3;
+}
 
 
 .day-bar-label {
