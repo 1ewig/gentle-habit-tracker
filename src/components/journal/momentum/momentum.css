@@ -108,10 +108,12 @@
 
 .day-bar-fill.is-stub {
   background: var(--ghost);
+  border-radius: 8px;
 }
 
 .day-bar-fill.is-future {
   opacity: 0.3;
+  border-radius: 8px;
 }
 
 
