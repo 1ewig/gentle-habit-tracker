@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { useAppStore } from '../../../store/useAppStore';
 import { useHabits } from '../../../hooks/useHabits';
 import { Dialog } from '../../shared/Dialog';
 import { GRID_ITEM_VARIANTS, HOVER_TAP } from '../../../lib/motion';

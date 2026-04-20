@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { useAppStore } from '../../../store/useAppStore';
 import { Dialog } from '../../shared/Dialog';
-import { cn } from '../../../lib/utils';
 import { GRID_ITEM_VARIANTS, HOVER_TAP } from '../../../lib/motion';
 
 export function ProfileSection() {

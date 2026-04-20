@@ -1,7 +1,6 @@
 import React, { ReactNode, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'motion/react';
-import { cn } from '../../lib/utils';
 import { DIALOG_VARIANTS } from '../../lib/motion';
 
 interface DialogProps {
@@ -11,7 +10,7 @@ interface DialogProps {
   children: ReactNode;
 }
 
-const FOCUSABLE_SELECTORS = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+const FOCUSABLE_SELECTORS = 'button, [href], input, select, textarea, [tabindex]:not([tabindex]="-1")';
 
 export function Dialog({ isOpen, onClose, title, children }: DialogProps) {
   const dialogRef = useRef<HTMLDivElement>(null);
