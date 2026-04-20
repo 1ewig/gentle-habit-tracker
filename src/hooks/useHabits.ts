@@ -13,7 +13,7 @@ export function useHabits() {
   const [justCheckedIds, setJustCheckedIds] = useState<Set<number>>(new Set());
 
   const handleToggle = useCallback((habit: Habit, key: string = TODAY_KEY) => {
-    const isDone = !!habit.days[key];
+    const isDone = Boolean(habit.days[key]);
     _toggleHabit(habit.id, key);
 
     if (key === TODAY_KEY && !isDone) {

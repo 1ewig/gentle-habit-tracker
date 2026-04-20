@@ -16,7 +16,7 @@ export const HabitCard: React.FC<HabitCardProps> = ({ habit, index }) => {
   const { settings } = useAppStore();
   const { justChecked, handleToggle } = useHabitToggle(habit);
   
-  const isDoneToday = !!habit.days[TODAY_KEY];
+  const isDoneToday = Boolean(habit.days[TODAY_KEY]);
   const StyleComponent = STYLE_MAP[settings.style] || STYLE_MAP[1];
 
   return (

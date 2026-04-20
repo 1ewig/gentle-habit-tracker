@@ -13,7 +13,7 @@ export function useHabitStats() {
 
   const getDayStats = (key: string): DayStats => {
     if (totalHabits === 0) return { total: 0, done: 0, pct: 0 };
-    const done = habits.filter(h => !!h.days[key]).length;
+    const done = habits.filter(h => Boolean(h.days[key])).length;
     return { total: totalHabits, done, pct: (done / totalHabits) * 100 };
   };
 
@@ -24,7 +24,7 @@ export function useHabitStats() {
     let count = 0;
     for (let day = 1; day <= TODAY.getDate(); day++) {
       const key = dateKey(new Date(year, month, day));
-      if (habits.every(h => !!h.days[key])) count++;
+      if (habits.every(h => Boolean(h.days[key]))) count++;
     }
     return count;
   };
@@ -38,7 +38,7 @@ export function useHabitStats() {
     for (let day = 1; day <= TODAY.getDate(); day++) {
       const key = dateKey(new Date(year, month, day));
       totalPossible += totalHabits;
-      totalDone += habits.filter(h => !!h.days[key]).length;
+      totalDone += habits.filter(h => Boolean(h.days[key])).length;
     }
     
     return totalPossible > 0 ? Math.round((totalDone / totalPossible) * 100) : 0;

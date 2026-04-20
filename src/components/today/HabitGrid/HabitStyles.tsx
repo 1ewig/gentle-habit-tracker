@@ -6,7 +6,7 @@ import { BloomEffect } from './BloomEffect';
 // --- Style 1: Classic ---
 // Standard dots with a simple checkmark and Bloom Effect support.
 export const StyleClassic: React.FC<HabitStyleProps> = ({ habit, handleToggle, justChecked }) => {
-  const isDoneToday = !!habit.days[TODAY_KEY];
+  const isDoneToday = Boolean(habit.days[TODAY_KEY]);
   return (
     <>
       <div className="hcard-top">
@@ -27,7 +27,7 @@ export const StyleClassic: React.FC<HabitStyleProps> = ({ habit, handleToggle, j
       <div className="week-row" role="group" aria-label="Weekly progress">
         {WEEK.map((d, i) => {
           const key = dateKey(d);
-          const done = !!habit.days[key];
+          const done = Boolean(habit.days[key]);
           const isToday = i === TODAY_IDX;
           const isYesterday = key === YESTERDAY_KEY;
           const canToggle = isToday || isYesterday;
@@ -54,7 +54,7 @@ export const StyleClassic: React.FC<HabitStyleProps> = ({ habit, handleToggle, j
 // --- Style 2: Strike ---
 // Minimalist dots where today and yesterday can be toggled via a simple check icon.
 export const StyleStrike: React.FC<HabitStyleProps> = ({ habit, handleToggle }) => {
-  const isDoneToday = !!habit.days[TODAY_KEY];
+  const isDoneToday = Boolean(habit.days[TODAY_KEY]);
   return (
     <>
       <div className="hcard-top">
@@ -74,7 +74,7 @@ export const StyleStrike: React.FC<HabitStyleProps> = ({ habit, handleToggle }) 
       <div className="week-row" role="group" aria-label="Weekly progress">
         {WEEK.map((d, i) => {
           const key = dateKey(d);
-          const done = !!habit.days[key];
+          const done = Boolean(habit.days[key]);
           const isToday = i === TODAY_IDX;
           const isYesterday = key === YESTERDAY_KEY;
           const canToggle = isToday || isYesterday;
@@ -101,7 +101,7 @@ export const StyleStrike: React.FC<HabitStyleProps> = ({ habit, handleToggle }) 
 // --- Style 3: Switch ---
 // Uses a toggle switch component for completion instead of a simple icon.
 export const StyleSwitch: React.FC<HabitStyleProps> = ({ habit, handleToggle }) => {
-  const isDoneToday = !!habit.days[TODAY_KEY];
+  const isDoneToday = Boolean(habit.days[TODAY_KEY]);
   return (
     <>
       <div className="hcard-top">
@@ -121,7 +121,7 @@ export const StyleSwitch: React.FC<HabitStyleProps> = ({ habit, handleToggle }) 
       <div className="week-row" role="group" aria-label="Weekly progress">
         {WEEK.map((d, i) => {
           const key = dateKey(d);
-          const done = !!habit.days[key];
+          const done = Boolean(habit.days[key]);
           const isToday = i === TODAY_IDX;
           const isYesterday = key === YESTERDAY_KEY;
           const canToggle = isToday || isYesterday;
@@ -148,7 +148,7 @@ export const StyleSwitch: React.FC<HabitStyleProps> = ({ habit, handleToggle }) 
 // --- Style 4: Counter ---
 // Numeric display (0/1) for a checklist-style feel. Supports YESTERDAY_KEY toggling.
 export const StyleCounter: React.FC<HabitStyleProps> = ({ habit, handleToggle }) => {
-  const isDoneToday = !!habit.days[TODAY_KEY];
+  const isDoneToday = Boolean(habit.days[TODAY_KEY]);
   return (
     <>
       <div className="hcard-top">
@@ -168,7 +168,7 @@ export const StyleCounter: React.FC<HabitStyleProps> = ({ habit, handleToggle })
       <div className="week-row" role="group" aria-label="Weekly progress">
         {WEEK.map((d, i) => {
           const key = dateKey(d);
-          const done = !!habit.days[key];
+          const done = Boolean(habit.days[key]);
           const isToday = i === TODAY_IDX;
           const isYesterday = key === YESTERDAY_KEY;
           const canToggle = isToday || isYesterday;
@@ -195,7 +195,7 @@ export const StyleCounter: React.FC<HabitStyleProps> = ({ habit, handleToggle })
 // --- Style 5: Pure ---
 // Extremely minimal: Click the habit name itself to toggle. Dots also act as triggers.
 export const StylePure: React.FC<HabitStyleProps> = ({ habit, handleToggle, justChecked }) => {
-  const isDoneToday = !!habit.days[TODAY_KEY];
+  const isDoneToday = Boolean(habit.days[TODAY_KEY]);
   return (
     <>
       <div className="hcard-top">
@@ -223,7 +223,7 @@ export const StylePure: React.FC<HabitStyleProps> = ({ habit, handleToggle, just
       <div className="week-row" role="group" aria-label="Weekly progress">
         {WEEK.map((d, i) => {
           const key = dateKey(d);
-          const done = !!habit.days[key];
+          const done = Boolean(habit.days[key]);
           const isToday = i === TODAY_IDX;
           const isYesterday = key === YESTERDAY_KEY;
           const canToggle = isToday || isYesterday;
@@ -254,7 +254,7 @@ export const StylePure: React.FC<HabitStyleProps> = ({ habit, handleToggle, just
 // --- Style 6: Pill ---
 // Plus icon turns into a checkmark. Highlights active interaction range (today/yesterday).
 export const StylePill: React.FC<HabitStyleProps> = ({ habit, handleToggle }) => {
-  const isDoneToday = !!habit.days[TODAY_KEY];
+  const isDoneToday = Boolean(habit.days[TODAY_KEY]);
   return (
     <>
       <div className="hcard-top">
@@ -275,7 +275,7 @@ export const StylePill: React.FC<HabitStyleProps> = ({ habit, handleToggle }) =>
       <div className="week-row" role="group" aria-label="Weekly progress">
         {WEEK.map((d, i) => {
           const key = dateKey(d);
-          const done = !!habit.days[key];
+          const done = Boolean(habit.days[key]);
           const isToday = i === TODAY_IDX;
           const isYesterday = key === YESTERDAY_KEY;
           const canToggle = isToday || isYesterday;
@@ -302,7 +302,7 @@ export const StylePill: React.FC<HabitStyleProps> = ({ habit, handleToggle }) =>
 // --- Style 7: Block ---
 // Simple checkbox icon with standard progress dots.
 export const StyleBlock: React.FC<HabitStyleProps> = ({ habit, handleToggle }) => {
-  const isDoneToday = !!habit.days[TODAY_KEY];
+  const isDoneToday = Boolean(habit.days[TODAY_KEY]);
   return (
     <>
       <div className="hcard-top">
@@ -322,7 +322,7 @@ export const StyleBlock: React.FC<HabitStyleProps> = ({ habit, handleToggle }) =
       <div className="week-row" role="group" aria-label="Weekly progress">
         {WEEK.map((d, i) => {
           const key = dateKey(d);
-          const done = !!habit.days[key];
+          const done = Boolean(habit.days[key]);
           const isToday = i === TODAY_IDX;
           const isYesterday = key === YESTERDAY_KEY;
           const canToggle = isToday || isYesterday;
@@ -349,7 +349,7 @@ export const StyleBlock: React.FC<HabitStyleProps> = ({ habit, handleToggle }) =
 // --- Style 8: Bar ---
 // Progress is visualized via vertical bars instead of dots. Includes 'Y' icon placeholder.
 export const StyleBar: React.FC<HabitStyleProps> = ({ habit, handleToggle }) => {
-  const isDoneToday = !!habit.days[TODAY_KEY];
+  const isDoneToday = Boolean(habit.days[TODAY_KEY]);
   return (
     <>
       <div className="hcard-top">
@@ -369,7 +369,7 @@ export const StyleBar: React.FC<HabitStyleProps> = ({ habit, handleToggle }) => 
       <div className="week-row" role="group" aria-label="Weekly progress">
         {WEEK.map((d, i) => {
           const key = dateKey(d);
-          const done = !!habit.days[key];
+          const done = Boolean(habit.days[key]);
           const isToday = i === TODAY_IDX;
           const isYesterday = key === YESTERDAY_KEY;
           const canToggle = isToday || isYesterday;
@@ -396,7 +396,7 @@ export const StyleBar: React.FC<HabitStyleProps> = ({ habit, handleToggle }) => 
 // --- Style 9: Arc ---
 // Circular progress indicator (SVG arc) surrounding the check icon.
 export const StyleArc: React.FC<HabitStyleProps> = ({ habit, handleToggle }) => {
-  const isDoneToday = !!habit.days[TODAY_KEY];
+  const isDoneToday = Boolean(habit.days[TODAY_KEY]);
   return (
     <>
       <div className="hcard-top">
@@ -422,7 +422,7 @@ export const StyleArc: React.FC<HabitStyleProps> = ({ habit, handleToggle }) => 
       <div className="week-row" role="group" aria-label="Weekly progress">
         {WEEK.map((d, i) => {
           const key = dateKey(d);
-          const done = !!habit.days[key];
+          const done = Boolean(habit.days[key]);
           const isToday = i === TODAY_IDX;
           const isYesterday = key === YESTERDAY_KEY;
           const canToggle = isToday || isYesterday;
@@ -449,7 +449,7 @@ export const StyleArc: React.FC<HabitStyleProps> = ({ habit, handleToggle }) => 
 // --- Style 10: Peel ---
 // Aesthetic 'shimmer' peel effect with a spark icon.
 export const StylePeel: React.FC<HabitStyleProps> = ({ habit, handleToggle }) => {
-  const isDoneToday = !!habit.days[TODAY_KEY];
+  const isDoneToday = Boolean(habit.days[TODAY_KEY]);
   return (
     <>
       <div className="hcard-top">
@@ -470,7 +470,7 @@ export const StylePeel: React.FC<HabitStyleProps> = ({ habit, handleToggle }) =>
       <div className="week-row" role="group" aria-label="Weekly progress">
         {WEEK.map((d, i) => {
           const key = dateKey(d);
-          const done = !!habit.days[key];
+          const done = Boolean(habit.days[key]);
           const isToday = i === TODAY_IDX;
           const isYesterday = key === YESTERDAY_KEY;
           const canToggle = isToday || isYesterday;

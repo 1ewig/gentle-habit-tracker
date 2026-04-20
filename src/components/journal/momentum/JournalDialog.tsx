@@ -24,12 +24,12 @@ export function JournalDialog() {
   const dialogPill = total === 0 ? 'no habits tracked' : `${done} of ${total} completed`;
 
   return (
-    <Dialog isOpen={!!selectedDay} onClose={closeDialog} title={dialogTitle}>
+    <Dialog isOpen={Boolean(selectedDay)} onClose={closeDialog} title={dialogTitle}>
       <span className="day-summary-pill">{dialogPill}</span>
       
       <div className="day-habits-list">
         {habits.map((h) => {
-          const isDone = !!h.days[selectedDay];
+          const isDone = Boolean(h.days[selectedDay]);
           return (
             <div 
               key={h.id} 
