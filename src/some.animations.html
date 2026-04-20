@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>10 Premium Framer Motion Transitions</title>
+
+  <!-- React 18 -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <!-- Babel for in-browser JSX compilation -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <!-- Framer Motion 11 -->
+  <script src="https://unpkg.com/framer-motion@11/dist/framer-motion.js"></script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* === BASE RESET & SETUP === */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body { 
+      font-family: 'Inter', sans-serif; 
+      background: #09090b; 
+      color: #ededed; 
+      overflow: hidden; /* Scrolling is handled by the container */
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* === SCROLL SNAPPING CONTAINER === */
+    .snap-container {
+      height: 100dvh;
+      overflow-y: scroll;
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
+    }
+    .snap-container::-webkit-scrollbar { display: none; }
+
+    .page {
+      height: 100dvh;
+      width: 100vw;
+      scroll-snap-align: start;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .page-header {
+      position: absolute;
+      top: 10%;
+      text-align: center;
+    }
+
+    .page-header h2 { font-size: 1.5rem; margin-bottom: 0.5rem; letter-spacing: -0.5px; }
+    .page-header p { color: #a1a1aa; font-size: 0.9rem; max-width: 400px; }
+
+    /* === SHARED UI ELEMENTS === */
+    .card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 1.5rem;
+      backdrop-filter: blur(10px);
+      width: 100%;
+      max-width: 340px;
+    }
+
+    button {
+      background: #ffffff;
+      color: #000000;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { motion, AnimatePresence, LayoutGroup } = window.Motion;
+    const { useState, useEffect } = React;
+
+    // Dummy Data for Habit Cards
+    const habits = [
+      { id: "h1", title: "Drink 2L Water", color: "#3b82f6", icon: "💧" },
+      { id: "h2", title: "Read 20 Pages", color: "#8b5cf6", icon: "📚" },
+      { id: "h3", title: "Morning Workout", color: "#10b981", icon: "🏋️" },
+    ];
+
+    // ==========================================
+    // 1. PUSH / HORIZONTAL SLIDE
+    // ==========================================
+    function PushTransition() {
+      const [index, setIndex] = useState(0);
+      const [direction, setDirection] = useState(1);
+
+      const navigate = (newIndex) => {
+        setDirection(newIndex > index ? 1 : -1);
+        setIndex(newIndex);
+      };
+
+      const variants = {
+        enter: (dir) => ({ x: dir > 0 ? "100%" : "-100%", opacity: 0 }),
+        center: { x: 0, opacity: 1 },
+        exit: (dir) => ({ x: dir < 0 ? "100%" : "-100%", opacity: 0 })
+      };
+
+      return (
+        <div className="card" style={{ overflow: "hidden", position: "relative", height: 200 }}>
+          <AnimatePresence mode="wait" custom={direction}>
+            <motion.div
+              key={index}
+              custom={direction}
+              variants={variants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+              style={{ position: "absolute", inset: 24, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}
+            >
+              <div style={{ fontSize: "3rem" }}>{habits[index].icon}</div>
+              <h3>{habits[index].title}</h3>
+            </motion.div>
+          </AnimatePresence>
+          <div style={{ position: "absolute", bottom: 16, width: "100%", display: "flex", justifyContent: "space-between", padding: "0 24px", left: 0 }}>
+            <button onClick={() => navigate(Math.max(0, index - 1))} disabled={index === 0} style={{ padding: "8px 16px" }}>←</button>
+            <button onClick={() => navigate(Math.min(habits.length - 1, index + 1))} disabled={index === habits.length - 1} style={{ padding: "8px 16px" }}>→</button>
+          </div>
+        </div>
+      );
+    }
+
+    // ==========================================
+    // 2. FADE THROUGH (CROSS DISSOLVE)
+    // ==========================================
+    function FadeThrough() {
+      const [activeTab, setActiveTab] = useState(0);
+
+      return (
+        <div className="card" style={{ height: 220, display: "flex", flexDirection: "column" }}>
+          <div style={{ display: "flex", gap: 8, marginBottom: 16 }}>
+            {habits.map((h, i) => (
+              <button key={h.id} onClick={() => setActiveTab(i)} style={{ flex: 1, padding: "8px", background: activeTab === i ? "#fff" : "#27272a", color: activeTab === i ? "#000" : "#fff" }}>
+                {h.icon}
+              </button>
+            ))}
+          </div>
+          <div style={{ position: "relative", flex: 1 }}>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeTab}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.2 }}
+                style={{ position: "absolute", inset: 0, background: "rgba(255,255,255,0.05)", borderRadius: 8, padding: 16 }}
+              >
+                <h3 style={{ color: habits[activeTab].color }}>{habits[activeTab].title}</h3>
+                <p style={{ color: "#a1a1aa", fontSize: "0.85rem", marginTop: 8 }}>Cross dissolve is the safest, most professional transition for sibling hierarchy.</p>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </div>
+      );
+    }
+
+    // ==========================================
+    // 3. MODAL SLIDE UP
+    // ==========================================
+    function ModalSlideUp() {
+      const [isOpen, setIsOpen] = useState(false);
+
+      return (
+        <>
+          <button onClick={() => setIsOpen(true)}>Open Habit Options</button>
+          <AnimatePresence>
+            {isOpen && (
+              <>
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  onClick={() => setIsOpen(false)}
+                  style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.6)", zIndex: 100, backdropFilter: "blur(4px)" }}
+                />
+                <motion.div
+                  initial={{ y: "100%" }}
+                  animate={{ y: 0 }}
+                  exit={{ y: "100%" }}
+                  transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                  style={{
+                    position: "fixed", bottom: 0, left: 0, right: 0, background: "#18181b", padding: "2rem",
+                    borderRadius: "24px 24px 0 0", zIndex: 101, borderTop: "1px solid rgba(255,255,255,0.1)"
+                  }}
+                >
+                  <div style={{ width: 40, height: 4, background: "#3f3f46", borderRadius: 2, margin: "0 auto 24px" }} />
+                  <h2>Settings</h2>
+                  <p style={{ color: "#a1a1aa", marginTop: 8, marginBottom: 24 }}>Context preserved via background dimming.</p>
+                  <button style={{ width: "100%", background: "#ef4444", color: "#fff" }} onClick={() => setIsOpen(false)}>Close Modal</button>
+                </motion.div>
+              </>
+            )}
+          </AnimatePresence>
+        </>
+      );
+    }
+
+    // ==========================================
+    // 4. SHARED ELEMENT (HERO)
+    // ==========================================
+    function SharedElement() {
+      const [selectedId, setSelectedId] = useState(null);
+
+      return (
+        <LayoutGroup>
+          <div style={{ display: "flex", gap: 16 }}>
+            {habits.map(habit => (
+              <motion.div
+                layoutId={`card-${habit.id}`}
+                key={habit.id}
+                onClick={() => setSelectedId(habit)}
+                style={{ width: 80, height: 80, borderRadius: 16, background: habit.color, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "2rem", cursor: "pointer" }}
+              >
+                {habit.icon}
+              </motion.div>
+            ))}
+          </div>
+
+          <AnimatePresence>
+            {selectedId && (
+              <>
+                <motion.div
+                  initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                  style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.8)", zIndex: 100 }}
+                  onClick={() => setSelectedId(null)}
+                />
+                <motion.div
+                  layoutId={`card-${selectedId.id}`}
+                  style={{
+                    position: "fixed", top: "20%", left: "10%", width: "80%", height: "60%",
+                    background: selectedId.color, borderRadius: 24, zIndex: 101, padding: 32, display: "flex", flexDirection: "column", cursor: "pointer"
+                  }}
+                  onClick={() => setSelectedId(null)}
+                >
+                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}>
+                    <div style={{ fontSize: "4rem" }}>{selectedId.icon}</div>
+                    <h2 style={{ fontSize: "2rem", marginTop: 16 }}>{selectedId.title}</h2>
+                    <p style={{ marginTop: 8, opacity: 0.8 }}>Seamlessly morphing layout bounds. Click anywhere to collapse.</p>
+                  </motion.div>
+                </motion.div>
+              </>
+            )}
+          </AnimatePresence>
+        </LayoutGroup>
+      );
+    }
+
+    // ==========================================
+    // 5. STAGGERED LIST ENTRANCE
+    // ==========================================
+    function StaggeredList() {
+      const containerVariants = {
+        hidden: {},
+        visible: { transition: { staggerChildren: 0.1, delayChildren: 0.2 } }
+      };
+      
+      const itemVariants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } }
+      };
+
+      return (
+        <motion.div
+          className="card"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, amount: 0.5 }}
+          style={{ display: "flex", flexDirection: "column", gap: 12 }}
+        >
+          {habits.map(habit => (
+            <motion.div key={habit.id} variants={itemVariants} style={{ background: "rgba(255,255,255,0.05)", padding: 16, borderRadius: 12, display: "flex", alignItems: "center", gap: 12 }}>
+              <div style={{ background: habit.color, width: 40, height: 40, borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center" }}>{habit.icon}</div>
+              <h4>{habit.title}</h4>
+            </motion.div>
+          ))}
+        </motion.div>
+      );
+    }
+
+    // ==========================================
+    // 6. SWIPE TO DISMISS
+    // ==========================================
+    function SwipeDismiss() {
+      const [list, setList] = useState(habits);
+
+      return (
+        <div className="card" style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+          <AnimatePresence>
+            {list.map(habit => (
+              <motion.div
+                key={habit.id}
+                layout
+                initial={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0, overflow: "hidden" }}
+                drag="x"
+                dragDirectionLock
+                dragSnapToOrigin
+                onDragEnd={(e, info) => { if (info.offset.x > 100 || info.offset.x < -100) setList(list.filter(h => h.id !== habit.id)); }}
+                style={{ background: "rgba(255,255,255,0.05)", padding: 16, borderRadius: 12, cursor: "grab" }}
+                whileDrag={{ scale: 1.05, cursor: "grabbing" }}
+              >
+                <h4>{habit.icon} {habit.title}</h4>
+                <p style={{ fontSize: "0.8rem", color: "#a1a1aa", marginTop: 4 }}>Swipe left or right to delete</p>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+          {list.length === 0 && <button onClick={() => setList(habits)}>Reset</button>}
+        </div>
+      );
+    }
+
+    // ==========================================
+    // 7. ACCORDION EXPAND
+    // ==========================================
+    function AccordionExpand() {
+      const [openId, setOpenId] = useState(null);
+
+      return (
+        <LayoutGroup>
+          <div className="card" style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            {habits.map(habit => {
+              const isOpen = openId === habit.id;
+              return (
+                <motion.div
+                  layout
+                  key={habit.id}
+                  onClick={() => setOpenId(isOpen ? null : habit.id)}
+                  style={{ background: "rgba(255,255,255,0.05)", borderRadius: 12, overflow: "hidden", cursor: "pointer" }}
+                >
+                  <motion.div layout style={{ padding: 16, display: "flex", alignItems: "center", gap: 12 }}>
+                    <span>{habit.icon}</span> <h4 style={{ margin: 0 }}>{habit.title}</h4>
+                  </motion.div>
+                  <AnimatePresence>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        style={{ padding: "0 16px 16px", color: "#a1a1aa", fontSize: "0.9rem" }}
+                      >
+                        Animating height automatically creates a smooth document flow adjustment without hardcoded pixels.
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+              );
+            })}
+          </div>
+        </LayoutGroup>
+      );
+    }
+
+    // ==========================================
+    // 8. APPLE SQUISH & DRAG
+    // ==========================================
+    function AppleSquish() {
+      return (
+        <motion.div
+          className="card"
+          drag
+          dragConstraints={{ left: -50, right: 50, top: -50, bottom: 50 }}
+          whileTap={{ scale: 0.9, cursor: "grabbing" }}
+          whileHover={{ scale: 1.02 }}
+          transition={{ type: "spring", stiffness: 400, damping: 25 }}
+          style={{ cursor: "grab", textAlign: "center", padding: "3rem 1.5rem" }}
+        >
+          <div style={{ fontSize: "3rem", marginBottom: 16 }}>🍏</div>
+          <h3>Tap, Hold, and Drag</h3>
+          <p style={{ color: "#a1a1aa", fontSize: "0.9rem", marginTop: 8 }}>Heavy resistance scaling on tap creates a physical sense of weight.</p>
+        </motion.div>
+      );
+    }
+
+    // ==========================================
+    // 9. 3D FLIP IN VIEW
+    // ==========================================
+    function FlipInView() {
+      return (
+        <div style={{ perspective: 1200 }}>
+          <motion.div
+            className="card"
+            initial={{ rotateX: 60, opacity: 0, y: 50 }}
+            whileInView={{ rotateX: 0, opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.8 }}
+            transition={{ type: "spring", stiffness: 100, damping: 20 }}
+            style={{ transformStyle: "preserve-3d", background: "linear-gradient(145deg, #2a2a30, #18181b)" }}
+          >
+            <h3 style={{ fontSize: "1.5rem" }}>3D Perspective</h3>
+            <p style={{ color: "#a1a1aa", marginTop: 8 }}>Combined Y translation and X rotation gives a paper-unfolding spatial effect.</p>
+          </motion.div>
+        </div>
+      );
+    }
+
+    // ==========================================
+    // 10. MORPHING FAB (FLOATING ACTION BUTTON)
+    // ==========================================
+    function MorphingFAB() {
+      const [isOpen, setIsOpen] = useState(false);
+
+      return (
+        <div style={{ position: "relative", width: 300, height: 200, display: "flex", justifyContent: "center", alignItems: "center" }}>
+          <LayoutGroup>
+            {!isOpen ? (
+              <motion.button
+                layoutId="fab"
+                onClick={() => setIsOpen(true)}
+                style={{ width: 64, height: 64, borderRadius: 32, background: "#3b82f6", color: "#fff", fontSize: "1.5rem", display: "flex", justifyContent: "center", alignItems: "center", padding: 0, border: "none" }}
+              >
+                +
+              </motion.button>
+            ) : (
+              <motion.div
+                layoutId="fab"
+                style={{ width: "100%", background: "#3b82f6", borderRadius: 16, padding: 24, color: "#fff" }}
+              >
+                <h3 style={{ marginBottom: 16 }}>New Habit</h3>
+                <div style={{ display: "flex", gap: 8 }}>
+                  <button onClick={() => setIsOpen(false)} style={{ flex: 1, background: "rgba(0,0,0,0.2)", color: "#fff" }}>Cancel</button>
+                  <button onClick={() => setIsOpen(false)} style={{ flex: 1, background: "#fff", color: "#3b82f6" }}>Save</button>
+                </div>
+              </motion.div>
+            )}
+          </LayoutGroup>
+        </div>
+      );
+    }
+
+
+    // ==========================================
+    // MAIN APP COMPONENT
+    // ==========================================
+    function App() {
+      const sections = [
+        { title: "1. Push / Slide", desc: "Classic spatial hierarchy navigation.", Component: PushTransition },
+        { title: "2. Fade Through", desc: "Safe, neutral tab switching.", Component: FadeThrough },
+        { title: "3. Modal Slide Up", desc: "Context-preserving bottom sheet.", Component: ModalSlideUp },
+        { title: "4. Shared Element", desc: "Seamless layout morphing.", Component: SharedElement },
+        { title: "5. Staggered List", desc: "Sequential entrance for parsing ease.", Component: StaggeredList },
+        { title: "6. Swipe to Dismiss", desc: "Gesture-driven list management.", Component: SwipeDismiss },
+        { title: "7. Accordion Expand", desc: "Fluid height calculation.", Component: AccordionExpand },
+        { title: "8. Apple Squish", desc: "Deep physical tap resistance.", Component: AppleSquish },
+        { title: "9. 3D Perspective", desc: "Spatial depth on scroll entry.", Component: FlipInView },
+        { title: "10. Morphing FAB", desc: "Button transforms into a menu.", Component: MorphingFAB },
+      ];
+
+      return (
+        <div className="snap-container">
+          {sections.map((section, index) => (
+            <section key={index} className="page">
+              <div className="page-header">
+                <h2>{section.title}</h2>
+                <p>{section.desc}</p>
+              </div>
+              <section.Component />
+            </section>
+          ))}
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
+</body>
+</html>
