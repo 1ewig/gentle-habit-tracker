@@ -10,7 +10,6 @@
   background: var(--text);
   color: var(--bg);
   border: none;
-  border-radius: var(--s-16);
   padding: var(--s-16);
   font-family: 'Outfit', sans-serif;
   font-size: var(--t-sm);
@@ -36,7 +35,6 @@
 /* Customization Matrix Buttons */
 .theme-btn {
   aspect-ratio: 1;
-  border-radius: 50%;
   cursor: pointer;
   border: 2px solid transparent;
   transition: transform 0.3s var(--bezier);
@@ -51,7 +49,6 @@
 
 .style-btn {
   aspect-ratio: 1;
-  border-radius: 12px;
   background: var(--surface);
   border: 1.5px solid var(--rim);
   cursor: pointer;
@@ -80,7 +77,6 @@
 .add-form input {
   background: var(--surface);
   border: 1px solid var(--rim);
-  border-radius: var(--s-16);
   padding: var(--s-16) var(--s-24);
   font-family: 'Outfit', sans-serif;
   font-size: var(--t-sm);
@@ -94,11 +90,4 @@
   border-color: var(--accent);
 }
 
-.section-lbl {
-  font-size: var(--t-xs);
-  color: var(--muted);
-  font-weight: var(--fw-reg);
-  letter-spacing: var(--ls-wide);
-  line-height: var(--lh-none);
-  text-transform: uppercase;
-}
+

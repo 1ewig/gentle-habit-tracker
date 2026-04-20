@@ -8,7 +8,6 @@
 .bloom-effect {
   position: absolute;
   pointer-events: none;
-  border-radius: 50%;
   background: radial-gradient(circle, rgba(var(--glow-rgb), 0.8) 0%, transparent 70%);
   z-index: 5;
 }
@@ -18,7 +17,6 @@
 
 .hcard {
   background: var(--surface);
-  border-radius: var(--r-card);
   padding: 12px var(--s-24);
   position: relative;
   overflow: hidden;
@@ -98,7 +96,6 @@
 .wd-dot {
   width: 100%;
   aspect-ratio: 1;
-  border-radius: 50%;
   background: var(--raised);
   border: 1px solid var(--ghost);
   transition: all 0.3s var(--bezier);
@@ -109,7 +106,6 @@
 .wd-bar {
   width: 100%;
   height: 4px;
-  border-radius: 99px;
   background: var(--raised);
   transition: all 0.4s var(--bezier);
 }
@@ -161,7 +157,6 @@
 
 /* 1. Classic (North Star) */
 .s1 .hcard-check {
-  border-radius: 50%;
   border: 1px solid var(--rim);
   background: var(--raised);
   transition: all 0.3s var(--bezier);
@@ -197,7 +192,6 @@
 }
 
 .s2 .hcard-check {
-  border-radius: 8px;
   border: 1.5px solid var(--rim);
   background: var(--raised);
 }
@@ -221,14 +215,13 @@
 }
 
 .s2 .wd-dot {
-  border-radius: 4px;
+  /* border-radius removed */
 }
 
 /* 3. Switch */
 .s3 .hcard-check {
   width: 48px;
   height: 28px;
-  border-radius: 99px;
   background: var(--rim);
 }
 
@@ -238,7 +231,6 @@
   left: 2px;
   width: 24px;
   height: 24px;
-  border-radius: 50%;
   background: var(--text);
   transition: transform 0.3s var(--bezier);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
@@ -292,7 +284,6 @@
 
 /* 6. Pill */
 .s6 .hcard-check {
-  border-radius: 50%;
   background: var(--raised);
   border: 1.5px solid var(--rim);
 }
@@ -312,7 +303,7 @@
 }
 
 .s6 .wd-dot {
-  border-radius: 4px;
+  /* border-radius removed */
 }
 
 .s6 .wd.is-today.today-done .wd-dot,
@@ -334,7 +325,6 @@
 }
 
 .s7 .hcard-check {
-  border-radius: 8px;
   border: 2px solid var(--muted);
 }
 
@@ -380,7 +370,6 @@
 
 /* 8. Key */
 .s8 .hcard-check {
-  border-radius: 12px;
   background: var(--raised);
   border-bottom: 4px solid var(--ghost);
   font-size: var(--t-md);

@@ -14,7 +14,6 @@
   background: color-mix(in srgb, var(--ui), transparent 30%);
   border: 1px solid var(--rim);
   border-top-color: color-mix(in srgb, var(--fg), transparent 85%);
-  border-radius: var(--r-pill);
   padding: 6px 12px;
   box-shadow: 0 24px 48px var(--nav-shadow);
   transition: all 0.6s var(--bezier);
@@ -32,7 +31,6 @@
   align-items: center;
   justify-content: center;
   padding: 12px 24px;
-  border-radius: var(--r-pill);
   cursor: pointer;
   transition: all 0.3s var(--bezier);
   border: none;

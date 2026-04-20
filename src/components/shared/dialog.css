@@ -17,7 +17,6 @@
 
 .dialog-box {
   background: var(--bg);
-  border-radius: 32px 32px 0 0;
   border-top: 1px solid var(--rim);
   overflow-y: auto;
   scrollbar-width: none;
@@ -49,7 +48,6 @@
 .dialog-close {
   width: var(--s-32);
   height: var(--s-32);
-  border-radius: 50%;
   background: var(--surface);
   display: flex;
   align-items: center;

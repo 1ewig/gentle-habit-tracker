@@ -3,7 +3,7 @@ import { useAppStore } from '../../../store/useAppStore';
 import { useHabits } from '../../../hooks/useHabits';
 import { useHabitStats } from '../../../hooks/useHabitStats';
 import { Dialog } from '../../shared/Dialog';
-import { FULL_DAYS, MONTHS } from '../../../lib/utils';
+import { FULL_DAYS, MONTHS, dateKey, getToday, getYesterday } from '../../../lib/utils';
 
 export function JournalDialog() {
   const { selectedDay, setSelectedDay } = useAppStore();
@@ -23,6 +23,11 @@ export function JournalDialog() {
   const { total, done } = getDayStats(selectedDay);
   const dialogPill = total === 0 ? 'no habits tracked' : `${done} of ${total} completed`;
 
+  // 3. Late Logging Check
+  const todayKey = dateKey(getToday());
+  const yesterdayKey = dateKey(getYesterday());
+  const isLoggable = selectedDay === todayKey || selectedDay === yesterdayKey;
+
   return (
     <Dialog isOpen={!!selectedDay} onClose={closeDialog} title={dialogTitle}>
       <span className="day-summary-pill">{dialogPill}</span>
@@ -33,10 +38,11 @@ export function JournalDialog() {
           return (
             <div 
               key={h.id} 
-              className={`day-habit-row ${isDone ? 'done' : ''}`}
-              onClick={() => handleToggle(h, selectedDay)}
+              className={`day-habit-row ${isDone ? 'done' : ''} ${!isLoggable ? 'readonly' : ''}`}
+              onClick={() => isLoggable && handleToggle(h, selectedDay)}
               role="button"
-              tabIndex={0}
+              tabIndex={isLoggable ? 0 : -1}
+              aria-disabled={!isLoggable}
             >
               <div className="day-habit-dot">
                 <svg viewBox="0 0 24 24">
