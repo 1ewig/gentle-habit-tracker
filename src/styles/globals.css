@@ -1,0 +1,87 @@
+/**
+ * GLOBALS
+ * Baseline HTML styles, accessibility resets, and theme definitions.
+ * This file sets the visual context for the entire application.
+ */
+
+/* 1. Global Reset & Accessibility */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* 2. Base Stage */
+html,
+body {
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  overscroll-behavior: none;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  line-height: var(--lh-base);
+  font-weight: var(--fw-reg);
+  text-transform: lowercase;
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.6s var(--bezier), color 0.6s var(--bezier);
+  position: fixed;
+  inset: 0;
+}
+
+#app-root {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  max-width: 480px;
+  margin: 0 auto;
+  isolation: isolate;
+}
+
+#body {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  position: relative;
+  z-index: 1;
+  padding-bottom: 108px; /* Offset for Bottom Navigation */
+  scrollbar-width: none;
+}
+
+#body::-webkit-scrollbar {
+  display: none;
+}
+
+/* 3. Theme Definitions */
+[data-theme="parchment"] { --bg: #f4edd8; --fg: #3d3522; --acc: #4a5d8c; --ui: #e8deca; --glow-rgb: 74, 93, 140; }
+[data-theme="ink"] { --bg: #0b101a; --fg: #d4def2; --acc: #c4a97d; --ui: #131a28; --glow-rgb: 196, 169, 125; }
+[data-theme="moss"] { --bg: #141712; --fg: #d9e0d5; --acc: #d4a373; --ui: #1e241b; --glow-rgb: 212, 163, 115; }
+[data-theme="void"] { --bg: #050507; --fg: #eeeeff; --acc: #ff1a6e; --ui: #0e0e12; --glow-rgb: 255, 26, 110; }
+[data-theme="sand"] { --bg: #1a1510; --fg: #f0dfc0; --acc: #e8956d; --ui: #231c15; --glow-rgb: 232, 149, 109; }
+[data-theme="ocean"] { --bg: #0c1420; --fg: #d5e8f5; --acc: #7ec8e3; --ui: #11202e; --glow-rgb: 126, 200, 227; }
+[data-theme="ruby"] { --bg: #0f0c0e; --fg: #f5eaed; --acc: #e8607a; --ui: #181318; --glow-rgb: 232, 96, 122; }
+[data-theme="amethyst"] { --bg: #09091a; --fg: #e8e5ff; --acc: #9d7dff; --ui: #10111f; --glow-rgb: 157, 125, 255; }
+[data-theme="frost"] { --bg: #f2f6fa; --fg: #18283a; --acc: #1a7abf; --ui: #e2eaf2; --glow-rgb: 26, 122, 191; }
+[data-theme="sakura"] { --bg: #fff5f7; --fg: #5c2a3e; --acc: #ff80ab; --ui: #fce4ec; --glow-rgb: 255, 128, 171; }
+[data-theme="birch"] { --bg: #f7f7f5; --fg: #4a4a48; --acc: #5c8c6d; --ui: #ececea; --glow-rgb: 92, 140, 109; }
+[data-theme="linen"] { --bg: #f8f9fa; --fg: #1a1d21; --acc: #5885af; --ui: #eff1f3; --glow-rgb: 88, 133, 175; }
+[data-theme="voltage"] { --bg: #000000; --fg: #ffffff; --acc: #f0ff00; --ui: #1a1a1a; --glow-rgb: 240, 255, 0; }

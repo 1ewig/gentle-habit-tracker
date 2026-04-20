@@ -1,22 +1,27 @@
 /**
- * DESIGN TOKENS
- * The mathematical foundation of the Agency-Grade UI.
- * This file defines all CSS custom properties for spacing, typography,
- * colors, and fluid layout scales (clamp).
+ * FOUNDATIONS
+ * The mathematical and typographic DNA of the application.
+ * Contains design tokens, fluid scales, and font face definitions.
  */
 
-:root {
+/* 1. Typography: Fonts */
+@font-face {
+  font-family: 'Outfit';
+  src: url('../assets/fonts/Outfit-Variable.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
 
-  /* Default: midnight */
+/* 2. Design Tokens */
+:root {
+  /* Core Colors (Default: Midnight) */
   --bg: #12100e;
   --fg: #e6dcd1;
   --acc: #8ca379;
   --ui: #1c1916;
 
-  /* Typography: Font Stacks */
-  --font-sans: 'Outfit', system-ui, -apple-system, sans-serif;
-
-  /* Derived Tokens (Mathematical Consistency) */
+  /* Derived Semantic Tokens */
   --surface: var(--ui);
   --raised: color-mix(in srgb, var(--ui), var(--fg) 10%);
   --rim: color-mix(in srgb, var(--ui), var(--fg) 15%);
@@ -29,7 +34,6 @@
   --nav-bg: color-mix(in srgb, var(--bg), transparent 25%);
   --nav-shadow: rgba(0, 0, 0, 0.4);
   --glow-rgb: 140, 163, 121;
-  /* Manual for now until hex-to-rgb utils are added */
 
   /* Spacing Grid (8-point) */
   --s-8: 8px;
@@ -48,23 +52,20 @@
   --t-lg: clamp(1.25rem, 1.2rem + 0.5vw, 1.4rem);
   --t-xl: clamp(1.563rem, 1.5rem + 1vw, 1.953rem);
 
-  /* Typography: Display Sizing */
+  /* Typography: Fixed Sizing */
   --t-display: 2.8rem;
   --t-display-sm: 1.4rem;
   --t-icon: 14px;
 
-  /* Typography: Line Heights */
+  /* Typography: Configuration */
+  --font-sans: 'Outfit', system-ui, -apple-system, sans-serif;
   --lh-none: 1;
   --lh-tight: 1.1;
   --lh-base: 1.5;
   --lh-loose: 1.7;
-
-  /* Typography: Tracking (Letter Spacing) */
   --ls-tight: -0.02em;
   --ls-base: 0em;
   --ls-wide: 0.05em;
-
-  /* Typography: Font Weights */
   --fw-light: 500;
   --fw-reg: 600;
   --fw-med: 700;
@@ -74,12 +75,15 @@
   --r-card: 24px;
   --r-pill: 64px;
 
+  /* Motion & Easing */
+  --bezier: cubic-bezier(0.23, 1, 0.32, 1);
+  --d-fast: 0.2s;
+  --d-norm: 0.4s;
+  --d-slow: 0.6s;
+
   /* Viewport & Safe Areas */
   --safe-t: env(safe-area-inset-top, 0px);
   --safe-b: env(safe-area-inset-bottom, 0px);
   --safe-l: env(safe-area-inset-left, 0px);
   --safe-r: env(safe-area-inset-right, 0px);
-
-  /* Motion & Easing */
-  --bezier: cubic-bezier(0.23, 1, 0.32, 1);
 }

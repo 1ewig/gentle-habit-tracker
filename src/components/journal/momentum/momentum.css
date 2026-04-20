@@ -6,7 +6,21 @@
 
 /* Momentum Dock (Internal visual state only) */
 #momentum-dock {
+  position: fixed;
+  bottom: calc(108px + var(--safe-b));
+  left: 0;
+  right: 0;
+  max-width: 480px;
+  z-index: 40;
+  margin: 0 auto;
+  padding: 0 var(--s-24);
+  box-shadow: none !important;
+  pointer-events: none; /* Let clicks pass through to empty areas */
   isolation: isolate;
+}
+
+#momentum-dock > * {
+  pointer-events: auto; /* Re-enable clicks for the actual card */
 }
 
 .momentum-card {
