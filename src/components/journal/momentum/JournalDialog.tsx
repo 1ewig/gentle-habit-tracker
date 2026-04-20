@@ -10,28 +10,24 @@ export const JournalDialog = () => {
   const { habits, handleToggle } = useHabits();
   const { getDayStats } = useHabitStats();
 
-  if (!selectedDay) return null;
-
-  const closeDialog = () => setSelectedDay(null);
-
   // 1. Structural Logic (Date Formatting)
-  const parts = selectedDay.split('-');
-  const dateObj = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
-  const dialogTitle = `${FULL_DAYS[dateObj.getDay()]}, ${MONTHS[dateObj.getMonth()]} ${dateObj.getDate()}`;
+  const parts = selectedDay?.split('-') || [];
+  const dateObj = parts.length === 3 ? new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2])) : new Date();
+  const dialogTitle = parts.length === 3 ? `${FULL_DAYS[dateObj.getDay()]}, ${MONTHS[dateObj.getMonth()]} ${dateObj.getDate()}` : '';
 
   // 2. Offloaded Logic (Using useHabitStats)
-  const { total, done } = getDayStats(selectedDay);
+  const { total, done } = getDayStats(selectedDay || '');
   const dialogPill = total === 0 ? 'no habits tracked' : `${done} of ${total} completed`;
 
   // 3. Late Logging Check
   const todayKey = dateKey(getToday());
   const yesterdayKey = dateKey(getYesterday());
-  const isLoggable = selectedDay === todayKey || selectedDay === yesterdayKey;
+  const isLoggable = selectedDay ? (selectedDay === todayKey || selectedDay === yesterdayKey) : false;
 
   return (
     <Dialog 
       isOpen={Boolean(selectedDay)} 
-      onClose={closeDialog} 
+      onClose={() => setSelectedDay(null)} 
       title={dialogTitle}
       subtitle={dialogPill}
     >

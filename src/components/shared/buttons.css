@@ -10,7 +10,7 @@
   background: var(--text);
   color: var(--bg);
   border: none;
-  padding: var(--s-16);
+  padding: 0 var(--s-24);
   font-family: 'Outfit', sans-serif;
   font-size: var(--t-sm);
   font-weight: var(--fw-reg);
@@ -20,7 +20,7 @@
   align-items: center;
   justify-content: center;
   gap: var(--s-8);
-  min-height: 44px;
+  min-height: 52px;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
 }
@@ -77,13 +77,14 @@
 .add-form input {
   background: var(--surface);
   border: 1px solid var(--rim);
-  padding: var(--s-16) var(--s-24);
+  padding: 0 var(--s-24);
   font-family: 'Outfit', sans-serif;
   font-size: var(--t-sm);
   color: var(--text);
   outline: none;
   transition: all 0.3s var(--bezier);
   width: 100%;
+  min-height: 52px;
 }
 
 .add-form input:focus {

@@ -26,9 +26,7 @@
   display: none;
 }
 
-.dialog-overlay.active .dialog-box {
-  transform: translateY(0);
-}
+
 
 .dialog-header {
   display: flex;
@@ -36,6 +34,12 @@
   align-items: center;
   gap: var(--s-16);
   padding: var(--s-32) var(--s-24) var(--s-16);
+  cursor: grab;
+  user-select: none;
+}
+
+.dialog-header:active {
+  cursor: grabbing;
 }
 
 .dialog-handle {

@@ -259,10 +259,11 @@
   display: flex;
   align-items: center;
   gap: var(--s-16);
-  padding: 14px var(--s-16);
+  padding: 0 var(--s-24);
   background: var(--surface);
   border: 1px solid transparent;
   transition: border-color 0.3s var(--bezier);
+  min-height: 52px;
 }
 
 .day-habit-row.done {

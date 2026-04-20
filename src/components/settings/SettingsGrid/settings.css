@@ -111,11 +111,12 @@
 
 .scard {
   background: var(--surface);
-  padding: var(--s-16) var(--s-24);
+  padding: 0 var(--s-24);
   display: flex;
   align-items: center;
   justify-content: space-between;
   border: 1px solid var(--rim);
+  min-height: 52px;
 }
 
 .scard-name {

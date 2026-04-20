@@ -1,6 +1,6 @@
 import React, { ReactNode, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, useDragControls } from 'motion/react';
 
 import { DIALOG_VARIANTS } from '../../lib/motion';
 
@@ -17,6 +17,7 @@ const FOCUSABLE_SELECTORS = 'button, [href], input, select, textarea, [tabindex]
 
 export function Dialog({ isOpen, onClose, title, subtitle, children, footer }: DialogProps) {
   const dialogRef = useRef<HTMLDivElement>(null);
+  const dragControls = useDragControls();
   const previousActiveElement = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
@@ -94,8 +95,22 @@ export function Dialog({ isOpen, onClose, title, subtitle, children, footer }: D
             initial="initial"
             animate="animate"
             exit="exit"
+            drag="y"
+            dragControls={dragControls}
+            dragListener={false}
+            dragConstraints={{ top: 0, bottom: 0 }}
+            dragElastic={{ top: 0, bottom: 0.6 }}
+            onDragEnd={(_, info) => {
+              if (info.offset.y > 80 || (info.velocity.y > 600 && info.offset.y > 0)) {
+                onClose();
+              }
+            }}
           >
-            <div className="dialog-header">
+            <div 
+              className="dialog-header"
+              onPointerDown={(e) => dragControls.start(e)}
+              style={{ touchAction: 'none' }}
+            >
               <div className="dialog-handle" />
               <div id="dialog-title" className="dialog-title">{title}</div>
               {subtitle && <div className="dialog-subtitle">{subtitle}</div>}

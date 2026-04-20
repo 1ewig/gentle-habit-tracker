@@ -137,7 +137,10 @@ export const DIALOG_VARIANTS = {
   overlay: {
     initial: { opacity: 0 },
     animate: { opacity: 1, transition: { duration: 0.2, ease: "easeOut" as const } },
-    exit: { opacity: 0, transition: { duration: 0.2, ease: "easeIn" as const } }
+    exit: { 
+      opacity: 0, 
+      transition: { duration: 0.3, ease: "easeIn" as const } 
+    }
   },
   content: {
     initial: { opacity: 0, y: '100%' },
@@ -147,9 +150,8 @@ export const DIALOG_VARIANTS = {
       transition: { duration: 0.4, ease: [0.23, 1, 0.32, 1] as const } 
     },
     exit: { 
-      opacity: 0, 
       y: '100%', 
-      transition: { duration: 0.2, ease: "easeIn" as const } 
+      transition: { duration: 0.3, ease: [0.32, 0, 0.67, 0] as const } 
     }
   }
 };
