@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 
-export function JournalCanvas() {
+export function NeuralWeb() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -15,7 +15,7 @@ export function JournalCanvas() {
 
   return (
     <canvas
-      id="journal-canvas"
+      id="neural-web"
       ref={canvasRef}
     />
   );
