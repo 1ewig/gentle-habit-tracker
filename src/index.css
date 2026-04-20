@@ -6,14 +6,13 @@
 
 /* LAYER 1: Foundations (Math & Type) */
 @import "./styles/foundations.css";
-@import "./styles/tokens/geometry.css";
 
 /* LAYER 2: Globals (Resets & Themes) */
 @import "./styles/globals.css";
 
 /* LAYER 3: System (Structure & Motion) */
 @import "./styles/system.css";
-@import "./styles/orchestration/geometry.css";
+@import "./styles/geometry.css";
 
 /* Tailwind (For utility escapes if needed) */
 @import "tailwindcss";
