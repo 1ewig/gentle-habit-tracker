@@ -71,7 +71,37 @@
   --fw-med: 700;
   --fw-semi: 800;
 
-  /* Geometry & Radii are now handled in tokens/geometry.css */
+  /* Geometry Tokens (Atomic Scale) */
+  --r-0: 0px;
+  --r-1: 2px;
+  --r-2: 4px;
+  --r-3: 8px;
+  --r-4: 12px;
+  --r-5: 16px;
+  --r-6: 24px;
+  --r-7: 32px;
+  --r-8: 48px;
+  --r-9: 64px;
+  --r-full: 9999px;
+
+  /* Geometry Presets */
+  --p-sharp-card: var(--r-2);
+  --p-sharp-btn: var(--r-1);
+  --p-sharp-input: var(--r-0);
+
+  --p-modern-card: var(--r-7);
+  --p-modern-btn: var(--r-4);
+  --p-modern-input: var(--r-3);
+
+  --p-organic-card: var(--r-9);
+  --p-organic-btn: var(--r-6);
+  --p-organic-input: var(--r-5);
+
+  /* Semantic Aliases (Master Switches) */
+  --r-card: var(--p-modern-card);
+  --r-button: var(--p-modern-btn);
+  --r-input: var(--p-modern-input);
+  --r-pill: var(--r-full);
 
   /* Motion & Easing */
   --bezier: cubic-bezier(0.23, 1, 0.32, 1);
