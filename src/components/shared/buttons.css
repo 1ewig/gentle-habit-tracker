@@ -71,7 +71,7 @@
 .add-form {
   display: flex;
   flex-direction: column;
-  gap: var(--s-16);
+  gap: var(--s-8);
 }
 
 .add-form input {
@@ -89,5 +89,3 @@
 .add-form input:focus {
   border-color: var(--accent);
 }
-
-
