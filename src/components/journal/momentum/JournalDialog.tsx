@@ -5,7 +5,7 @@ import { useHabitStats } from '../../../hooks/useHabitStats';
 import { Dialog } from '../../shared/Dialog';
 import { FULL_DAYS, MONTHS, dateKey, getToday, getYesterday } from '../../../lib/utils';
 
-export function JournalDialog() {
+export const JournalDialog = () => {
   const { selectedDay, setSelectedDay } = useAppStore();
   const { habits, handleToggle } = useHabits();
   const { getDayStats } = useHabitStats();
@@ -16,8 +16,8 @@ export function JournalDialog() {
 
   // 1. Structural Logic (Date Formatting)
   const parts = selectedDay.split('-');
-  const d = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
-  const dialogTitle = `${FULL_DAYS[d.getDay()]}, ${MONTHS[d.getMonth()]} ${d.getDate()}`;
+  const dateObj = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
+  const dialogTitle = `${FULL_DAYS[dateObj.getDay()]}, ${MONTHS[dateObj.getMonth()]} ${dateObj.getDate()}`;
 
   // 2. Offloaded Logic (Using useHabitStats)
   const { total, done } = getDayStats(selectedDay);
@@ -29,12 +29,12 @@ export function JournalDialog() {
   const isLoggable = selectedDay === todayKey || selectedDay === yesterdayKey;
 
   return (
-    <Dialog isOpen={!!selectedDay} onClose={closeDialog} title={dialogTitle}>
+    <Dialog isOpen={Boolean(selectedDay)} onClose={closeDialog} title={dialogTitle}>
       <span className="day-summary-pill">{dialogPill}</span>
       
       <div className="day-habits-list">
         {habits.map((h) => {
-          const isDone = !!h.days[selectedDay];
+          const isDone = Boolean(h.days[selectedDay]);
           return (
             <div 
               key={h.id} 
@@ -56,4 +56,4 @@ export function JournalDialog() {
       </div>
     </Dialog>
   );
-}
+};
