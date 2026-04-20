@@ -144,7 +144,7 @@ export const DIALOG_VARIANTS = {
     animate: { 
       opacity: 1, 
       y: 0, 
-      transition: { type: "spring" as const, damping: 28, stiffness: 350 } 
+      transition: { duration: 0.4, ease: [0.23, 1, 0.32, 1] as const } 
     },
     exit: { 
       opacity: 0, 

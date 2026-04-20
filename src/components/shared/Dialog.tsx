@@ -1,19 +1,21 @@
 import React, { ReactNode, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'motion/react';
-import { cn } from '../../lib/utils';
+
 import { DIALOG_VARIANTS } from '../../lib/motion';
 
 interface DialogProps {
   isOpen: boolean;
   onClose: () => void;
   title: string;
+  subtitle?: ReactNode;
   children: ReactNode;
+  footer?: ReactNode;
 }
 
 const FOCUSABLE_SELECTORS = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
 
-export function Dialog({ isOpen, onClose, title, children }: DialogProps) {
+export function Dialog({ isOpen, onClose, title, subtitle, children, footer }: DialogProps) {
   const dialogRef = useRef<HTMLDivElement>(null);
   const previousActiveElement = useRef<HTMLElement | null>(null);
 
@@ -94,19 +96,18 @@ export function Dialog({ isOpen, onClose, title, children }: DialogProps) {
             exit="exit"
           >
             <div className="dialog-header">
+              <div className="dialog-handle" />
               <div id="dialog-title" className="dialog-title">{title}</div>
-              <button 
-                className="dialog-close" 
-                onClick={onClose}
-                aria-label="Close dialog"
-              >
-                <svg viewBox="0 0 24 24">
-                  <line x1="18" y1="6" x2="6" y2="18" />
-                  <line x1="6" y1="6" x2="18" y2="18" />
-                </svg>
-              </button>
+              {subtitle && <div className="dialog-subtitle">{subtitle}</div>}
             </div>
-            {children}
+            <div className="dialog-content">
+              {children}
+            </div>
+            {footer && (
+              <div className="dialog-footer">
+                {footer}
+              </div>
+            )}
           </motion.div>
         </motion.div>
       )}

@@ -29,9 +29,12 @@ export const JournalDialog = () => {
   const isLoggable = selectedDay === todayKey || selectedDay === yesterdayKey;
 
   return (
-    <Dialog isOpen={Boolean(selectedDay)} onClose={closeDialog} title={dialogTitle}>
-      <span className="day-summary-pill">{dialogPill}</span>
-      
+    <Dialog 
+      isOpen={Boolean(selectedDay)} 
+      onClose={closeDialog} 
+      title={dialogTitle}
+      subtitle={dialogPill}
+    >
       <div className="day-habits-list">
         {habits.map((h) => {
           const isDone = Boolean(h.days[selectedDay]);

@@ -35,18 +35,24 @@ export function HabitSection() {
         </div>
       </motion.div>
 
-      <Dialog isOpen={isOpen} onClose={() => setIsOpen(false)} title="manage habits">
-        <div className="add-form">
-          <input
-            type="text"
-            value={newHabitName}
-            onChange={e => setNewHabitName(e.target.value)}
-            onKeyDown={e => e.key === 'Enter' && handleAdd()}
-            placeholder="something gentle to build…"
-            maxLength={32}
-          />
-          <button className="btn-primary" onClick={handleAdd}>add habit</button>
-        </div>
+      <Dialog 
+        isOpen={isOpen} 
+        onClose={() => setIsOpen(false)} 
+        title="manage habits"
+        footer={
+          <div className="add-form">
+            <input
+              type="text"
+              value={newHabitName}
+              onChange={e => setNewHabitName(e.target.value)}
+              onKeyDown={e => e.key === 'Enter' && handleAdd()}
+              placeholder="something gentle to build…"
+              maxLength={32}
+            />
+            <button className="btn-primary" onClick={handleAdd}>add habit</button>
+          </div>
+        }
+      >
         <div className="settings-list">
           {habits.map(h => (
             <div key={h.id} className="scard">

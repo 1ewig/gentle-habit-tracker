@@ -18,8 +18,8 @@
 .dialog-box {
   background: var(--bg);
   border-top: 1px solid var(--rim);
-  overflow-y: auto;
-  scrollbar-width: none;
+  display: flex;
+  flex-direction: column;
 }
 
 .dialog-box::-webkit-scrollbar {
@@ -32,9 +32,19 @@
 
 .dialog-header {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  margin-bottom: var(--s-24);
+  gap: var(--s-16);
+  padding: var(--s-32) var(--s-24) var(--s-16);
+}
+
+.dialog-handle {
+  width: 40px;
+  height: 4px;
+  background: var(--rim);
+  border-radius: var(--r-pill);
+  margin-top: var(--s-8);
+  opacity: 0.6;
 }
 
 .dialog-title {
@@ -45,28 +55,30 @@
   text-wrap: balance;
 }
 
-.dialog-close {
-  width: var(--s-32);
-  height: var(--s-32);
-  background: var(--surface);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  border: none;
-  transition: transform 0.2s var(--bezier);
+.dialog-subtitle {
+  font-size: var(--t-xs);
+  color: var(--muted);
+  font-weight: var(--fw-light);
+  margin-top: calc(var(--s-8) * -1); /* Pull closer to title */
 }
 
-.dialog-close:active {
-  transform: scale(0.9);
+.dialog-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 var(--s-24) var(--s-24);
+  scrollbar-width: none;
 }
 
-.dialog-close svg {
-  width: 16px;
-  height: 16px;
-  stroke: var(--muted);
-  fill: none;
-  stroke-width: 2;
-  stroke-linecap: round;
+.dialog-content::-webkit-scrollbar {
+  display: none;
 }
+
+.dialog-footer {
+  padding: var(--s-16) var(--s-24) calc(var(--s-24) + var(--safe-b));
+  border-top: 1px solid var(--rim);
+  background: var(--bg);
+  z-index: 10;
+}
+
+
 

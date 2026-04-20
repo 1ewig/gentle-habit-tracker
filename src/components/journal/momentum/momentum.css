@@ -253,10 +253,7 @@
   gap: var(--s-8);
 }
 
-.day-summary-pill {
-  text-align: center;
-  text-wrap: pretty;
-}
+
 
 .day-habit-row {
   display: flex;
