@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { useAppStore } from './store/useAppStore';
 import { Navigation } from './components/shared/Navigation';
-import { Today } from './pages/Today/Today';
-import { Journal } from './pages/Journal/Journal';
-import { Settings } from './pages/Settings/Settings';
+import { Today } from './pages/Today';
+import { Journal } from './pages/Journal';
+import { Settings } from './pages/Settings';
 import { AnimatePresence } from 'motion/react';
 import { useDynamicViewportHeight } from './hooks/useDynamicViewportHeight';
 

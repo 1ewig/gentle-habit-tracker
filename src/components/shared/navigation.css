@@ -4,19 +4,7 @@
  * Engineered for mobile reachability and haptic-aligned transitions.
  */
 
-#nav {
 
-  position: fixed;
-  bottom: calc(var(--s-24) + var(--safe-b));
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: center;
-  z-index: 50;
-  pointer-events: none;
-  isolation: isolate;
-  /* Navigation isolation */
-}
 
 .nav-pill {
   pointer-events: auto;
@@ -62,7 +50,6 @@
   transition: stroke 0.3s var(--bezier);
 }
 
-.nav-btn:hover,
 .nav-btn.active {
   background: var(--raised);
 }

@@ -31,13 +31,7 @@
   opacity: 0.9;
 }
 
-/* Customization Matrix Layout */
-.grid-5 {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: var(--s-16);
-  margin-bottom: var(--s-32);
-}
+
 
 /* Customization Matrix Buttons */
 .theme-btn {
@@ -103,7 +97,6 @@
 .section-lbl {
   font-size: var(--t-xs);
   color: var(--muted);
-  margin-bottom: var(--s-16);
   font-weight: var(--fw-reg);
   letter-spacing: var(--ls-wide);
   line-height: var(--lh-none);

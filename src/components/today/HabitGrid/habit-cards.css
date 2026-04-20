@@ -13,14 +13,7 @@
   z-index: 5;
 }
 
-.habits-grid {
-  display: flex;
-  flex-direction: column;
-  gap: var(--s-8);
-  padding: 0 var(--s-24);
-  width: 100%;
-  position: relative;
-}
+
 
 
 .hcard {

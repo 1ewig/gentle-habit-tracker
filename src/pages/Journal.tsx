@@ -1,12 +1,12 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Dialog } from '../../components/shared/Dialog';
-import { JournalCanvas } from '../../components/journal/JournalCanvas';
-import { DayHabitList } from '../../components/journal/momentum/DayHabitList';
-import { useAppStore } from '../../store/useAppStore';
-import { FULL_DAYS, MONTHS } from '../../lib/utils';
-import { PAGE_VARIANTS } from '../../lib/motion';
-import { MomentumDock } from '../../components/journal/momentum/MomentumDock';
+import { Dialog } from '../components/shared/Dialog';
+import { JournalCanvas } from '../components/journal/JournalCanvas';
+import { DayHabitList } from '../components/journal/momentum/DayHabitList';
+import { useAppStore } from '../store/useAppStore';
+import { FULL_DAYS, MONTHS } from '../lib/utils';
+import { PAGE_VARIANTS } from '../lib/motion';
+import { MomentumDock } from '../components/journal/momentum/MomentumDock';
 
 export function Journal() {
   const { habits, selectedDay, setSelectedDay } = useAppStore();

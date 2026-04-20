@@ -1,9 +1,9 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { ProfileSection } from '../../components/settings/SettingsGrid/ProfileSection';
-import { AppearanceSection } from '../../components/settings/SettingsGrid/AppearanceSection';
-import { HabitSection } from '../../components/settings/SettingsGrid/HabitSection';
-import { PAGE_VARIANTS, GRID_VARIANTS } from '../../lib/motion';
+import { ProfileSection } from '../components/settings/SettingsGrid/ProfileSection';
+import { AppearanceSection } from '../components/settings/SettingsGrid/AppearanceSection';
+import { HabitSection } from '../components/settings/SettingsGrid/HabitSection';
+import { PAGE_VARIANTS, GRID_VARIANTS } from '../lib/motion';
 
 export function Settings() {
   return (
