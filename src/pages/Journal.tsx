@@ -4,7 +4,7 @@ import { JournalScene } from '../components/journal/JournalScene';
 import { JournalDialog } from '../components/journal/momentum/JournalDialog';
 import { PAGE_VARIANTS } from '../lib/motion';
 
-export function Journal() {
+export const Journal = () => {
   return (
     <motion.div
       className="page journal active"
@@ -17,4 +17,4 @@ export function Journal() {
       <JournalDialog />
     </motion.div>
   );
-}
+};

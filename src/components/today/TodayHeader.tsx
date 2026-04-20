@@ -2,7 +2,7 @@ import React from 'react';
 import { MONTHS, FULL_DAYS, getToday } from '../../lib/utils';
 import './today-header.css';
 
-export function TodayHeader() {
+export const TodayHeader = () => {
   const today = getToday();
   const displayTitle = `${FULL_DAYS[today.getDay()]}, ${MONTHS[today.getMonth()]} ${today.getDate()}`;
   const displaySub = 'your personal evolution';
@@ -15,4 +15,4 @@ export function TodayHeader() {
       </div>
     </div>
   );
-}
+};
