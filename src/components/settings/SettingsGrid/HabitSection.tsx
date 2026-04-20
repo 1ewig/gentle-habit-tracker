@@ -39,15 +39,22 @@ export function HabitSection() {
         isOpen={isOpen} 
         onClose={() => setIsOpen(false)} 
         title="manage habits"
+        autoFocus={false}
         footer={
           <div className="add-form">
             <input
               type="text"
               value={newHabitName}
               onChange={e => setNewHabitName(e.target.value)}
-              onKeyDown={e => e.key === 'Enter' && handleAdd()}
+              onKeyDown={e => {
+                if (e.key === 'Enter') {
+                  (e.target as HTMLInputElement).blur();
+                  handleAdd();
+                }
+              }}
               placeholder="something gentle to build…"
               maxLength={32}
+              enterKeyHint="done"
             />
             <button className="btn-primary" onClick={handleAdd}>add habit</button>
           </div>

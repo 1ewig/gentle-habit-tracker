@@ -42,21 +42,33 @@ export function ProfileSection() {
         </div>
       </motion.div>
 
-      <Dialog isOpen={isOpen} onClose={() => setIsOpen(false)} title="edit profile">
+      <Dialog isOpen={isOpen} onClose={() => setIsOpen(false)} title="edit profile" autoFocus={false}>
         <div className="add-form">
           <input 
             type="text" 
             value={formName} 
             onChange={e => setFormName(e.target.value)} 
+            onKeyDown={e => {
+              if (e.key === 'Enter') {
+                (e.target as HTMLInputElement).blur();
+              }
+            }}
             placeholder="your name" 
             maxLength={24} 
+            enterKeyHint="done"
           />
           <input 
             type="text" 
             value={formBio} 
             onChange={e => setFormBio(e.target.value)} 
+            onKeyDown={e => {
+              if (e.key === 'Enter') {
+                (e.target as HTMLInputElement).blur();
+              }
+            }}
             placeholder="a short bio" 
             maxLength={48} 
+            enterKeyHint="done"
           />
           <button className="btn-primary" onClick={handleSave}>save profile</button>
         </div>

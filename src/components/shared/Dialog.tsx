@@ -11,11 +11,12 @@ interface DialogProps {
   subtitle?: ReactNode;
   children: ReactNode;
   footer?: ReactNode;
+  autoFocus?: boolean;
 }
 
 const FOCUSABLE_SELECTORS = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
 
-export function Dialog({ isOpen, onClose, title, subtitle, children, footer }: DialogProps) {
+export function Dialog({ isOpen, onClose, title, subtitle, children, footer, autoFocus = true }: DialogProps) {
   const dialogRef = useRef<HTMLDivElement>(null);
   const dragControls = useDragControls();
   const previousActiveElement = useRef<HTMLElement | null>(null);
@@ -31,17 +32,19 @@ export function Dialog({ isOpen, onClose, title, subtitle, children, footer }: D
   useEffect(() => {
     if (isOpen) {
       previousActiveElement.current = document.activeElement as HTMLElement;
-      setTimeout(() => {
-        const dialog = dialogRef.current;
-        if (dialog) {
-          const firstFocusable = dialog.querySelector<HTMLElement>(FOCUSABLE_SELECTORS);
-          firstFocusable?.focus();
-        }
-      }, 50);
+      if (autoFocus) {
+        setTimeout(() => {
+          const dialog = dialogRef.current;
+          if (dialog) {
+            const firstFocusable = dialog.querySelector<HTMLElement>(FOCUSABLE_SELECTORS);
+            firstFocusable?.focus();
+          }
+        }, 50);
+      }
     } else {
       previousActiveElement.current?.focus();
     }
-  }, [isOpen]);
+  }, [isOpen, autoFocus]);
 
   useEffect(() => {
     if (!isOpen) return;
