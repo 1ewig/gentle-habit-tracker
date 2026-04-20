@@ -8,7 +8,7 @@ export type Habit = {
   days: Record<string, boolean>;
 };
 
-export function useHabits() {
+export const useHabits = () => {
   const { habits, _toggleHabit, _addHabit, _removeHabit } = useAppStore();
   const [justCheckedIds, setJustCheckedIds] = useState<Set<number>>(new Set());
 
@@ -18,11 +18,10 @@ export function useHabits() {
     const resolvedKey = key ?? todayKey;
 
     // LATE LOGGING PROTECTION: Only allow Today or Yesterday
-    if (resolvedKey !== todayKey && resolvedKey !== yesterdayKey) {
-      return;
-    }
+    const isLoggable = resolvedKey === todayKey || resolvedKey === yesterdayKey;
+    if (!isLoggable) return;
 
-    const isDone = !!habit.days[resolvedKey];
+    const isDone = Boolean(habit.days[resolvedKey]);
     _toggleHabit(habit.id, resolvedKey);
 
     if (resolvedKey === todayKey && !isDone) {
@@ -54,13 +53,13 @@ export function useHabits() {
     handleToggle,
     justChecked,
   };
-}
+};
 
-export function useHabitToggle(habit: Habit) {
+export const useHabitToggle = (habit: Habit) => {
   const { handleToggle, justChecked } = useHabits();
 
   return {
     justChecked: justChecked(habit.id),
     handleToggle: (key?: string) => handleToggle(habit, key),
   };
-}
+};
