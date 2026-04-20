@@ -41,10 +41,10 @@ export function Dialog({ isOpen, onClose, title, children }: DialogProps) {
   }, [isOpen]);
 
   useEffect(() => {
-    if (!isOpen) return;
+    if (!isOpen) return null;
 
     const dialog = dialogRef.current;
-    if (!dialog) return;
+    if (!dialog) return null;
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key !== 'Tab') return;
