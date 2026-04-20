@@ -71,9 +71,7 @@
   --fw-med: 700;
   --fw-semi: 800;
 
-  /* Geometry & Radii */
-  --r-card: 24px;
-  --r-pill: 64px;
+  /* Geometry & Radii are now handled in tokens/geometry.css */
 
   /* Motion & Easing */
   --bezier: cubic-bezier(0.23, 1, 0.32, 1);

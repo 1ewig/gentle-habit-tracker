@@ -1,0 +1,136 @@
+/**
+ * GEOMETRY ORCHESTRATION
+ * Centralized control for all component shapes, organized by feature.
+ */
+
+/* ==========================================================================
+   1. GLOBAL SHELL & PRIMITIVES
+   ========================================================================== */
+
+.dialog-box {
+  border-radius: var(--r-card) var(--r-card) 0 0;
+}
+
+.nav-pill,
+.nav-btn {
+  border-radius: var(--r-pill);
+}
+
+.btn-primary,
+.add-form input {
+  border-radius: var(--r-button);
+}
+
+.dialog-close,
+.btn-icon,
+.card-action-btn {
+  border-radius: 50%;
+}
+
+
+/* ==========================================================================
+   2. TODAY PAGE (HABIT GRID)
+   ========================================================================== */
+
+.hcard {
+  border-radius: var(--r-card);
+}
+
+.wd-bar {
+  border-radius: var(--r-pill);
+}
+
+.hcard-check,
+.wd-dot,
+.habit-card.s1 .visual,
+.habit-card.s3 .visual,
+.habit-card.s7 .visual,
+.habit-card.s8 .visual {
+  border-radius: 50%;
+}
+
+.habit-card.s2 .visual,
+.habit-card.s6 .visual {
+  border-radius: var(--r-pill);
+}
+
+.habit-card.s4 .visual,
+.habit-card.s10 .visual {
+  border-radius: var(--r-1);
+}
+
+.habit-card.s5 .visual,
+.habit-card.s9 .visual {
+  border-radius: var(--r-2);
+}
+
+.habit-card-s6 .pill {
+  border-radius: var(--r-button);
+}
+
+.bloom-effect {
+  border-radius: 50%;
+}
+
+
+/* ==========================================================================
+   3. JOURNAL PAGE (MOMENTUM)
+   ========================================================================== */
+
+.momentum-card {
+  border-radius: var(--r-card);
+}
+
+.momentum-item,
+.day-habit-row {
+  border-radius: calc(var(--r-card) * 0.5);
+}
+
+.momentum-tabs,
+.mtab {
+  border-radius: var(--r-pill);
+}
+
+.day-bar-fill {
+  border-radius: var(--r-4);
+}
+
+.momentum-dot,
+.momentum-bar {
+  border-radius: var(--r-pill);
+}
+
+.momentum-avatar,
+.month-dot,
+.day-habit-dot {
+  border-radius: 50%;
+}
+
+.stat-pill {
+  border-radius: var(--r-button);
+}
+
+
+/* ==========================================================================
+   4. SETTINGS PAGE (DASHBOARD)
+   ========================================================================== */
+
+.settings-card {
+  border-radius: var(--r-card);
+}
+
+.scard,
+.habit-item {
+  border-radius: calc(var(--r-card) * 0.5);
+}
+
+.style-btn {
+  border-radius: var(--r-button);
+}
+
+.theme-btn,
+.bp-avatar,
+.scard-remove,
+.habit-color-dot {
+  border-radius: 50%;
+}

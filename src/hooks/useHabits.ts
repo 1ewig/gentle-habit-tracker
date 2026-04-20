@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import { useAppStore } from '../store/useAppStore';
-import { getTodayKey } from '../lib/utils';
+import { getTodayKey, getYesterdayKey } from '../lib/utils';
 
 export type Habit = {
   id: number;
@@ -14,7 +14,14 @@ export function useHabits() {
 
   const handleToggle = useCallback((habit: Habit, key?: string) => {
     const todayKey = getTodayKey();
+    const yesterdayKey = getYesterdayKey();
     const resolvedKey = key ?? todayKey;
+
+    // LATE LOGGING PROTECTION: Only allow Today or Yesterday
+    if (resolvedKey !== todayKey && resolvedKey !== yesterdayKey) {
+      return;
+    }
+
     const isDone = !!habit.days[resolvedKey];
     _toggleHabit(habit.id, resolvedKey);
 

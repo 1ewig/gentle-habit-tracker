@@ -4,11 +4,8 @@
  * This includes the Momentum Dock, Monthly Grid, and Day Detail Dialog extensions.
  */
 
-
-
 .momentum-card {
   background: var(--surface);
-  border-radius: var(--r-card);
   padding: var(--s-16) var(--s-24);
   border: 1px solid var(--rim);
   isolation: isolate;
@@ -35,7 +32,6 @@
   display: flex;
   gap: 3px;
   background: var(--raised);
-  border-radius: 999px;
   padding: 4px;
 }
 
@@ -46,7 +42,6 @@
   font-size: var(--t-xs);
   color: var(--muted);
   cursor: pointer;
-  border-radius: 999px;
   transition: all 0.3s var(--bezier);
   font-weight: var(--fw-reg);
   text-transform: lowercase;
@@ -100,17 +95,14 @@
   width: 100%;
   background: var(--accent);
   transform-origin: bottom;
-  border-radius: 8px;
 }
 
 .day-bar-fill.is-empty {
   background: var(--ghost);
-  border-radius: 8px;
 }
 
 .day-bar-fill.is-future {
   background: var(--ghost);
-  border-radius: 8px;
 }
 
 
@@ -164,7 +156,6 @@
 .month-dot {
   width: 100%;
   aspect-ratio: 1;
-  border-radius: 50%;
   background: var(--raised);
   border: 1px solid var(--ghost);
   transition: all 0.3s var(--bezier);
@@ -273,7 +264,6 @@
   gap: var(--s-16);
   padding: 14px var(--s-16);
   background: var(--surface);
-  border-radius: 16px;
   border: 1px solid transparent;
   transition: border-color 0.3s var(--bezier);
 }
@@ -285,7 +275,6 @@
 .day-habit-dot {
   width: 28px;
   height: 28px;
-  border-radius: 50%;
   background: var(--raised);
   border: 1px solid var(--ghost);
   display: flex;
@@ -318,4 +307,9 @@
   stroke: var(--bg);
   opacity: 1;
   transform: scale(1);
+}
+
+.day-habit-row.readonly {
+  cursor: default;
+  pointer-events: none;
 }
