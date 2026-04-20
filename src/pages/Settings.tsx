@@ -1,9 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { ProfileSection } from '../components/settings/SettingsGrid/ProfileSection';
-import { AppearanceSection } from '../components/settings/SettingsGrid/AppearanceSection';
-import { HabitSection } from '../components/settings/SettingsGrid/HabitSection';
-import { PAGE_VARIANTS, GRID_VARIANTS } from '../lib/motion';
+import { SettingsGrid } from '../components/settings/SettingsGrid';
+import { PAGE_VARIANTS } from '../lib/motion';
 
 export function Settings() {
   return (
@@ -14,16 +12,7 @@ export function Settings() {
       animate="enter"
       exit="exit"
     >
-      <motion.div
-        className="settings-grid"
-        variants={GRID_VARIANTS}
-        initial="hidden"
-        animate="visible"
-      >
-        <ProfileSection />
-        <AppearanceSection />
-        <HabitSection />
-      </motion.div>
+      <SettingsGrid />
     </motion.div>
   );
 }
