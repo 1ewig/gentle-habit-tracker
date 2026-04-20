@@ -1,5 +1,5 @@
 import { useAppStore } from '../store/useAppStore';
-import { TODAY, dateKey } from '../lib/utils';
+import { getToday, dateKey } from '../lib/utils';
 
 export interface DayStats {
   total: number;
@@ -10,6 +10,7 @@ export interface DayStats {
 export function useHabitStats() {
   const { habits } = useAppStore();
   const totalHabits = habits.length;
+  const today = getToday();
 
   const getDayStats = (key: string): DayStats => {
     if (totalHabits === 0) return { total: 0, done: 0, pct: 0 };
@@ -19,10 +20,10 @@ export function useHabitStats() {
 
   const countPerfectDays = () => {
     if (totalHabits === 0) return 0;
-    const year = TODAY.getFullYear();
-    const month = TODAY.getMonth();
+    const year = today.getFullYear();
+    const month = today.getMonth();
     let count = 0;
-    for (let day = 1; day <= TODAY.getDate(); day++) {
+    for (let day = 1; day <= today.getDate(); day++) {
       const key = dateKey(new Date(year, month, day));
       if (habits.every(h => !!h.days[key])) count++;
     }
@@ -30,12 +31,12 @@ export function useHabitStats() {
   };
 
   const getOverallConsistency = () => {
-    const year = TODAY.getFullYear();
-    const month = TODAY.getMonth();
+    const year = today.getFullYear();
+    const month = today.getMonth();
     let totalPossible = 0;
     let totalDone = 0;
     
-    for (let day = 1; day <= TODAY.getDate(); day++) {
+    for (let day = 1; day <= today.getDate(); day++) {
       const key = dateKey(new Date(year, month, day));
       totalPossible += totalHabits;
       totalDone += habits.filter(h => !!h.days[key]).length;
@@ -45,8 +46,8 @@ export function useHabitStats() {
   };
 
   const getMonthMetadata = () => {
-    const year = TODAY.getFullYear();
-    const month = TODAY.getMonth();
+    const year = today.getFullYear();
+    const month = today.getMonth();
     const firstDay = new Date(year, month, 1).getDay();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
     return { year, month, firstDay, daysInMonth };
@@ -59,6 +60,6 @@ export function useHabitStats() {
     countPerfectDays,
     getOverallConsistency,
     getMonthMetadata,
-    TODAY,
+    TODAY: today,
   };
 }

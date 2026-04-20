@@ -1,9 +1,10 @@
 import React from 'react';
-import { MONTHS, TODAY, FULL_DAYS } from '../../lib/utils';
+import { MONTHS, FULL_DAYS, getToday } from '../../lib/utils';
 import './today-header.css';
 
 export function TodayHeader() {
-  const displayTitle = `${FULL_DAYS[TODAY.getDay()]}, ${MONTHS[TODAY.getMonth()]} ${TODAY.getDate()}`;
+  const today = getToday();
+  const displayTitle = `${FULL_DAYS[today.getDay()]}, ${MONTHS[today.getMonth()]} ${today.getDate()}`;
   const displaySub = 'your personal evolution';
 
   return (

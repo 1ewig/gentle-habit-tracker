@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import { useAppStore } from '../store/useAppStore';
-import { TODAY_KEY } from '../lib/utils';
+import { getTodayKey } from '../lib/utils';
 
 export type Habit = {
   id: number;
@@ -12,11 +12,13 @@ export function useHabits() {
   const { habits, _toggleHabit, _addHabit, _removeHabit } = useAppStore();
   const [justCheckedIds, setJustCheckedIds] = useState<Set<number>>(new Set());
 
-  const handleToggle = useCallback((habit: Habit, key: string = TODAY_KEY) => {
-    const isDone = !!habit.days[key];
-    _toggleHabit(habit.id, key);
+  const handleToggle = useCallback((habit: Habit, key?: string) => {
+    const todayKey = getTodayKey();
+    const resolvedKey = key ?? todayKey;
+    const isDone = !!habit.days[resolvedKey];
+    _toggleHabit(habit.id, resolvedKey);
 
-    if (key === TODAY_KEY && !isDone) {
+    if (resolvedKey === todayKey && !isDone) {
       setJustCheckedIds(prev => new Set(prev).add(habit.id));
       setTimeout(() => {
         setJustCheckedIds(prev => {

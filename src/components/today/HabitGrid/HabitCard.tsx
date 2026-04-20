@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { useAppStore } from '../../../store/useAppStore';
-import { TODAY_KEY, cn } from '../../../lib/utils';
+import { getTodayKey, cn } from '../../../lib/utils';
 import { useHabitToggle } from '../../../hooks/useHabits';
 import { STYLE_MAP } from './HabitStyles';
 import { GRID_ITEM_VARIANTS, HOVER_TAP } from '../../../lib/motion';
@@ -16,7 +16,7 @@ export const HabitCard: React.FC<HabitCardProps> = ({ habit, index }) => {
   const { settings } = useAppStore();
   const { justChecked, handleToggle } = useHabitToggle(habit);
   
-  const isDoneToday = !!habit.days[TODAY_KEY];
+  const isDoneToday = !!habit.days[getTodayKey()];
   const StyleComponent = STYLE_MAP[settings.style] || STYLE_MAP[1];
 
   return (

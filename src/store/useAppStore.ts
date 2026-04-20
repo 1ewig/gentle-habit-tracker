@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { TODAY_KEY } from '../lib/utils';
+import { getTodayKey } from '../lib/utils';
 
 export const THEMES = ['midnight', 'parchment', 'ink', 'moss', 'void', 'sand', 'ocean', 'ruby', 'amethyst', 'frost', 'sakura', 'birch', 'linen', 'voltage'];
 export const THEME_COLORS: Record<string, { bg: string, border: string }> = {
@@ -72,17 +72,20 @@ export const useAppStore = create<AppState>()(
       setCurrentPage: (currentPage) => set({ currentPage }),
       setSelectedDay: (selectedDay) => set({ selectedDay }),
 
-      _toggleHabit: (id: number, key: string = TODAY_KEY) => 
-        set((state) => ({
+      _toggleHabit: (id: number, key?: string) =>
+        set((state) => {
+          const resolvedKey = key ?? getTodayKey();
+          return {
           habits: state.habits.map((h) => {
             if (h.id === id) {
-              const isDone = !h.days[key];
+              const isDone = !h.days[resolvedKey];
               if (navigator.vibrate) navigator.vibrate(isDone ? [10, 30, 10] : 10);
-              return { ...h, days: { ...h.days, [key]: isDone } };
+              return { ...h, days: { ...h.days, [resolvedKey]: isDone } };
             }
             return h;
           })
-        })),
+          };
+        }),
 
       _addHabit: (name: string) =>
         set((state) => ({
