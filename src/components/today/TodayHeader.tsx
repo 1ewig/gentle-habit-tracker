@@ -1,5 +1,6 @@
 import React from 'react';
 import { MONTHS, TODAY, FULL_DAYS } from '../../lib/utils';
+import './today-header.css';
 
 export function TodayHeader() {
   const displayTitle = `${FULL_DAYS[TODAY.getDay()]}, ${MONTHS[TODAY.getMonth()]} ${TODAY.getDate()}`;
