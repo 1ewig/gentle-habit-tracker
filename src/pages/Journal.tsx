@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { NeuralContainer } from '../components/journal/NeuralContainer';
+import { JournalScene } from '../components/journal/JournalScene';
 import { JournalDialog } from '../components/journal/momentum/JournalDialog';
 import { PAGE_VARIANTS } from '../lib/motion';
 
@@ -13,7 +13,7 @@ export function Journal() {
       animate="enter"
       exit="exit"
     >
-      <NeuralContainer />
+      <JournalScene />
       <JournalDialog />
     </motion.div>
   );

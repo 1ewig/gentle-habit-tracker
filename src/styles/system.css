@@ -79,7 +79,7 @@
 }
 
 /* Today Header Placement */
-.page.today .header {
+.page.today .today-header {
   align-items: center;
   justify-content: center;
   padding: 0 var(--s-24) var(--s-16);

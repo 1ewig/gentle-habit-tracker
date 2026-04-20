@@ -1,8 +1,8 @@
 import React from 'react';
+import { MomentumDock } from '../momentum/MomentumDock';
 import { NeuralWeb } from './NeuralWeb';
-import { MomentumDock } from './momentum/MomentumDock';
 
-export function NeuralContainer() {
+export function JournalScene() {
   return (
     <div className="neural-container">
       <NeuralWeb />
@@ -10,3 +10,4 @@ export function NeuralContainer() {
     </div>
   );
 }
+

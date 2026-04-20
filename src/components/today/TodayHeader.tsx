@@ -8,10 +8,10 @@ export function TodayHeader() {
   const displaySub = 'your personal evolution';
 
   return (
-    <div className="header">
-      <div className="header-info">
-        <div className="header-title">{displayTitle}</div>
-        <div className="header-sub">{displaySub}</div>
+    <div className="today-header">
+      <div className="today-header__info">
+        <div className="today-header__title">{displayTitle}</div>
+        <div className="today-header__sub">{displaySub}</div>
       </div>
     </div>
   );

@@ -67,6 +67,12 @@ body {
   scrollbar-width: none;
 }
 
+/* Fixed-viewport pages (no scroll) */
+#body:has(.page.journal.active),
+#body:has(.page.settings.active) {
+  overflow: hidden;
+}
+
 #body::-webkit-scrollbar {
   display: none;
 }
