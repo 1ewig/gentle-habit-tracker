@@ -43,9 +43,11 @@ interface AppState {
   setCurrentPage: (page: 'today' | 'journal' | 'settings') => void;
   setSelectedDay: (day: string | null) => void;
   
-  // Internal habit actions (used by useHabits hook)
+  /** @internal Use useHabits() instead */
   _toggleHabit: (id: number, key?: string) => void;
+  /** @internal Use useHabits() instead */
   _addHabit: (name: string) => void;
+  /** @internal Use useHabits() instead */
   _removeHabit: (id: number) => void;
 }
 
@@ -64,10 +66,7 @@ export const useAppStore = create<AppState>()(
       selectedDay: null,
 
       setProfile: (profile) => set({ profile }),
-      setSettings: (settings) => {
-        document.documentElement.setAttribute('data-theme', settings.theme);
-        set({ settings });
-      },
+      setSettings: (settings) => set({ settings }),
       setHabits: (habits) => set({ habits }),
       setCurrentPage: (currentPage) => set({ currentPage }),
       setSelectedDay: (selectedDay) => set({ selectedDay }),
