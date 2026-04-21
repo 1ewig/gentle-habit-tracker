@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { JournalScene } from '../components/journal/JournalScene';
-import { JournalDialog } from '../components/journal/momentum/JournalDialog';
 import { PAGE_VARIANTS } from '../lib/motion';
 
 export const Journal = () => {
@@ -14,7 +13,6 @@ export const Journal = () => {
       exit="exit"
     >
       <JournalScene />
-      <JournalDialog />
     </motion.div>
   );
 };

@@ -1,9 +1,9 @@
 import React from 'react';
-import { useAppStore } from '../../../store/useAppStore';
-import { useHabits } from '../../../hooks/useHabits';
-import { useHabitStats } from '../../../hooks/useHabitStats';
-import { Dialog } from '../../shared/Dialog';
-import { FULL_DAYS, MONTHS, dateKey, getToday, getYesterday } from '../../../lib/utils';
+import { useAppStore } from '../../store/useAppStore';
+import { useHabits } from '../../hooks/useHabits';
+import { useHabitStats } from '../../hooks/useHabitStats';
+import { Dialog } from '../shared/Dialog';
+import { FULL_DAYS, MONTHS, dateKey, getToday, getYesterday } from '../../lib/utils';
 
 export const JournalDialog = () => {
   const { selectedDay, setSelectedDay } = useAppStore();

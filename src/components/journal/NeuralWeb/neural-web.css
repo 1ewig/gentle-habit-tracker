@@ -1,0 +1,7 @@
+/* Neural Web Actor */
+#neural-web {
+  flex: 1;
+  min-height: 0;
+  touch-action: none;
+  display: block;
+}
