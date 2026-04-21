@@ -7,9 +7,15 @@
 
 .bloom-effect {
   position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--bloom-size, 50px);
+  height: var(--bloom-size, 50px);
+  margin-left: calc(var(--bloom-size, 50px) / -2);
+  margin-top: calc(var(--bloom-size, 50px) / -2);
+  background: var(--bloom-color, var(--accent));
   pointer-events: none;
-  background: radial-gradient(circle, rgba(var(--glow-rgb), 0.8) 0%, transparent 70%);
-  z-index: 5;
+  z-index: 0;
 }
 
 
