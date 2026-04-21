@@ -5,13 +5,6 @@ import { useHabitStats } from '../../../hooks/useHabitStats';
 import { useAppStore } from '../../../store/useAppStore';
 import { MOMENTUM_TRANSITIONS } from '../../../lib/motion';
 
-export const MomentumMonthly: React.FC = () => {
-  const { totalHabits, getDayStats, getMonthMetadata } = useHabitStats();
-  const { setSelectedDay } = useAppStore();
-  const { year, month, firstDay, daysInMonth } = getMonthMetadata();
-  const today = getToday();
-  const todayKey = dateKey(today);
-
 const LABELS = [
   { id: 'sun', label: 's' },
   { id: 'mon', label: 'm' },
