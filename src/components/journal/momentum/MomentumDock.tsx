@@ -4,7 +4,7 @@ import { cn } from '../../../lib/utils';
 import { MomentumWeekly } from './MomentumWeekly';
 import { MomentumMonthly } from './MomentumMonthly';
 import { MomentumStats } from './MomentumStats';
-import { PAGE_VARIANTS, PANEL_VARIANTS } from '../../../lib/motion';
+import { PANEL_VARIANTS } from '../../../lib/motion';
 
 type TabType = 'weekly' | 'monthly' | 'stats';
 
@@ -40,9 +40,9 @@ export function MomentumDock() {
     <div id="momentum-dock">
       <motion.div
         className="momentum-card"
-        variants={PAGE_VARIANTS}
+        variants={PANEL_VARIANTS}
         initial="initial"
-        animate="enter"
+        animate="animate"
         exit="exit"
       >
         <MomentumHeader activeTab={activeTab} onTabChange={setActiveTab} />
