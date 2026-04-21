@@ -78,34 +78,6 @@ export const GRID_ITEM_VARIANTS: Variants = {
   }
 };
 
-/**
- * List & Card Entrances
- * Staggered entrance for clusters of items
- */
-export const LIST_VARIANTS: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.05,
-      delayChildren: 0.1
-    }
-  }
-};
-
-export const ITEM_VARIANTS: Variants = {
-  hidden: { 
-    opacity: 0, 
-    y: 16, 
-    scale: 0.98 
-  },
-  visible: { 
-    opacity: 1, 
-    y: 0, 
-    scale: 1,
-    transition: SPRINGS.smooth
-  }
-};
 
 /**
  * Shared Interactions
@@ -189,21 +161,6 @@ export const BLOOM_VARIANTS = {
   }
 };
 
-/**
- * Global Shell Components
- */
-export const HEADER_VARIANTS = {
-  visible: { 
-    opacity: 1, 
-    y: 0,
-    transition: { duration: 0.3, ease: [0.23, 1, 0.32, 1] as const }
-  },
-  hidden: { 
-    opacity: 0, 
-    y: -40,
-    transition: { duration: 0.25, ease: [0.23, 1, 0.32, 1] as const }
-  }
-};
 
 export const NAV_BUTTON_VARIANTS = {
   hover: { y: -2 },
