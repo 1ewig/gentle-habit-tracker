@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { useAppStore } from '../../../store/useAppStore';
 import { Dialog } from '../../shared/Dialog';
-import { cn } from '../../../lib/utils';
 import { GRID_ITEM_VARIANTS, HOVER_TAP } from '../../../lib/motion';
 
 export function ProfileSection() {
@@ -42,7 +41,7 @@ export function ProfileSection() {
         </div>
       </motion.div>
 
-      <Dialog isOpen={isOpen} onClose={() => setIsOpen(false)} title="edit profile" autoFocus={false}>
+      <Dialog isOpen={isOpen} onClose={() => setIsOpen(false)} title="edit profile" initialFocus={false}>
         <div className="add-form">
           <input 
             type="text" 

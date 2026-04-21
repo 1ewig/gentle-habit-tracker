@@ -130,10 +130,11 @@ export const PANEL_VARIANTS: Variants = {
   exit: { opacity: 0, scale: 1.02, transition: { duration: 0.15, ease: "easeIn" as const } }
 };
 
+
 /**
  * Dialog & Modal Transitions
  */
-export const DIALOG_VARIANTS = {
+export const DIALOG_VARIANTS: { overlay: Variants; content: Variants } = {
   overlay: {
     initial: { opacity: 0, pointerEvents: "none" as const },
     animate: { 
@@ -168,7 +169,7 @@ export const DIALOG_VARIANTS = {
         opacity: { duration: 0.2 }
       } 
     }
-  } as any
+  }
 };
 
 /**

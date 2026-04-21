@@ -11,12 +11,12 @@ interface DialogProps {
   subtitle?: ReactNode;
   children: ReactNode;
   footer?: ReactNode;
-  autoFocus?: boolean;
+  initialFocus?: boolean;
 }
 
 const FOCUSABLE_SELECTORS = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
 
-export function Dialog({ isOpen, onClose, title, subtitle, children, footer, autoFocus = true }: DialogProps) {
+export function Dialog({ isOpen, onClose, title, subtitle, children, footer, initialFocus = true }: DialogProps) {
   const dialogRef = useRef<HTMLDivElement>(null);
   const dragControls = useDragControls();
   const previousActiveElement = useRef<HTMLElement | null>(null);
@@ -32,19 +32,17 @@ export function Dialog({ isOpen, onClose, title, subtitle, children, footer, aut
   useEffect(() => {
     if (isOpen) {
       previousActiveElement.current = document.activeElement as HTMLElement;
-      if (autoFocus) {
+      if (initialFocus) {
         setTimeout(() => {
           const dialog = dialogRef.current;
-          if (dialog) {
-            const firstFocusable = dialog.querySelector<HTMLElement>(FOCUSABLE_SELECTORS);
-            firstFocusable?.focus();
-          }
+          const firstFocusable = dialog?.querySelector<HTMLElement>(FOCUSABLE_SELECTORS);
+          firstFocusable?.focus();
         }, 50);
       }
     } else {
       previousActiveElement.current?.focus();
     }
-  }, [isOpen, autoFocus]);
+  }, [isOpen, initialFocus]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -53,18 +51,17 @@ export function Dialog({ isOpen, onClose, title, subtitle, children, footer, aut
     if (!dialog) return;
 
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key !== 'Tab') return;
-
+      if (e.key !== 'Tab' || !dialog) return;
       const focusableElements = dialog.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTORS);
-      const firstElement = focusableElements[0];
-      const lastElement = focusableElements[focusableElements.length - 1];
+      const first = focusableElements[0];
+      const last = focusableElements[focusableElements.length - 1];
 
-      if (e.shiftKey && document.activeElement === firstElement) {
+      if (e.shiftKey && document.activeElement === first) {
         e.preventDefault();
-        lastElement?.focus();
-      } else if (!e.shiftKey && document.activeElement === lastElement) {
+        last?.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
         e.preventDefault();
-        firstElement?.focus();
+        first?.focus();
       }
     };
 
