@@ -13,7 +13,7 @@ export function TodayEmptyState() {
     >
       <div className="empty-icon">✧</div>
       <div className="empty-text">
-        it's a fresh beginning. <br />
+        it&apos;s a fresh beginning. <br />
         add your first habit to start the journey.
       </div>
       <button 

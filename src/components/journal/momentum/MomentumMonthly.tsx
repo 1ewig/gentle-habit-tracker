@@ -18,7 +18,7 @@ export const MomentumMonthly: React.FC = () => {
     <div className="monthly-grid">
       {labels.map((l, i) => (
         <motion.div 
-          key={`lbl-${i}`} 
+          key={`day-header-${i}`} 
           className={cn("month-day-lbl", i === today.getDay() && "is-today")}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -29,7 +29,7 @@ export const MomentumMonthly: React.FC = () => {
       ))}
 
       {Array.from({ length: firstDay }).map((_, i) => (
-        <div key={`empty-${i}`} className="month-dot empty-cell" />
+        <div key={`month-pad-${i}`} className="month-dot empty-cell" />
       ))}
 
       {Array.from({ length: daysInMonth }).map((_, i) => {

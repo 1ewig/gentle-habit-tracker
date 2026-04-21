@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { useAppStore } from '../../../store/useAppStore';
 import { cn } from '../../../lib/utils';
 import { MomentumWeekly } from './MomentumWeekly';
 import { MomentumMonthly } from './MomentumMonthly';
 import { MomentumStats } from './MomentumStats';
-import { PAGE_VARIANTS, GRID_ITEM_VARIANTS, PANEL_VARIANTS } from '../../../lib/motion';
+import { PAGE_VARIANTS, PANEL_VARIANTS } from '../../../lib/motion';
 
 type TabType = 'weekly' | 'monthly' | 'stats';
 
