@@ -220,9 +220,6 @@
   stroke: var(--accent);
 }
 
-.s2 .wd-dot {
-  /* border-radius removed */
-}
 
 /* 3. Switch */
 .s3 .hcard-check {
@@ -308,9 +305,6 @@
   border-color: var(--accent);
 }
 
-.s6 .wd-dot {
-  /* border-radius removed */
-}
 
 .s6 .wd.is-today.today-done .wd-dot,
 .s6 .wd.is-yesterday.past-done .wd-dot {
