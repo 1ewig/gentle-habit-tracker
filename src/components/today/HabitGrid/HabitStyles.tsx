@@ -1,16 +1,12 @@
 import React from 'react';
-import { cn, getWeek, getTodayIdx, getTodayKey, getYesterdayKey, dateKey, DAY_LABELS, onCardKeyDown } from '../../../lib/utils';
+import { cn, getTodayKey, onCardKeyDown } from '../../../lib/utils';
 import { HabitStyleProps } from '../../../store/useAppStore';
 import { BloomEffect } from './BloomEffect';
+import { WeekRow } from './WeekRow';
 
 // --- Style 1: Classic ---
-// Standard dots with a simple checkmark and Bloom Effect support.
 export const StyleClassic: React.FC<HabitStyleProps> = ({ habit, handleToggle, justChecked }) => {
-  const todayKey = getTodayKey();
-  const yesterdayKey = getYesterdayKey();
-  const week = getWeek();
-  const todayIdx = getTodayIdx();
-  const isDoneToday = !!habit.days[todayKey];
+  const isDoneToday = !!habit.days[getTodayKey()];
   return (
     <>
       <div className="hcard-top">
@@ -28,41 +24,14 @@ export const StyleClassic: React.FC<HabitStyleProps> = ({ habit, handleToggle, j
           {justChecked && <BloomEffect />}
         </div>
       </div>
-      <div className="week-row" role="group" aria-label="Weekly progress">
-        {week.map((d, i) => {
-          const key = dateKey(d);
-          const done = !!habit.days[key];
-          const isToday = i === todayIdx;
-          const isYesterday = key === yesterdayKey;
-          const canToggle = isToday || isYesterday;
-          return (
-            <div 
-              key={key} 
-              className={cn("wd", isToday && "is-today", isYesterday && "is-yesterday")} 
-              onClick={canToggle ? () => handleToggle(isToday ? todayKey : key) : undefined}
-              onKeyDown={canToggle ? (e) => onCardKeyDown(e, () => handleToggle(isToday ? todayKey : key)) : undefined}
-              role={canToggle ? "button" : "presentation"}
-              tabIndex={canToggle ? 0 : -1}
-              aria-label={isToday ? `Toggle ${habit.name} for today` : `${DAY_LABELS[i]} ${done ? 'completed' : 'not completed'}`}
-            >
-              <div className="wd-label" aria-hidden="true">{DAY_LABELS[i]}</div>
-              <div className={cn("wd-dot", done && (isToday ? "today-done" : "past-done"))}></div>
-            </div>
-          );
-        })}
-      </div>
+      <WeekRow habit={habit} handleToggle={handleToggle} />
     </>
   );
 };
 
 // --- Style 2: Strike ---
-// Minimalist dots where today and yesterday can be toggled via a simple check icon.
 export const StyleStrike: React.FC<HabitStyleProps> = ({ habit, handleToggle }) => {
-  const todayKey = getTodayKey();
-  const yesterdayKey = getYesterdayKey();
-  const week = getWeek();
-  const todayIdx = getTodayIdx();
-  const isDoneToday = !!habit.days[todayKey];
+  const isDoneToday = !!habit.days[getTodayKey()];
   return (
     <>
       <div className="hcard-top">
@@ -79,41 +48,14 @@ export const StyleStrike: React.FC<HabitStyleProps> = ({ habit, handleToggle }) 
           <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" /></svg>
         </div>
       </div>
-      <div className="week-row" role="group" aria-label="Weekly progress">
-        {week.map((d, i) => {
-          const key = dateKey(d);
-          const done = !!habit.days[key];
-          const isToday = i === todayIdx;
-          const isYesterday = key === yesterdayKey;
-          const canToggle = isToday || isYesterday;
-          return (
-            <div 
-              key={key} 
-              className={cn("wd", isToday && "is-today", isYesterday && "is-yesterday")} 
-              onClick={canToggle ? () => handleToggle(isToday ? todayKey : key) : undefined}
-              onKeyDown={canToggle ? (e) => onCardKeyDown(e, () => handleToggle(isToday ? todayKey : key)) : undefined}
-              role={canToggle ? "button" : "presentation"}
-              tabIndex={canToggle ? 0 : -1}
-              aria-label={`${DAY_LABELS[i]} ${done ? 'completed' : 'not completed'}`}
-            >
-              <div className="wd-label" aria-hidden="true">{DAY_LABELS[i]}</div>
-              <div className={cn("wd-dot", done && (isToday ? "today-done" : "past-done"))}></div>
-            </div>
-          );
-        })}
-      </div>
+      <WeekRow habit={habit} handleToggle={handleToggle} />
     </>
   );
 };
 
 // --- Style 3: Switch ---
-// Uses a toggle switch component for completion instead of a simple icon.
 export const StyleSwitch: React.FC<HabitStyleProps> = ({ habit, handleToggle }) => {
-  const todayKey = getTodayKey();
-  const yesterdayKey = getYesterdayKey();
-  const week = getWeek();
-  const todayIdx = getTodayIdx();
-  const isDoneToday = !!habit.days[todayKey];
+  const isDoneToday = !!habit.days[getTodayKey()];
   return (
     <>
       <div className="hcard-top">
@@ -130,41 +72,14 @@ export const StyleSwitch: React.FC<HabitStyleProps> = ({ habit, handleToggle }) 
           <div className="hcard-knob"></div>
         </div>
       </div>
-      <div className="week-row" role="group" aria-label="Weekly progress">
-        {week.map((d, i) => {
-          const key = dateKey(d);
-          const done = !!habit.days[key];
-          const isToday = i === todayIdx;
-          const isYesterday = key === yesterdayKey;
-          const canToggle = isToday || isYesterday;
-          return (
-            <div 
-              key={key} 
-              className={cn("wd", isToday && "is-today", isYesterday && "is-yesterday")} 
-              onClick={canToggle ? () => handleToggle(isToday ? todayKey : key) : undefined}
-              onKeyDown={canToggle ? (e) => onCardKeyDown(e, () => handleToggle(isToday ? todayKey : key)) : undefined}
-              role={canToggle ? "button" : "presentation"}
-              tabIndex={canToggle ? 0 : -1}
-              aria-label={`${DAY_LABELS[i]} ${done ? 'completed' : 'not completed'}`}
-            >
-              <div className="wd-label" aria-hidden="true">{DAY_LABELS[i]}</div>
-              <div className={cn("wd-dot", done && (isToday ? "today-done" : "past-done"))}></div>
-            </div>
-          );
-        })}
-      </div>
+      <WeekRow habit={habit} handleToggle={handleToggle} />
     </>
   );
 };
 
 // --- Style 4: Counter ---
-// Numeric display (0/1) for a checklist-style feel. Supports YESTERDAY_KEY toggling.
 export const StyleCounter: React.FC<HabitStyleProps> = ({ habit, handleToggle }) => {
-  const todayKey = getTodayKey();
-  const yesterdayKey = getYesterdayKey();
-  const week = getWeek();
-  const todayIdx = getTodayIdx();
-  const isDoneToday = !!habit.days[todayKey];
+  const isDoneToday = !!habit.days[getTodayKey()];
   return (
     <>
       <div className="hcard-top">
@@ -181,41 +96,14 @@ export const StyleCounter: React.FC<HabitStyleProps> = ({ habit, handleToggle })
           {isDoneToday ? '1' : '0'}
         </div>
       </div>
-      <div className="week-row" role="group" aria-label="Weekly progress">
-        {week.map((d, i) => {
-          const key = dateKey(d);
-          const done = !!habit.days[key];
-          const isToday = i === todayIdx;
-          const isYesterday = key === yesterdayKey;
-          const canToggle = isToday || isYesterday;
-          return (
-            <div 
-              key={key} 
-              className={cn("wd", isToday && "is-today", isYesterday && "is-yesterday")} 
-              onClick={canToggle ? () => handleToggle(isToday ? todayKey : key) : undefined}
-              onKeyDown={canToggle ? (e) => onCardKeyDown(e, () => handleToggle(isToday ? todayKey : key)) : undefined}
-              role={canToggle ? "button" : "presentation"}
-              tabIndex={canToggle ? 0 : -1}
-              aria-label={`${DAY_LABELS[i]} ${done ? 'completed' : 'not completed'}`}
-            >
-              <div className="wd-label" aria-hidden="true">{DAY_LABELS[i]}</div>
-              <div className={cn("wd-bar", done && (isToday ? "today-done" : "past-done"))}></div>
-            </div>
-          );
-        })}
-      </div>
+      <WeekRow habit={habit} handleToggle={handleToggle} indicator="bar" />
     </>
   );
 };
 
 // --- Style 5: Pure ---
-// Extremely minimal: Click the habit name itself to toggle. Dots also act as triggers.
 export const StylePure: React.FC<HabitStyleProps> = ({ habit, handleToggle, justChecked }) => {
-  const todayKey = getTodayKey();
-  const yesterdayKey = getYesterdayKey();
-  const week = getWeek();
-  const todayIdx = getTodayIdx();
-  const isDoneToday = !!habit.days[todayKey];
+  const isDoneToday = !!habit.days[getTodayKey()];
   return (
     <>
       <div className="hcard-top">
@@ -229,7 +117,6 @@ export const StylePure: React.FC<HabitStyleProps> = ({ habit, handleToggle, just
         >
           {habit.name}
         </div>
-        {/* Ghost CTA: top right empty space marks as done */}
         <div 
           className="hcard-check" 
           onClick={() => handleToggle()}
@@ -240,45 +127,22 @@ export const StylePure: React.FC<HabitStyleProps> = ({ habit, handleToggle, just
           aria-pressed={isDoneToday}
         />
       </div>
-      <div className="week-row" role="group" aria-label="Weekly progress">
-        {week.map((d, i) => {
-          const key = dateKey(d);
-          const done = !!habit.days[key];
-          const isToday = i === todayIdx;
-          const isYesterday = key === yesterdayKey;
-          const canToggle = isToday || isYesterday;
-          return (
-            <div 
-              key={key} 
-              className={cn("wd", isToday && "is-today", isYesterday && "is-yesterday")}
-              onClick={canToggle ? () => handleToggle(isToday ? todayKey : key) : undefined}
-              onKeyDown={canToggle ? (e) => onCardKeyDown(e, () => handleToggle(isToday ? todayKey : key)) : undefined}
-              role={canToggle ? "button" : "presentation"}
-              tabIndex={canToggle ? 0 : -1}
-              aria-label={isToday ? `Toggle ${habit.name} for today` : `${DAY_LABELS[i]} ${done ? 'completed' : 'not completed'}`}
-            >
-              <div className="wd-label" aria-hidden="true">{DAY_LABELS[i]}</div>
-              <div 
-                className={cn("wd-dot relative", done && (isToday ? "today-done" : "past-done"))} 
-              >
-                {isToday && justChecked && <BloomEffect size={40} />}
-              </div>
-            </div>
-          );
-        })}
-      </div>
+      <WeekRow 
+        habit={habit} 
+        handleToggle={handleToggle} 
+        renderIndicator={(isToday, done) => (
+          <div className={cn("wd-dot", done && (isToday ? "today-done" : "past-done"))}>
+            {isToday && justChecked && <BloomEffect size={40} />}
+          </div>
+        )}
+      />
     </>
   );
 };
 
 // --- Style 6: Pill ---
-// Plus icon turns into a checkmark. Highlights active interaction range (today/yesterday).
 export const StylePill: React.FC<HabitStyleProps> = ({ habit, handleToggle }) => {
-  const todayKey = getTodayKey();
-  const yesterdayKey = getYesterdayKey();
-  const week = getWeek();
-  const todayIdx = getTodayIdx();
-  const isDoneToday = !!habit.days[todayKey];
+  const isDoneToday = !!habit.days[getTodayKey()];
   return (
     <>
       <div className="hcard-top">
@@ -296,41 +160,14 @@ export const StylePill: React.FC<HabitStyleProps> = ({ habit, handleToggle }) =>
           <svg className="icon-check" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12" /></svg>
         </div>
       </div>
-      <div className="week-row" role="group" aria-label="Weekly progress">
-        {week.map((d, i) => {
-          const key = dateKey(d);
-          const done = !!habit.days[key];
-          const isToday = i === todayIdx;
-          const isYesterday = key === yesterdayKey;
-          const canToggle = isToday || isYesterday;
-          return (
-            <div 
-              key={key} 
-              className={cn("wd", isToday && "is-today", isYesterday && "is-yesterday")} 
-              onClick={canToggle ? () => handleToggle(isToday ? todayKey : key) : undefined}
-              onKeyDown={canToggle ? (e) => onCardKeyDown(e, () => handleToggle(isToday ? todayKey : key)) : undefined}
-              role={canToggle ? "button" : "presentation"}
-              tabIndex={canToggle ? 0 : -1}
-              aria-label={`${DAY_LABELS[i]} ${done ? 'completed' : 'not completed'}`}
-            >
-              <div className="wd-label" aria-hidden="true">{DAY_LABELS[i]}</div>
-              <div className={cn("wd-dot", done && (isToday ? "today-done" : "past-done"))}></div>
-            </div>
-          );
-        })}
-      </div>
+      <WeekRow habit={habit} handleToggle={handleToggle} />
     </>
   );
 };
 
 // --- Style 7: Block ---
-// Simple checkbox icon with standard progress dots.
 export const StyleBlock: React.FC<HabitStyleProps> = ({ habit, handleToggle }) => {
-  const todayKey = getTodayKey();
-  const yesterdayKey = getYesterdayKey();
-  const week = getWeek();
-  const todayIdx = getTodayIdx();
-  const isDoneToday = !!habit.days[todayKey];
+  const isDoneToday = !!habit.days[getTodayKey()];
   return (
     <>
       <div className="hcard-top">
@@ -347,41 +184,14 @@ export const StyleBlock: React.FC<HabitStyleProps> = ({ habit, handleToggle }) =
           <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12" /></svg>
         </div>
       </div>
-      <div className="week-row" role="group" aria-label="Weekly progress">
-        {week.map((d, i) => {
-          const key = dateKey(d);
-          const done = !!habit.days[key];
-          const isToday = i === todayIdx;
-          const isYesterday = key === yesterdayKey;
-          const canToggle = isToday || isYesterday;
-          return (
-            <div 
-              key={key} 
-              className={cn("wd", isToday && "is-today", isYesterday && "is-yesterday")} 
-              onClick={canToggle ? () => handleToggle(isToday ? todayKey : key) : undefined}
-              onKeyDown={canToggle ? (e) => onCardKeyDown(e, () => handleToggle(isToday ? todayKey : key)) : undefined}
-              role={canToggle ? "button" : "presentation"}
-              tabIndex={canToggle ? 0 : -1}
-              aria-label={`${DAY_LABELS[i]} ${done ? 'completed' : 'not completed'}`}
-            >
-              <div className="wd-label" aria-hidden="true">{DAY_LABELS[i]}</div>
-              <div className={cn("wd-dot", done && (isToday ? "today-done" : "past-done"))}></div>
-            </div>
-          );
-        })}
-      </div>
+      <WeekRow habit={habit} handleToggle={handleToggle} />
     </>
   );
 };
 
 // --- Style 8: Bar ---
-// Progress is visualized via vertical bars instead of dots. Includes 'Y' icon placeholder.
 export const StyleBar: React.FC<HabitStyleProps> = ({ habit, handleToggle }) => {
-  const todayKey = getTodayKey();
-  const yesterdayKey = getYesterdayKey();
-  const week = getWeek();
-  const todayIdx = getTodayIdx();
-  const isDoneToday = !!habit.days[todayKey];
+  const isDoneToday = !!habit.days[getTodayKey()];
   return (
     <>
       <div className="hcard-top">
@@ -398,41 +208,14 @@ export const StyleBar: React.FC<HabitStyleProps> = ({ habit, handleToggle }) => 
           Y
         </div>
       </div>
-      <div className="week-row" role="group" aria-label="Weekly progress">
-        {week.map((d, i) => {
-          const key = dateKey(d);
-          const done = !!habit.days[key];
-          const isToday = i === todayIdx;
-          const isYesterday = key === yesterdayKey;
-          const canToggle = isToday || isYesterday;
-          return (
-            <div 
-              key={key} 
-              className={cn("wd", isToday && "is-today", isYesterday && "is-yesterday")} 
-              onClick={canToggle ? () => handleToggle(isToday ? todayKey : key) : undefined}
-              onKeyDown={canToggle ? (e) => onCardKeyDown(e, () => handleToggle(isToday ? todayKey : key)) : undefined}
-              role={canToggle ? "button" : "presentation"}
-              tabIndex={canToggle ? 0 : -1}
-              aria-label={`${DAY_LABELS[i]} ${done ? 'completed' : 'not completed'}`}
-            >
-              <div className="wd-label" aria-hidden="true">{DAY_LABELS[i]}</div>
-              <div className={cn("wd-bar", done && (isToday ? "today-done" : "past-done"))}></div>
-            </div>
-          );
-        })}
-      </div>
+      <WeekRow habit={habit} handleToggle={handleToggle} indicator="bar" />
     </>
   );
 };
 
 // --- Style 9: Arc ---
-// Circular progress indicator (SVG arc) surrounding the check icon.
 export const StyleArc: React.FC<HabitStyleProps> = ({ habit, handleToggle }) => {
-  const todayKey = getTodayKey();
-  const yesterdayKey = getYesterdayKey();
-  const week = getWeek();
-  const todayIdx = getTodayIdx();
-  const isDoneToday = !!habit.days[todayKey];
+  const isDoneToday = !!habit.days[getTodayKey()];
   return (
     <>
       <div className="hcard-top">
@@ -455,41 +238,14 @@ export const StyleArc: React.FC<HabitStyleProps> = ({ habit, handleToggle }) => 
           </div>
         </div>
       </div>
-      <div className="week-row" role="group" aria-label="Weekly progress">
-        {week.map((d, i) => {
-          const key = dateKey(d);
-          const done = !!habit.days[key];
-          const isToday = i === todayIdx;
-          const isYesterday = key === yesterdayKey;
-          const canToggle = isToday || isYesterday;
-          return (
-            <div 
-              key={key} 
-              className={cn("wd", isToday && "is-today", isYesterday && "is-yesterday")} 
-              onClick={canToggle ? () => handleToggle(isToday ? todayKey : key) : undefined}
-              onKeyDown={canToggle ? (e) => onCardKeyDown(e, () => handleToggle(isToday ? todayKey : key)) : undefined}
-              role={canToggle ? "button" : "presentation"}
-              tabIndex={canToggle ? 0 : -1}
-              aria-label={`${DAY_LABELS[i]} ${done ? 'completed' : 'not completed'}`}
-            >
-              <div className="wd-label" aria-hidden="true">{DAY_LABELS[i]}</div>
-              <div className={cn("wd-bar", done && (isToday ? "today-done" : "past-done"))}></div>
-            </div>
-          );
-        })}
-      </div>
+      <WeekRow habit={habit} handleToggle={handleToggle} indicator="bar" />
     </>
   );
 };
 
 // --- Style 10: Peel ---
-// Aesthetic 'shimmer' peel effect with a spark icon.
 export const StylePeel: React.FC<HabitStyleProps> = ({ habit, handleToggle }) => {
-  const todayKey = getTodayKey();
-  const yesterdayKey = getYesterdayKey();
-  const week = getWeek();
-  const todayIdx = getTodayIdx();
-  const isDoneToday = !!habit.days[todayKey];
+  const isDoneToday = !!habit.days[getTodayKey()];
   return (
     <>
       <div className="hcard-top">
@@ -507,29 +263,7 @@ export const StylePeel: React.FC<HabitStyleProps> = ({ habit, handleToggle }) =>
           <div className="peel-icon">✦</div>
         </div>
       </div>
-      <div className="week-row" role="group" aria-label="Weekly progress">
-        {week.map((d, i) => {
-          const key = dateKey(d);
-          const done = !!habit.days[key];
-          const isToday = i === todayIdx;
-          const isYesterday = key === yesterdayKey;
-          const canToggle = isToday || isYesterday;
-          return (
-            <div 
-              key={key} 
-              className={cn("wd", isToday && "is-today", isYesterday && "is-yesterday")} 
-              onClick={canToggle ? () => handleToggle(isToday ? todayKey : key) : undefined}
-              onKeyDown={canToggle ? (e) => onCardKeyDown(e, () => handleToggle(isToday ? todayKey : key)) : undefined}
-              role={canToggle ? "button" : "presentation"}
-              tabIndex={canToggle ? 0 : -1}
-              aria-label={`${DAY_LABELS[i]} ${done ? 'completed' : 'not completed'}`}
-            >
-              <div className="wd-label" aria-hidden="true">{DAY_LABELS[i]}</div>
-              <div className={cn("wd-dot", done && (isToday ? "today-done" : "past-done"))}></div>
-            </div>
-          );
-        })}
-      </div>
+      <WeekRow habit={habit} handleToggle={handleToggle} />
     </>
   );
 };
