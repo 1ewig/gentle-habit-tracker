@@ -8,14 +8,33 @@ import { PAGE_VARIANTS, PANEL_VARIANTS } from '../../../lib/motion';
 
 type TabType = 'weekly' | 'monthly' | 'stats';
 
-export function MomentumDock() {
-  const [activeTab, setActiveTab] = useState<TabType>('weekly');
-
+const MomentumHeader = ({ activeTab, onTabChange }: { activeTab: TabType; onTabChange: (t: TabType) => void }) => {
   const tabs: { id: TabType; label: string }[] = [
     { id: 'weekly', label: 'weekly' },
     { id: 'monthly', label: 'monthly' },
     { id: 'stats', label: 'stats' },
   ];
+
+  return (
+    <div className="momentum-header">
+      <div className="momentum-title">momentum</div>
+      <div className="momentum-tabs">
+        {tabs.map((tab) => (
+          <button
+            key={tab.id}
+            className={cn("mtab", activeTab === tab.id && "active")}
+            onClick={() => onTabChange(tab.id)}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export function MomentumDock() {
+  const [activeTab, setActiveTab] = useState<TabType>('weekly');
 
   return (
     <div id="momentum-dock">
@@ -26,21 +45,7 @@ export function MomentumDock() {
         animate="enter"
         exit="exit"
       >
-        <div className="momentum-header">
-          <div className="momentum-title">momentum</div>
-          <div className="momentum-tabs">
-            {tabs.map((tab) => (
-              <button
-                key={tab.id}
-                className={cn("mtab", activeTab === tab.id && "active")}
-                onClick={() => setActiveTab(tab.id)}
-              >
-                {tab.label}
-              </button>
-            ))}
-          </div>
-        </div>
-
+        <MomentumHeader activeTab={activeTab} onTabChange={setActiveTab} />
         <div>
           <AnimatePresence mode="wait">
             <motion.div
