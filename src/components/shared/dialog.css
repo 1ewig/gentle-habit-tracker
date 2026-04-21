@@ -12,10 +12,6 @@
   will-change: opacity;
 }
 
-.dialog-overlay.active {
-  pointer-events: auto;
-}
-
 .dialog-box {
   background: var(--bg);
   width: 100%;

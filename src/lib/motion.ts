@@ -135,11 +135,16 @@ export const PANEL_VARIANTS: Variants = {
  */
 export const DIALOG_VARIANTS = {
   overlay: {
-    initial: { opacity: 0 },
-    animate: { opacity: 1, transition: { duration: 0.2, ease: "easeOut" as const } },
+    initial: { opacity: 0, pointerEvents: "none" as const },
+    animate: { 
+      opacity: 1, 
+      pointerEvents: "auto" as const,
+      transition: { duration: 0.2, ease: "easeOut" as const } 
+    },
     exit: { 
       opacity: 0, 
-      transition: { duration: 0.2, ease: "easeIn" as const } 
+      pointerEvents: "none" as const,
+      transition: { duration: 0.15, ease: "easeIn" as const } 
     }
   },
   content: {
