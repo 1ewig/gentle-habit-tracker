@@ -15,6 +15,16 @@ const LABELS = [
   { id: 'sat', label: 's' }
 ];
 
+const getMonthDotClass = (isFuture: boolean, isToday: boolean, done: number, total: number) => {
+  return cn(
+    "month-dot",
+    isFuture && "future",
+    !isFuture && total > 0 && done === total && "done",
+    !isFuture && total > 0 && done > 0 && done < total && "partial",
+    isToday && "is-today"
+  );
+};
+
 const MonthCell = ({ 
   dayKey, 
   isFuture, 
@@ -32,18 +42,10 @@ const MonthCell = ({
   index: number; 
   onSelect: (key: string) => void;
 }) => {
-  const cls = cn(
-    "month-dot",
-    isFuture && "future",
-    !isFuture && total > 0 && done === total && "done",
-    !isFuture && total > 0 && done > 0 && done < total && "partial",
-    isToday && "is-today"
-  );
-
   return (
     <motion.div
       key={dayKey}
-      className={cls}
+      className={getMonthDotClass(isFuture, isToday, done, total)}
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={MOMENTUM_TRANSITIONS.dot(index)}
@@ -74,14 +76,15 @@ export const MomentumMonthly: React.FC = () => {
         </motion.div>
       ))}
 
-      {Array.from({ length: firstDay }).map((_, i) => (
-        <div key={`month-pad-${year}-${month}-${i}`} className="month-dot empty-cell" />
-      ))}
+      {Array.from({ length: firstDay }).map((_, i) => {
+        const padDate = new Date(year, month, -i);
+        return <div key={dateKey(padDate)} className="month-dot empty-cell" />;
+      })}
 
       {Array.from({ length: daysInMonth }).map((_, i) => {
         const dateObj = new Date(year, month, i + 1);
         const dayKey = dateKey(dateObj);
-        const { done, total } = getDayStats(dayKey);
+        const { done } = getDayStats(dayKey);
 
         return (
           <MonthCell 
