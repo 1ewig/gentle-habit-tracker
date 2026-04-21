@@ -1,6 +1,6 @@
 import React from 'react';
 import { MONTHS, FULL_DAYS, getToday } from '../../lib/utils';
-import './today-header.css';
+
 
 export const TodayHeader = () => {
   const today = getToday();
