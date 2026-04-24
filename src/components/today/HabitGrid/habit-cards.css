@@ -154,13 +154,8 @@
   outline: none;
 }
 
-@media (hover: hover) {
 
-  .is-yesterday:hover,
-  .is-today:hover {
-    opacity: 0.8;
-  }
-}
+
 
 /* 1. Classic (North Star) */
 .s1 .hcard-check {
