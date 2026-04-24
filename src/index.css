@@ -14,9 +14,6 @@
 @import "./styles/system.css";
 @import "./styles/geometry.css";
 
-/* Tailwind (For utility escapes if needed) */
-@import "tailwindcss";
-
 /* --- SHARED COMPONENTS --- */
 @import "./components/shared/navigation.css";
 @import "./components/shared/dialog.css";
