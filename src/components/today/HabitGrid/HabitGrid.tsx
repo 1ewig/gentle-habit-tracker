@@ -6,11 +6,11 @@ import { TodayEmptyState } from './TodayEmptyState';
 import { GRID_VARIANTS } from '../../../lib/motion';
 
 export function HabitGrid() {
-  const { habits } = useAppStore();
+  const { habits, settings } = useAppStore();
 
   return (
     <motion.div 
-      className="habits-grid"
+      className={`habits-grid grid-s${settings.style}`}
       variants={GRID_VARIANTS}
       initial="hidden"
       animate="visible"

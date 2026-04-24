@@ -187,4 +187,74 @@
   stroke: var(--bg);
 }
 
+/* 2. Grid Style (3:4 ratio) */
+.hcard.s2 {
+  aspect-ratio: 3 / 4;
+  min-height: auto;
+  padding: var(--s-16);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.hcard.s2.checked {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.hcard.s2 .s2-check {
+  width: var(--s-24);
+  height: var(--s-24);
+  border-radius: 50%;
+  border: 2px solid var(--rim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  transition: all 0.3s var(--bezier);
+  position: relative;
+  z-index: 2;
+}
+
+.hcard.s2.checked .s2-check {
+  background: var(--bg);
+  border-color: var(--bg);
+}
+
+.hcard.s2 .s2-check svg {
+  width: 14px;
+  height: 14px;
+  stroke: var(--accent);
+  fill: none;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0;
+  transition: all 0.3s var(--bezier);
+}
+
+.hcard.s2.checked .s2-check svg {
+  opacity: 1;
+}
+
+.hcard.s2 .hcard-name {
+  font-size: var(--t-md);
+  font-weight: var(--fw-semi);
+  line-height: var(--lh-tight);
+  color: var(--text);
+  white-space: normal;
+  text-wrap: balance;
+  transition: color 0.3s var(--bezier);
+  position: relative;
+  z-index: 2;
+}
+
+.hcard.s2.checked .hcard-name {
+  color: var(--bg);
+}
+
+.hcard.s2 .s2-overlay {
+  cursor: pointer;
+}
 

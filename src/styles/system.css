@@ -149,6 +149,11 @@
   width: 100%;
 }
 
+.habits-grid.grid-s2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
 
 /* ==========================================================================
    2. JOURNAL PAGE

@@ -156,12 +156,45 @@
   padding-top: 0;
 }
 
+/* Customization Tabs */
+.dialog-tabs-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--s-24);
+}
+
+.dialog-tabs {
+  display: flex;
+  gap: 3px;
+  background: var(--raised);
+  padding: 4px;
+  border-radius: var(--r-full);
+}
+
+.dtab {
+  background: none;
+  border: none;
+  padding: 5px 16px;
+  font-size: var(--t-xs);
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.3s var(--bezier);
+  font-weight: var(--fw-med);
+  text-transform: lowercase;
+  border-radius: var(--r-full);
+}
+
+.dtab.active {
+  background: var(--bg);
+  color: var(--text);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
 /* Customization Grid & Theme Buttons */
 .theme-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: var(--s-16);
-  padding-bottom: var(--s-32);
 }
 
 .theme-btn {
