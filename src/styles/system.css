@@ -209,8 +209,4 @@
 }
 
 /* Customization Matrix Grid (5-column utility) */
-.grid-5 {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: var(--s-16);
-}
+

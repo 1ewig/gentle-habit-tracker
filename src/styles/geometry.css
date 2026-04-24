@@ -41,32 +41,10 @@
 }
 
 .hcard-check,
-.wd-dot,
-.habit-card.s1 .visual,
-.habit-card.s3 .visual,
-.habit-card.s7 .visual,
-.habit-card.s8 .visual {
+.wd-dot {
   border-radius: 50%;
 }
 
-.habit-card.s2 .visual,
-.habit-card.s6 .visual {
-  border-radius: var(--r-pill);
-}
-
-.habit-card.s4 .visual,
-.habit-card.s10 .visual {
-  border-radius: var(--r-1);
-}
-
-.habit-card.s5 .visual,
-.habit-card.s9 .visual {
-  border-radius: var(--r-2);
-}
-
-.habit-card-s6 .pill {
-  border-radius: var(--r-button);
-}
 
 .bloom-effect {
   border-radius: 50%;
@@ -124,11 +102,9 @@
   border-radius: calc(var(--r-card) * 0.5);
 }
 
-.style-btn {
-  border-radius: var(--r-button);
-}
 
-.theme-btn,
+
+
 .bp-avatar,
 .scard-remove,
 .habit-color-dot {

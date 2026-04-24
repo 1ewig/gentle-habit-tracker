@@ -148,9 +148,63 @@
   letter-spacing: var(--ls-wide);
   line-height: var(--lh-none);
   text-transform: uppercase;
-  padding: var(--s-16) 0 var(--s-8);
+  text-align: center;
+  padding: 0 0 var(--s-16);
 }
 
-.dialog-header + .section-lbl {
+.dialog-header+.section-lbl {
   padding-top: 0;
+}
+
+/* Customization Grid & Theme Buttons */
+.theme-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--s-16);
+  padding-bottom: var(--s-32);
+}
+
+.theme-btn {
+  width: 100%;
+  aspect-ratio: 3 / 1;
+  border-radius: var(--r-4);
+  border: 1px solid var(--rim);
+  cursor: pointer;
+  transition: all 0.3s var(--bezier);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface);
+  overflow: hidden;
+  outline: none;
+}
+
+.theme-btn.active {
+  border-width: 2px;
+  transform: scale(0.96);
+}
+
+.theme-btn-label {
+  display: flex;
+  align-items: center;
+  gap: var(--s-8);
+  color: var(--text);
+  font-weight: var(--fw-med);
+  z-index: 1;
+  text-transform: lowercase;
+  opacity: 0.6;
+  transition: opacity 0.3s var(--bezier);
+}
+
+.t-emoji {
+  font-size: 1.1em;
+}
+
+.t-name {
+  font-size: var(--t-sm);
+}
+
+.theme-btn.active .theme-btn-label {
+  opacity: 1;
 }
