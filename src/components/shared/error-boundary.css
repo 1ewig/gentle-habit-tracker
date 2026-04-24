@@ -1,0 +1,63 @@
+/**
+ * SHARED COMPONENT: ERROR BOUNDARY
+ * Handles the fallback UI when the application crashes.
+ */
+
+.error-boundary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100dvh;
+  padding: var(--s-48);
+  text-align: center;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+}
+
+.error-boundary__title {
+  font-size: var(--t-xl);
+  font-weight: var(--fw-semi);
+  margin-bottom: var(--s-8);
+  letter-spacing: var(--ls-tight);
+}
+
+.error-boundary__text {
+  color: var(--muted);
+  font-size: var(--t-md);
+  margin-bottom: var(--s-32);
+  max-width: 240px;
+  line-height: var(--lh-tight);
+}
+
+.error-boundary__button {
+  padding: var(--s-16) var(--s-40);
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  border-radius: var(--r-pill);
+  cursor: pointer;
+  font-size: var(--t-md);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-tight);
+  transition: all 0.4s var(--bezier);
+  box-shadow: 0 10px 20px -10px rgba(var(--glow-rgb), 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-12);
+  user-select: none;
+}
+
+.error-boundary__button:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 30px -10px rgba(var(--glow-rgb), 0.6);
+  filter: brightness(1.05);
+}
+
+.error-boundary__button:active {
+  transform: translateY(-1px) scale(0.96);
+  box-shadow: 0 5px 15px -5px rgba(var(--glow-rgb), 0.4);
+  transition-duration: 0.1s;
+}

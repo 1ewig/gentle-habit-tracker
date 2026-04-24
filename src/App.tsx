@@ -6,6 +6,7 @@ import { Journal } from './pages/Journal';
 import { Settings } from './pages/Settings';
 import { AnimatePresence } from 'motion/react';
 import { useDynamicViewportHeight } from './hooks/useDynamicViewportHeight';
+import { ErrorBoundary } from './components/shared/ErrorBoundary';
 
 function AppContent() {
   const { currentPage, settings } = useAppStore();
@@ -31,5 +32,9 @@ function AppContent() {
 }
 
 export default function App() {
-  return <AppContent />;
+  return (
+    <ErrorBoundary>
+      <AppContent />
+    </ErrorBoundary>
+  );
 }

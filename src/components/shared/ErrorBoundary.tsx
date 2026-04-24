@@ -31,36 +31,24 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
       }
 
       return (
-        <div style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          height: '100dvh',
-          padding: '2rem',
-          textAlign: 'center',
-          background: 'var(--bg)',
-          color: 'var(--fg)'
-        }}>
-          <h1 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>
+        <div className="error-boundary">
+          <h1 className="error-boundary__title">
             something went wrong
           </h1>
-          <p style={{ color: 'var(--muted)', fontSize: '0.875rem' }}>
+          <p className="error-boundary__text">
             please refresh the app
           </p>
           <button
+            className="error-boundary__button"
             onClick={() => window.location.reload()}
-            style={{
-              marginTop: '1.5rem',
-              padding: '0.75rem 1.5rem',
-              background: 'var(--accent)',
-              color: 'var(--bg)',
-              border: 'none',
-              borderRadius: '8px',
-              cursor: 'pointer',
-              fontSize: '0.875rem'
-            }}
           >
+            <svg 
+              width="16" height="16" viewBox="0 0 24 24" fill="none" 
+              stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
+            >
+              <path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8" />
+              <path d="M21 3v5h-5" />
+            </svg>
             refresh
           </button>
         </div>

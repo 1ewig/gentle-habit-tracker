@@ -21,6 +21,7 @@
 @import "./components/shared/navigation.css";
 @import "./components/shared/dialog.css";
 @import "./components/shared/buttons.css";
+@import "./components/shared/error-boundary.css";
 
 /* --- FEATURE-SPECIFIC --- */
 @import "./components/today/today-header.css";

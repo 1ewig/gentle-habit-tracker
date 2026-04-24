@@ -7,7 +7,7 @@ export function TodayEmptyState() {
   const { setCurrentPage } = useAppStore();
 
   return (
-    <motion.div 
+    <motion.div
       className="empty-state"
       variants={GRID_ITEM_VARIANTS}
     >
@@ -16,7 +16,7 @@ export function TodayEmptyState() {
         it&apos;s a fresh beginning. <br />
         add your first habit to start the journey.
       </div>
-      <button 
+      <button
         className="btn-primary empty-action"
         onClick={() => setCurrentPage('settings')}
       >
