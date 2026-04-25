@@ -5,23 +5,23 @@
 
 ## The 3-Layer Model
 
-Every UI element belongs to exactly one of three layers. No element skips a layer or occupies two.
+Every UI element belongs to exactly one of three layers. This hierarchy ensures strict separation of layout, logic, and visual identity.
 
 ```
 Layer 1 — Page          pages/Today.tsx
-Layer 2 — Body Host     components/today/HabitGrid/HabitGrid.tsx
-Layer 3 — Actor         components/today/HabitGrid/HabitCard.tsx
+Layer 2 — Component     components/today/HabitGrid/HabitGrid.tsx
+Layer 3 — Segment       components/today/HabitGrid/HabitCard.tsx
 ```
 
 ### Layer 1 — Page
 `pages/*.tsx`
 
-The page orchestrates the full screen. It renders, in order:
-1. **Header** (optional) — a named component, e.g. `<TodayHeader />`
-2. **Body Host** — exactly one Layer 2 container that fills the remaining space
-3. **Global Overlays** — dialogs, sheets, popovers (rendered via portal, outside the body flow)
+The page orchestrates the entire screen. It manages Layer 2 components and ensures they are rendered in the correct order:
+1. **Header** (optional) — e.g. `<TodayHeader />`
+2. **Body Components** — one or more Layer 2 components that form the page content.
+3. **Global Overlays** — dialogs, sheets, or popovers.
 
-The page never contains layout logic, style, or business logic. It is a pure composition of its three children.
+The page handles composition and state orchestration between its components. It does not contain direct visual styling or business logic.
 
 ```tsx
 // ✅ Correct
@@ -29,7 +29,7 @@ export function Today() {
   return (
     <motion.div className="page today active" variants={PAGE_VARIANTS} ...>
       <TodayHeader />        {/* Layer 1 Header */}
-      <HabitGrid />          {/* Layer 2 Body Host */}
+      <HabitGrid />          {/* Layer 2 Body Component */}
     </motion.div>
   );
 }
@@ -38,36 +38,34 @@ export function Today() {
 export const Journal = () => {
   return (
     <motion.div className="page journal active" variants={PAGE_VARIANTS} ...>
-      <JournalScene />       {/* Layer 2 Body Host */}
-      <JournalDialog />      {/* Global overlay — portal, not in body flow */}
+      <JournalScene />       {/* Layer 2 Body Component */}
+      <JournalDialog />      {/* Layer 1 Overlay */}
     </motion.div>
   );
 };
 ```
 
-> **Rule:** If the page body contains more than one sibling component, they must be wrapped
-> in a Layer 2 Body Host. The Page never renders two body-level components side by side.
+> **Rule:** The Page is the manager. It decides which Layer 2 components are visible and in what sequence. It uses `system.css` for overall placement.
 
 ---
 
-### Layer 2 — Body Host
+### Layer 2 — Component
 `components/{feature}/{FeatureName}.tsx`
 
-The Body Host is the container for everything inside the page body. It:
-- Defines how its children are **arranged** (flex column, grid, gap)
-- Orchestrates **animation stagger** across children
-- Renders one or more Layer 3 Actors
+The Component is a functional unit within the page body. It:
+- Defines how its segments are **arranged** (grid, list, flex)
+- Orchestrates **internal logic** and stagger animations
+- Renders one or more Layer 3 Segments
 
-It does **not** decide where it sits on the page (that is `system.css`).
-It does **not** have visual identity (color, border, shadow — that belongs to the Actor).
+It does **not** decide its absolute placement on the page.
+It does **not** have its own visual identity (borders, shadows — those belong to Segments).
 
 ```tsx
-// ✅ Correct — HabitGrid lays out its actors, nothing more
+// ✅ Correct — HabitGrid lays out its segments
 export function HabitGrid() {
   return (
     <motion.div className="habits-grid" variants={GRID_VARIANTS} ...>
-      {habits.map((habit, idx) => <HabitCard key={habit.id} habit={habit} index={idx} />)}
-      {habits.length === 0 && <TodayEmptyState />}
+      {habits.map((h, i) => <HabitCard key={h.id} habit={h} index={i} />)}
     </motion.div>
   );
 }
@@ -94,20 +92,19 @@ export function MomentumDock() {
 
 ---
 
-### Layer 3 — Actor
+### Layer 3 — Segment
 `components/{feature}/{ComponentName}.tsx`
 
-The Actor is a self-contained visual unit. It:
+The Segment is the atomic visual unit. It:
 - Defines its own **visual identity** (colors, typography, borders, shadows)
-- Handles its own **interaction** (click, toggle, animation on self)
-- Does **not** know about its siblings or its position on screen
-- Does **not** set `position: absolute/fixed`, `margin`, or `z-index` on its own root element
+- Handles its own **interaction** (click, toggle, self-animation)
+- Does **not** know about its siblings or overall layout
 
 ```tsx
-// ✅ Correct — HabitCard owns its look, not its place
+// ✅ Correct — HabitCard owns its look, not its arrangement
 export const HabitCard = ({ habit, index }) => (
   <motion.div className={cn('hcard', isDone && 'checked')} ...>
-    <StyleComponent habit={habit} handleToggle={handleToggle} />
+    <StyleComponent habit={habit} />
   </motion.div>
 );
 ```
@@ -116,36 +113,33 @@ export const HabitCard = ({ habit, index }) => (
 
 ## Header Rule
 
-Headers are **Layer 1 concerns**. They are rendered directly by the Page, not by the Body Host. This keeps the body container clean and makes it easy to add, remove, or restyle the header independently.
+Headers are **Layer 1 concerns**. They are rendered directly by the Page, not by a Component. This keeps the body container clean and makes it easy to add, remove, or restyle the header independently.
 
 ```
-Page renders:  <PageHeader />  +  <BodyHost />
-BodyHost never renders a header.
+Page renders:  <PageHeader />  +  <Component />
+Component never renders a header.
 ```
 
 ---
 
 ## CSS Responsibility Map
 
-Three CSS layers, each with a single job.
+Two CSS layers, each with a single job.
 
 | What | CSS file | Controls |
 |---|---|---|
-| Page placement | `src/styles/system.css` | Where the body host sits: `padding-top`, safe-area offsets, fixed element positions |
-| Body Host layout | Co-located with the host component | How children are arranged inside: `display`, `flex-direction`, `gap`, `grid-template-columns` |
-| Actor appearance | Co-located with the actor component | What the component looks like: color, border, radius, shadow, typography |
+| Page placement | `src/styles/system.css` | WHERE the components sit on the page: `padding-top`, safe-area offsets, and global placement. |
+| Component visuals | Co-located `.css` | HOW the component and its segments look: layout, colors, borders, shadows, and typography. |
 
 ### The Hard Rules
 
 ```
-system.css   → position, inset, z-index, margin (page-level only)
-host .css    → display, gap, grid, flex, internal padding
-actor .css   → background, color, border, border-radius, font-size, box-shadow
+system.css      → placement, inset, z-index, page-level padding/margin
+component .css  → display, gap, grid, flex, background, color, border, radius
 ```
 
-An Actor CSS file never contains `position: fixed/absolute` on its own root.
-A Body Host CSS file never contains `background`, `border`, or `color`.
-`system.css` never contains component-level visual properties.
+`system.css` never contains component-level visual properties (colors, borders).
+A Component CSS file handles everything from the component's internal layout to the fine details of its segments.
 
 ---
 
@@ -168,7 +162,7 @@ src/
 │   ├── today/
 │   │   ├── TodayHeader.tsx   ← Layer 1 Header
 │   │   ├── today-header.css
-│   │   └── HabitGrid/        ← Layer 2 Body Host folder
+│   │   └── HabitGrid/        ← Layer 2 Component folder
 │   │       ├── HabitGrid.tsx
 │   │       ├── HabitCard.tsx
 │   │       ├── HabitStyles.tsx
@@ -178,21 +172,19 @@ src/
 │   │       └── index.ts
 │   │
 │   ├── journal/
-│   │   ├── JournalDialog.tsx ← Layer 1 Global Overlay (not in body host)
-│   │   └── JournalScene/     ← Layer 2 Body Host folder
-│   │       ├── JournalScene.tsx
-│   │       ├── NeuralWeb.tsx         ← Actor: flex:1, fills space above dock
-│   │       ├── momentum/             ← Sub-feature folder inside the body host
-│   │       │   ├── MomentumDock.tsx  ← Actor that orchestrates its own sub-views
-│   │       │   ├── MomentumWeekly.tsx
-│   │       │   ├── MomentumMonthly.tsx
-│   │       │   ├── MomentumStats.tsx
-│   │       │   └── momentum.css
-│   │       ├── journal-scene.css
-│   │       └── index.ts
+│   │   ├── JournalDialog.tsx ← Layer 1 Global Overlay
+│   │   ├── NeuralWeb/        ← Layer 2 Component
+│   │   │   ├── NeuralWeb.tsx
+│   │   │   └── neural-web.css
+│   │   └── momentum/         ← Layer 2 Component
+│   │       ├── MomentumDock.tsx
+│   │       ├── MomentumWeekly.tsx
+│   │       ├── MomentumMonthly.tsx
+│   │       ├── MomentumStats.tsx
+│   │       └── momentum.css
 │   │
 │   └── settings/
-│       └── SettingsGrid/     ← Layer 2 Body Host folder
+│       └── SettingsGrid/     ← Layer 2 Component folder
 │           ├── SettingsGrid.tsx
 │           ├── ProfileSection.tsx
 │           ├── AppearanceSection.tsx
@@ -217,34 +209,34 @@ src/
 
 ## Naming Conventions
 
-### Body Hosts (Layer 2)
+### Components (Layer 2)
 Named after **what they contain** and **how they arrange it**.
 
 | Suffix | Meaning | Example |
 |---|---|---|
 | `Grid` | Card grid or bento layout | `HabitGrid`, `SettingsGrid` |
-| `Scene` | Full-bleed canvas or ambient visual area | `JournalScene` |
-| `Dock` | Anchored panel with internal tab navigation | `MomentumDock` |
+| `Dock` | Anchored panel with internal navigation | `MomentumDock` |
+| `Web` | Ambient visual canvas | `NeuralWeb` |
 | `List` | Scrollable item list | `NotificationList` *(future)* |
-| `Feed` | Chronological stream | `ActivityFeed` *(future)* |
 
-### Actors (Layer 3)
+### Segments (Layer 3)
 Named after **what they represent**.
 
 | Suffix | Meaning | Example |
 |---|---|---|
 | `Card` | Standalone item in a grid | `HabitCard` |
-| `Header` | Page-level title block | `TodayHeader` |
-| `Section` | Named settings group | `ProfileSection` |
+| `Section` | Named settings group | `ProfileSection`, `AtmosphereSection` |
 | `EmptyState` | Zero-state placeholder | `TodayEmptyState` |
-| `Weekly/Monthly/Stats` | Named sub-views of a dock | `MomentumWeekly` |
+| `Effect` | Visual feedback element | `BloomEffect` |
+| `Weekly/Monthly/Stats` | Named sub-views of a dock | `MomentumWeekly`, `MomentumMonthly` |
 
-### Global Overlays (Page-level, Layer 1)
-Named after **the feature they serve** + `Dialog` or `Sheet`.
+### Layer 1 Components
+Orchestration elements managed directly by the Page.
 
-| Pattern | Example |
-|---|---|
-| `{Feature}Dialog` | `JournalDialog` |
+| Category | Suffix | Meaning | Example |
+|---|---|---|---|
+| **Header** | `Header` | Page-level title and status block | `TodayHeader` |
+| **Overlay** | `Dialog`, `Sheet` | Portal-rendered global UI | `JournalDialog` |
 
 ---
 
@@ -254,54 +246,35 @@ The Journal is the most complex page. This is the canonical reference.
 
 ```
 pages/Journal.tsx
-  <motion.div class="page journal active">     ← system.css: padding-top safe area
-    <JournalScene />                           ← Layer 2 Body Host
-    <JournalDialog />                          ← Portal overlay, outside body flow
+  <motion.div className="page journal active">  {/* .page provides flex column */}
+    <NeuralWeb />                              {/* Layer 2 Component: flex:1 */}
+    <MomentumDock />                           {/* Layer 2 Component: position:fixed */}
+    <JournalDialog />                          {/* Layer 1 Global Overlay */}
   </motion.div>
 ```
 
-```
-JournalScene.tsx
-  <div class="journal-scene">                  ← display:flex; flex:1; flex-direction:column
-    <NeuralWeb />                              ← Actor: flex:1 — fills remaining space
-    <MomentumDock />                           ← Actor: position:fixed (system.css placement)
-  </div>
-```
-
 ```css
-/* system.css — WHERE the journal body sits on screen */
+/* system.css — WHERE the journal elements sit on screen */
 .page.journal {
   padding-top: calc(var(--safe-t) + var(--s-32));
 }
 
-/* journal-scene.css — HOW JournalScene arranges its children */
-.journal-scene {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  min-height: 0;   /* critical: allows children to shrink correctly in flex */
-  position: relative;
-  width: 100%;
-}
-
-/* NeuralWeb actor — fills all space above the fixed dock */
-#neural-web {
-  flex: 1;
-  min-height: 0;
-  touch-action: none;
-  display: block;
-}
-
-/* system.css — MomentumDock is fixed, placed above nav by system */
 #momentum-dock {
   position: fixed;
   bottom: calc(var(--nav-height) + var(--safe-b));
   left: 0; right: 0;
-  /* ... */
+  z-index: 40;
+}
+
+/* neural-web.css — HOW the web component fills its space */
+#neural-web {
+  flex: 1;
+  min-height: 0;
+  display: block;
 }
 ```
 
-NeuralWeb naturally fills whatever space the page gives it. MomentumDock floats fixed above the nav. The header safe-area is absorbed by `.page.journal` — nothing inside needs to know about it.
+NeuralWeb naturally fills whatever space the page gives it via flexbox (Layer 2 behavior). MomentumDock is fixed to the bottom of the screen by the system (Layer 1 orchestration). The header safe-area is absorbed by the page padding.
 
 ---
 
@@ -311,8 +284,8 @@ NeuralWeb naturally fills whatever space the page gives it. MomentumDock floats 
 |---|---|
 | `PAGE_VARIANTS` | The `motion.div` wrapper in `pages/*.tsx` **only** |
 | `PANEL_VARIANTS` | Internal panels, tab views, sub-views within a dock |
-| `GRID_VARIANTS` | The Body Host stagger wrapper |
-| `GRID_ITEM_VARIANTS` | Individual Actors inside a stagger grid |
+| `GRID_VARIANTS` | The Component stagger wrapper |
+| `GRID_ITEM_VARIANTS` | Individual Segments inside a stagger grid |
 | `DIALOG_VARIANTS` | `Dialog.tsx` overlay and bottom sheet |
 | `BLOOM_VARIANTS` | `BloomEffect.tsx` only |
 | `MOMENTUM_TRANSITIONS` | Momentum chart bars, dots, labels |
@@ -325,43 +298,43 @@ NeuralWeb naturally fills whatever space the page gives it. MomentumDock floats 
 
 ### Adding a New Page
 
-- [ ] Create `pages/{PageName}.tsx` — wrap in `<motion.div class="page {name} active" variants={PAGE_VARIANTS}>`
+- [ ] Create `pages/{PageName}.tsx` — wrap in `<motion.div className="page {name} active" variants={PAGE_VARIANTS}>`
 - [ ] Add to `App.tsx` `AnimatePresence` block
 - [ ] Add nav button to `Navigation.tsx`
 - [ ] Add page name to `AppState.currentPage` union in `useAppStore.ts`
 - [ ] Add a numbered page section to `system.css`
-- [ ] Create `components/{feature}/` folder for the body host
+- [ ] Create `components/{feature}/` folder for the components
 
-### Adding a New Body Host
+### Adding a New Component
 
 - [ ] Create `components/{feature}/{FeatureName}.tsx`
-- [ ] Create `components/{feature}/{feature-name}.css` — layout only (`display`, `gap`, `grid`)
+- [ ] Create `components/{feature}/{feature-name}.css` — visuals and layout (`display`, `gap`, `background`, `border`)
 - [ ] Add `@import` to `index.css` under `FEATURE-SPECIFIC`
 - [ ] Add placement rules to `system.css` (`padding-top`, `position` if fixed)
 - [ ] Export via `index.ts`
 
-### Adding a New Actor
+### Adding a New Segment
 
-- [ ] Create `components/{feature}/{ActorName}.tsx`
-- [ ] Add actor styles to the feature's co-located `.css` file
+- [ ] Create `components/{feature}/{SegmentName}.tsx`
+- [ ] Add segment styles to the feature's co-located `.css` file
 - [ ] Add geometry (border-radius) to `geometry.css` under the correct page section
-- [ ] Never set `position`, `margin`, or `z-index` on the actor's root element
+- [ ] Never set `position`, `margin`, or `z-index` on the segment's root element
 
 ### Adding a New Habit Card Style (s11+)
 
-- [ ] Add `Style{Name}` component in `HabitStyles.tsx` using the shared `<WeekRow>` actor
+- [ ] Add `Style{Name}` component in `HabitStyles.tsx` using the shared `<WeekRow>` segment
 - [ ] Register in `STYLE_MAP` at the bottom of `HabitStyles.tsx`
 - [ ] Add geometry rule to `geometry.css` → `2. TODAY PAGE`: `.hcard.s11 .visual { border-radius: ... }`
-- [ ] Update style count in `AppearanceSection.tsx`
+- [ ] Update style count in `AtmosphereSection.tsx`
 
 ---
 
 ## The One Firm Law
 
-> **The Body Host decides layout. The Actor decides appearance. The Page decides placement. Nothing decides two things.**
+> **The Component decides its visual identity and internal layout. The Page decides where that component sits on the screen. Nothing decides both.**
 
-If you find yourself writing `position: fixed` inside an Actor — stop.
-If you find yourself writing `background-color` inside a Body Host — stop.
-If you find yourself writing `gap` inside `system.css` — stop.
+If you find yourself writing `background-color` or `border` inside `system.css` — stop.
+If you find yourself writing `position: fixed` or `inset` inside a Component — stop.
+If you find yourself writing `gap` or `padding` for page-level spacing inside a Component — stop.
 
 The responsibility belongs elsewhere.

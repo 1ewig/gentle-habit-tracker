@@ -4,7 +4,7 @@
  * This includes the Momentum Dock, Monthly Grid, and Day Detail Dialog extensions.
  */
 
-.momentum-card {
+.momentum-dock {
   background: var(--surface);
   padding: var(--s-16) var(--s-24);
   border: 1px solid var(--rim);

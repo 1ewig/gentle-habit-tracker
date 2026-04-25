@@ -1,6 +1,8 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { JournalScene } from '../components/journal/JournalScene';
+import { NeuralWeb } from '../components/journal/NeuralWeb/NeuralWeb';
+import { MomentumDock } from '../components/journal/momentum/MomentumDock';
+import { JournalDialog } from '../components/journal/JournalDialog';
 import { PAGE_VARIANTS } from '../lib/motion';
 
 export const Journal = () => {
@@ -12,7 +14,9 @@ export const Journal = () => {
       animate="enter"
       exit="exit"
     >
-      <JournalScene />
+      <NeuralWeb />
+      <MomentumDock />
+      <JournalDialog />
     </motion.div>
   );
 };

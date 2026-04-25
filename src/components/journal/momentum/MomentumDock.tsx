@@ -39,7 +39,7 @@ export function MomentumDock() {
   return (
     <div id="momentum-dock">
       <motion.div
-        className="momentum-card"
+        className="momentum-dock"
         variants={PANEL_VARIANTS}
         initial="initial"
         animate="animate"
