@@ -189,13 +189,15 @@
 
 /* 2. Grid Style (3:4 ratio) */
 .hcard.s2 {
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 4 / 5;
   min-height: auto;
   padding: var(--s-16);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: flex-start;
+  cursor: pointer;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .hcard.s2.checked {
@@ -203,7 +205,12 @@
   border-color: var(--accent);
 }
 
-.hcard.s2 .s2-check {
+.s2-top {
+  display: flex;
+  width: 100%;
+}
+
+.s2-check {
   width: var(--s-24);
   height: var(--s-24);
   border-radius: 50%;
@@ -222,7 +229,7 @@
   border-color: var(--bg);
 }
 
-.hcard.s2 .s2-check svg {
+.s2-check svg {
   width: 14px;
   height: 14px;
   stroke: var(--accent);
@@ -236,6 +243,13 @@
 
 .hcard.s2.checked .s2-check svg {
   opacity: 1;
+}
+
+.s2-bottom {
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  text-align: left;
 }
 
 .hcard.s2 .hcard-name {
@@ -252,9 +266,5 @@
 
 .hcard.s2.checked .hcard-name {
   color: var(--bg);
-}
-
-.hcard.s2 .s2-overlay {
-  cursor: pointer;
 }
 

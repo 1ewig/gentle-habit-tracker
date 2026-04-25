@@ -31,23 +31,18 @@ export const StyleClassic: React.FC<HabitStyleProps> = ({ habit, handleToggle, j
 
 
 // --- Style 2: Grid (3:4 ratio) ---
-export const StyleGrid: React.FC<HabitStyleProps> = ({ habit, handleToggle }) => {
+export const StyleGrid: React.FC<HabitStyleProps> = ({ habit, justChecked }) => {
   return (
     <>
-      <div className="s2-check">
-        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" /></svg>
+      <div className="s2-top">
+        <div className="s2-check">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" /></svg>
+        </div>
       </div>
-      <div className="hcard-name">{habit.name}</div>
-      {/* Invisible overlay to make the whole card clickable */}
-      <div 
-        className="s2-overlay"
-        onClick={() => handleToggle()}
-        onKeyDown={(e) => onCardKeyDown(e, () => handleToggle())}
-        role="button"
-        tabIndex={0}
-        aria-label={`Mark ${habit.name} as complete for today`}
-        style={{ position: 'absolute', inset: 0, zIndex: 10 }}
-      />
+
+      <div className="s2-bottom">
+        <div className="hcard-name">{habit.name}</div>
+      </div>
     </>
   );
 };

@@ -31,6 +31,10 @@ export const HabitCard: React.FC<HabitCardProps> = ({ habit, index }) => {
         isDoneToday && 'checked', 
         justChecked && 'just-checked'
       )}
+      onClick={settings.style === 2 ? () => handleToggle() : undefined}
+      onKeyDown={settings.style === 2 ? (e) => (e.key === 'Enter' || e.key === ' ') && handleToggle() : undefined}
+      role={settings.style === 2 ? "button" : undefined}
+      tabIndex={settings.style === 2 ? 0 : undefined}
     >
       <StyleComponent 
         habit={habit} 
