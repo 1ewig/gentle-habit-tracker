@@ -41,7 +41,8 @@
 }
 
 .hcard-check,
-.wd-dot {
+.wd-dot,
+.s2-check {
   border-radius: 50%;
 }
 
@@ -100,6 +101,15 @@
 .scard,
 .habit-item {
   border-radius: calc(var(--r-card) * 0.5);
+}
+
+.dialog-tabs,
+.dtab {
+  border-radius: var(--r-pill);
+}
+
+.theme-btn {
+  border-radius: var(--r-4);
 }
 
 

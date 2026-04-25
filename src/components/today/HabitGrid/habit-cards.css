@@ -214,7 +214,6 @@
 .s2-check {
   width: var(--s-32);
   height: var(--s-32);
-  border-radius: 50%;
   border: none;
   display: flex;
   align-items: center;

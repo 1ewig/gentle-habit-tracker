@@ -26,8 +26,8 @@ export function AtmosphereSection() {
         <div className="bs-info">
           <div className="bs-title">atmosphere</div>
           <div className="bs-val">
-            <svg width="12" height="12" viewBox="0 0 12 12" style={{ marginRight: '8px', display: 'inline-block', verticalAlign: 'middle' }}>
-              <circle cx="6" cy="6" r="5" fill={THEME_COLORS[settings.theme].acc} />
+            <svg width="12" height="12" viewBox="0 0 12 12" className="theme-dot" style={{ '--theme-acc': THEME_COLORS[settings.theme].acc } as React.CSSProperties}>
+              <circle cx="6" cy="6" r="5" />
             </svg>
             {settings.theme}
           </div>
@@ -58,17 +58,15 @@ export function AtmosphereSection() {
               <button
                 key={theme}
                 className={cn("theme-btn", settings.theme === theme && "active")}
-                style={settings.theme === theme ? { 
-                  borderColor: THEME_COLORS[theme].acc 
-                } : {}}
+                style={{ '--theme-acc': THEME_COLORS[theme].acc } as React.CSSProperties}
                 onClick={() => setSettings({ ...settings, theme })}
                 aria-label={`Switch to ${theme} theme`}
                 aria-pressed={settings.theme === theme}
               >
                 <span className="theme-btn-label">
                   <span className="t-emoji">
-                    <svg width="14" height="14" viewBox="0 0 14 14">
-                      <circle cx="7" cy="7" r="6" fill={THEME_COLORS[theme].acc} />
+                    <svg width="14" height="14" viewBox="0 0 14 14" className="theme-dot">
+                      <circle cx="7" cy="7" r="6" />
                     </svg>
                   </span>
                   <span className="t-name">{theme}</span>
@@ -84,9 +82,7 @@ export function AtmosphereSection() {
               <button
                 key={styleId}
                 className={cn("theme-btn", settings.style === styleId && "active")}
-                style={settings.style === styleId ? { 
-                  borderColor: THEME_COLORS[settings.theme].acc 
-                } : {}}
+                style={{ '--theme-acc': THEME_COLORS[settings.theme].acc } as React.CSSProperties}
                 onClick={() => setSettings({ ...settings, style: styleId })}
                 aria-label={`Switch to style ${styleId}`}
                 aria-pressed={settings.style === styleId}

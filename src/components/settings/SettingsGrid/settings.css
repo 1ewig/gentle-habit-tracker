@@ -168,7 +168,6 @@
   gap: 3px;
   background: var(--raised);
   padding: 4px;
-  border-radius: var(--r-full);
 }
 
 .dtab {
@@ -181,7 +180,6 @@
   transition: all 0.3s var(--bezier);
   font-weight: var(--fw-med);
   text-transform: lowercase;
-  border-radius: var(--r-full);
 }
 
 .dtab.active {
@@ -200,7 +198,6 @@
 .theme-btn {
   width: 100%;
   aspect-ratio: 3 / 1;
-  border-radius: var(--r-4);
   border: 1px solid var(--rim);
   cursor: pointer;
   transition: all 0.3s var(--bezier);
@@ -214,8 +211,9 @@
 }
 
 .theme-btn.active {
-  border-width: 2px;
-  transform: scale(0.96);
+  border-color: var(--theme-acc) !important;
+  box-shadow: 0 0 0 1px var(--theme-acc);
+  transform: scale(0.98);
 }
 
 .theme-btn-label {
@@ -240,4 +238,19 @@
 
 .theme-btn.active .theme-btn-label {
   opacity: 1;
+}
+
+/* Theme Dot Utility */
+.theme-dot {
+  margin-right: var(--s-8);
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.theme-dot circle {
+  fill: var(--theme-acc);
+}
+
+.t-emoji .theme-dot {
+  margin-right: 0;
 }
