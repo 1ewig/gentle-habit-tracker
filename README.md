@@ -1,52 +1,46 @@
 <div align="center">
   <br />
-  <h1>Gentle Habit Tracker</h1>
-  <p><b>A high-fidelity, high-momentum experience for building a better you.</b></p>
+  <h1>Gentle</h1>
+  <p><b>A minimalistic, ADHD-friendly habit tracker built for kindness, not pressure.</b></p>
   <br />
 </div>
 
-## ✨ Overview
-**Gentle** is a premium habit tracking application designed with a focus on high-momentum UI/UX and agency-grade modular architecture. It moves away from the clinical feel of traditional trackers, offering a vibrant, fluid, and "gentle" approach to personal growth.
+## 🌿 Philosophy
+Most habit trackers are built around "streaks"—the pressure of not breaking a chain. For many, especially those with ADHD, a single missed day feels like failure. 
 
-## 🚀 Key Features
-- **Momentum Dock**: A dedicated visualization hub for your weekly, monthly, and overall progress.
-- **Bento Settings**: A beautiful, clustered preference system for deep personalization.
-- **Dynamic Habit Cards**: 10+ high-fidelity card styles with integrated logging logic.
-- **Agency-Grade Orchestration**: A strictly modular codebase using the "Actor/Orchestrator" pattern for maximum performance.
+**Gentle is different.** 
+We focus on **Momentum**, not streaks. No shame, no guilt, and no clinical checklists. Just a beautiful, fluid space to track your journey at your own pace.
 
-## 🛠 Tech Stack
+## ✨ Core Experience
+- **No-Shame Tracking**: Missed a day? No problem. The UI focuses on your long-term momentum, not a fragile count of consecutive days.
+- **ADHD-Friendly Design**: High visual clarity, low friction, and variable card styles to keep the experience fresh and engaging.
+- **The Momentum Dock**: A soft, non-judgmental visualization of your progress over weeks and months.
+- **Atmosphere & Style**: 13+ curated themes and multiple card layouts to match your aesthetic and mood.
+- **Privacy First**: Local-first architecture. Your habits and data stay on your device.
+
+## 🛠 Architectural Purity
+Gentle is built with a custom **3-Layer System** (Page / Component / Segment) for a codebase that is as clean as the UI.
 - **Core**: React + TypeScript
-- **Motion**: Framer Motion (Optimized Variants)
-- **Styling**: Vanilla CSS (Modular Token System)
-- **Bundler**: Vite
+- **Motion**: Framer Motion (Mathematical Spring Physics)
+- **Styling**: Vanilla CSS (Global Token System)
+- **State**: Zustand (Atomic & Fast)
 
 ## 📦 Getting Started
 
 ### Prerequisites
 - Node.js (v18+)
-- npm / yarn / pnpm
+- npm / pnpm
 
-### Installation
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/1ewig/gentle-habit-tracker.git
-   ```
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Start the development server:
-   ```bash
-   npm run dev
-   ```
+### Development
+```bash
+# Install dependencies
+npm install
 
-## 🏗 Architecture
-The project follows a strict **Orchestrator-Actor** model:
-- **Pages**: Act as Orchestrators (handling layout blueprints and global states).
-- **Components**: Act as Actors (handling local visuals and independent interactions).
-- **Styles**: Decoupled into Global Blueprints (`layout.css`) and Component Skins (`*.css`).
+# Run dev server
+npm run dev
+```
 
 ---
-<div align="center">
-  <p>Built with momentum by 1ewig</p>
-</div>
+
+## 🏛 Documentation
+For a deep dive into the engineering principles and the 3-Layer CSS Map, see the [ARCHITECTURE.md](./ARCHITECTURE.md).
