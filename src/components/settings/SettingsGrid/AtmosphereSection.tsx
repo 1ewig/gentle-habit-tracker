@@ -6,7 +6,7 @@ import { cn } from '../../../lib/utils';
 import { GRID_ITEM_VARIANTS, HOVER_TAP } from '../../../lib/motion';
 
 
-export function AppearanceSection() {
+export function AtmosphereSection() {
   const { settings, setSettings } = useAppStore();
   const [isOpen, setIsOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<'theme' | 'cards'>('theme');

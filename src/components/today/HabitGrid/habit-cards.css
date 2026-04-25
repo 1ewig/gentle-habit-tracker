@@ -208,31 +208,31 @@
 .s2-top {
   display: flex;
   width: 100%;
+  justify-content: flex-end;
 }
 
 .s2-check {
-  width: var(--s-24);
-  height: var(--s-24);
+  width: var(--s-32);
+  height: var(--s-32);
   border-radius: 50%;
-  border: 2px solid var(--rim);
+  border: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: transparent;
+  background: var(--accent);
   transition: all 0.3s var(--bezier);
   position: relative;
   z-index: 2;
 }
 
 .hcard.s2.checked .s2-check {
-  background: var(--bg);
-  border-color: var(--bg);
+  background: var(--surface);
 }
 
 .s2-check svg {
-  width: 14px;
-  height: 14px;
-  stroke: var(--accent);
+  width: 18px;
+  height: 18px;
+  stroke: var(--bg);
   fill: none;
   stroke-width: 3;
   stroke-linecap: round;
@@ -242,6 +242,7 @@
 }
 
 .hcard.s2.checked .s2-check svg {
+  stroke: var(--accent);
   opacity: 1;
 }
 
