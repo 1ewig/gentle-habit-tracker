@@ -23,9 +23,13 @@
 }
 
 .momentum-title {
-  font-size: var(--t-sm);
-  font-weight: var(--fw-reg);
-  color: var(--text);
+  font-family: var(--ts-overline-f);
+  font-size: var(--ts-overline-s);
+  font-weight: var(--ts-overline-w);
+  line-height: var(--ts-overline-l);
+  letter-spacing: var(--ts-overline-t);
+  text-transform: uppercase;
+  color: var(--accent);
 }
 
 .momentum-tabs {
@@ -37,14 +41,17 @@
 }
 
 .mtab {
+  font-family: var(--ts-label-f);
+  font-size: var(--ts-label-s);
+  font-weight: var(--ts-label-w);
+  line-height: var(--ts-label-l);
+  letter-spacing: var(--ts-label-t);
   background: none;
   border: none;
   padding: 5px 16px;
-  font-size: var(--t-xs);
   color: var(--muted);
   cursor: pointer;
   transition: all 0.3s var(--bezier);
-  font-weight: var(--fw-med);
   text-transform: lowercase;
   border-radius: var(--r-full);
 }
@@ -52,6 +59,7 @@
 .mtab.active {
   background: var(--bg);
   color: var(--text);
+  font-weight: var(--ts-label-w-bold);
   box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
 
@@ -110,9 +118,12 @@
 
 
 .day-bar-label {
-  font-size: var(--t-xs);
+  font-family: var(--ts-micro-f);
+  font-size: var(--ts-micro-s);
+  font-weight: var(--ts-micro-w);
+  line-height: var(--ts-micro-l);
+  letter-spacing: var(--ts-micro-t);
   color: var(--muted);
-  font-weight: var(--fw-med);
   flex-shrink: 0;
   text-transform: lowercase;
   transition: color 0.3s;
@@ -143,9 +154,12 @@
 }
 
 .month-day-lbl {
-  font-size: var(--t-xs);
+  font-family: var(--ts-micro-f);
+  font-size: var(--ts-micro-s);
+  font-weight: var(--ts-micro-w);
+  line-height: var(--ts-micro-l);
+  letter-spacing: var(--ts-micro-t);
   color: var(--muted);
-  font-weight: var(--fw-med);
   text-align: center;
   text-transform: lowercase;
   margin-bottom: 4px;
@@ -224,16 +238,16 @@
 }
 
 .stat-big {
-  font-size: var(--t-display);
-  font-weight: var(--fw-light);
+  font-family: var(--ts-stat-f);
+  font-size: var(--ts-stat-s);
+  font-weight: var(--ts-stat-w);
+  line-height: var(--ts-stat-l);
+  letter-spacing: var(--ts-stat-t);
   color: var(--text);
-  line-height: 1;
   margin-bottom: 8px;
 }
 
 .stat-big .stat-unit {
-  font-size: var(--t-display-sm);
-  font-weight: var(--fw-light);
   color: var(--muted);
 }
 
@@ -242,11 +256,13 @@
 }
 
 .stat-lbl {
-  font-size: var(--t-xs);
-  color: var(--muted);
+  font-family: var(--ts-overline-f);
+  font-size: var(--ts-overline-s);
+  font-weight: var(--ts-overline-w);
+  line-height: var(--ts-overline-l);
+  letter-spacing: var(--ts-overline-t);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  font-weight: var(--fw-semi);
+  color: var(--accent);
 }
 
 /* Day Detail Dialog Internal Content Styles */
@@ -289,6 +305,15 @@
   background: var(--accent);
   border-color: var(--accent);
   box-shadow: 0 0 12px rgba(var(--glow-rgb), 0.3);
+}
+
+.day-habit-name {
+  font-family: var(--ts-label-f);
+  font-size: var(--ts-label-s);
+  font-weight: var(--ts-label-w);
+  line-height: var(--ts-label-l);
+  letter-spacing: var(--ts-label-t);
+  color: var(--text);
 }
 
 .day-habit-dot svg {

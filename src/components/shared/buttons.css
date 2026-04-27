@@ -7,13 +7,15 @@
 /* Shared Buttons & Interactive Primitives */
 
 .btn-primary {
+  font-family: var(--ts-label-f);
+  font-size: var(--ts-label-s);
+  font-weight: var(--ts-label-w);
+  line-height: var(--ts-label-l);
+  letter-spacing: var(--ts-label-t);
   background: var(--text);
   color: var(--bg);
   border: none;
   padding: 0 var(--s-24);
-  font-family: 'Outfit', sans-serif;
-  font-size: var(--t-sm);
-  font-weight: var(--fw-reg);
   cursor: pointer;
   transition: transform 0.3s var(--bezier), opacity 0.3s var(--bezier);
   display: inline-flex;
@@ -48,6 +50,11 @@
 }
 
 .style-btn {
+  font-family: var(--ts-label-f);
+  font-size: var(--ts-label-s);
+  font-weight: var(--ts-label-w);
+  line-height: var(--ts-label-l);
+  letter-spacing: var(--ts-label-t);
   aspect-ratio: 1;
   background: var(--surface);
   border: 1.5px solid var(--rim);
@@ -55,8 +62,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: var(--t-md);
-  font-weight: var(--fw-reg);
   color: var(--muted);
   transition: all 0.3s var(--bezier);
 }
@@ -75,11 +80,14 @@
 }
 
 .add-form input {
+  font-family: var(--ts-body-f);
+  font-size: var(--ts-body-s);
+  font-weight: var(--ts-body-w);
+  line-height: var(--ts-body-l);
+  letter-spacing: var(--ts-body-t);
   background: var(--surface);
   border: 1px solid var(--rim);
   padding: 0 var(--s-24);
-  font-family: 'Outfit', sans-serif;
-  font-size: var(--t-sm);
   color: var(--text);
   outline: none;
   transition: all 0.3s var(--bezier);

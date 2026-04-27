@@ -47,10 +47,11 @@
 }
 
 .hcard-name {
-  font-size: var(--t-md);
-  font-weight: var(--fw-med);
-  line-height: var(--lh-tight);
-  letter-spacing: var(--ls-tight);
+  font-family: var(--ts-card-title-f);
+  font-size: var(--ts-card-title-s);
+  font-weight: var(--ts-card-title-w);
+  line-height: var(--ts-card-title-l);
+  letter-spacing: var(--ts-card-title-t);
   color: var(--text);
   flex: 1;
   min-width: 0;
@@ -90,9 +91,12 @@
 }
 
 .wd-label {
-  font-size: var(--t-xs);
+  font-family: var(--ts-micro-f);
+  font-size: var(--ts-micro-s);
+  font-weight: var(--ts-micro-w);
+  line-height: var(--ts-micro-l);
+  letter-spacing: var(--ts-micro-t);
   color: var(--muted);
-  font-weight: var(--fw-med);
   text-align: center;
   text-transform: lowercase;
   height: var(--s-16);
@@ -129,7 +133,7 @@
 /* --- Global Today Highlight --- */
 .wd.is-today .wd-label {
   color: var(--accent);
-  font-weight: var(--fw-semi);
+  font-weight: var(--ts-micro-w-bold);
 }
 
 .wd.is-today .wd-dot {
@@ -253,10 +257,6 @@
 }
 
 .hcard.s2 .hcard-name {
-  font-size: var(--t-md);
-  font-weight: var(--fw-semi);
-  line-height: var(--lh-tight);
-  color: var(--text);
   white-space: normal;
   text-wrap: balance;
   transition: color 0.3s var(--bezier);

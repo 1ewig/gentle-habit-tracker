@@ -58,18 +58,22 @@
 }
 
 .dialog-title {
-  font-size: var(--t-md);
-  font-weight: var(--fw-reg);
-  line-height: var(--lh-tight);
+  font-family: var(--ts-section-f);
+  font-size: var(--ts-section-s);
+  font-weight: var(--ts-section-w);
+  line-height: var(--ts-section-l);
+  letter-spacing: var(--ts-section-t);
   color: var(--text);
   text-wrap: balance;
 }
 
 .dialog-subtitle {
-  font-size: var(--t-xs);
+  font-family: var(--ts-caption-f);
+  font-size: var(--ts-caption-s);
+  font-weight: var(--ts-caption-w);
+  line-height: var(--ts-caption-l);
+  letter-spacing: var(--ts-caption-t);
   color: var(--muted);
-  font-weight: var(--fw-light);
-  margin-top: calc(var(--s-8) * -1); /* Pull closer to title */
 }
 
 .dialog-content {

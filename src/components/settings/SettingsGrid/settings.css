@@ -52,10 +52,12 @@
 }
 
 .bp-name {
-  font-size: var(--t-lg);
-  font-weight: var(--fw-reg);
+  font-family: var(--ts-card-title-f);
+  font-size: var(--ts-card-title-s);
+  font-weight: var(--ts-card-title-w);
+  line-height: var(--ts-card-title-l);
+  letter-spacing: var(--ts-card-title-t);
   color: var(--text);
-  line-height: 1.1;
   margin-bottom: 4px;
   white-space: nowrap;
   overflow: hidden;
@@ -63,7 +65,11 @@
 }
 
 .bp-bio {
-  font-size: var(--t-xs);
+  font-family: var(--ts-card-sub-f);
+  font-size: var(--ts-card-sub-s);
+  font-weight: var(--ts-card-sub-w);
+  line-height: var(--ts-card-sub-l);
+  letter-spacing: var(--ts-card-sub-t);
   color: var(--muted);
   white-space: nowrap;
   overflow: hidden;
@@ -78,12 +84,14 @@
 }
 
 .bs-title {
-  font-size: var(--t-xs);
-  color: var(--muted);
-  font-weight: var(--fw-med);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  font-family: var(--ts-card-title-f);
+  font-size: var(--ts-card-title-s);
+  font-weight: var(--ts-card-title-w);
+  line-height: var(--ts-card-title-l);
+  letter-spacing: var(--ts-card-title-t);
+  color: var(--text);
   margin-bottom: 8px;
+  transition: color 0.3s var(--bezier);
 }
 
 .bs-info {
@@ -93,9 +101,16 @@
 }
 
 .bs-val {
-  font-size: var(--t-md);
-  color: var(--text);
-  font-weight: var(--fw-light);
+  font-family: var(--ts-card-sub-f);
+  font-size: var(--ts-card-sub-s);
+  font-weight: var(--ts-card-sub-w);
+  line-height: var(--ts-card-sub-l);
+  letter-spacing: var(--ts-card-sub-t);
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: var(--s-8);
+  transition: color 0.3s var(--bezier);
 }
 
 /* Settings List */
@@ -116,7 +131,11 @@
 }
 
 .scard-name {
-  font-size: var(--t-sm);
+  font-family: var(--ts-label-f);
+  font-size: var(--ts-label-s);
+  font-weight: var(--ts-label-w);
+  line-height: var(--ts-label-l);
+  letter-spacing: var(--ts-label-t);
   color: var(--text);
   min-width: 0;
   text-wrap: pretty;
@@ -142,12 +161,7 @@
 
 /* Section Labels (Used in customization dialogs) */
 .section-lbl {
-  font-size: var(--t-xs);
   color: var(--muted);
-  font-weight: var(--fw-reg);
-  letter-spacing: var(--ls-wide);
-  line-height: var(--lh-none);
-  text-transform: uppercase;
   text-align: center;
   padding: 0 0 var(--s-16);
 }
@@ -171,20 +185,25 @@
 }
 
 .dtab {
+  font-family: var(--ts-label-f);
+  font-size: var(--ts-label-s);
+  font-weight: var(--ts-label-w);
+  line-height: var(--ts-label-l);
+  letter-spacing: var(--ts-label-t);
+  flex: 1;
+  padding: var(--s-8) var(--s-16);
   background: none;
   border: none;
-  padding: 5px 16px;
-  font-size: var(--t-xs);
   color: var(--muted);
   cursor: pointer;
   transition: all 0.3s var(--bezier);
-  font-weight: var(--fw-med);
-  text-transform: lowercase;
+  border-radius: var(--r-pill);
 }
 
 .dtab.active {
   background: var(--bg);
   color: var(--text);
+  font-weight: var(--ts-label-w-bold);
   box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
 
@@ -219,11 +238,10 @@
 .theme-btn-label {
   display: flex;
   align-items: center;
-  gap: var(--s-8);
+  gap: var(--s-16);
+  width: 100%;
   color: var(--text);
-  font-weight: var(--fw-med);
   z-index: 1;
-  text-transform: lowercase;
   opacity: 0.6;
   transition: opacity 0.3s var(--bezier);
 }
@@ -233,7 +251,12 @@
 }
 
 .t-name {
-  font-size: var(--t-sm);
+  font-family: var(--ts-label-f);
+  font-size: var(--ts-label-s);
+  font-weight: var(--ts-label-w);
+  line-height: var(--ts-label-l);
+  letter-spacing: var(--ts-label-t);
+  color: inherit;
 }
 
 .theme-btn.active .theme-btn-label {

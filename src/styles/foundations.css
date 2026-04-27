@@ -56,31 +56,56 @@
   --z-dialog: 200;
   --z-toast: 300;
 
-  /* Typography: Fluid Sizing */
-  --t-xs: clamp(0.64rem, 0.6rem + 0.2vw, 0.8rem);
-  --t-sm: clamp(0.8rem, 0.75rem + 0.25vw, 1rem);
-  --t-md: clamp(1rem, 0.95rem + 0.5vw, 1.25rem);
-  --t-lg: clamp(1.25rem, 1.2rem + 0.5vw, 1.4rem);
-  --t-xl: clamp(1.563rem, 1.5rem + 1vw, 1.953rem);
-
-  /* Typography: Fixed Sizing */
-  --t-display: 2.8rem;
-  --t-display-sm: 1.4rem;
-  --t-icon: 14px;
+  /* Typography: New Fluid Scale (rem-based) */
+  --t-2xs: clamp(0.55rem, 0.5rem + 0.2vw, 0.625rem);   /* micro labels */
+  --t-xs:  clamp(0.65rem, 0.6rem + 0.3vw, 0.75rem);    /* captions */
+  --t-sm:  clamp(0.75rem, 0.7rem + 0.4vw, 0.875rem);   /* secondary body */
+  --t-base: clamp(0.9rem, 0.85rem + 0.5vw, 1rem);      /* primary body */
+  --t-md:  clamp(1rem, 0.95rem + 0.6vw, 1.125rem);     /* card titles */
+  --t-lg:  clamp(1.1rem, 1rem + 0.8vw, 1.25rem);       /* section head */
+  --t-xl:  clamp(1.25rem, 1.1rem + 1vw, 1.5rem);       /* sub-headings */
+  --t-2xl: clamp(1.5rem, 1.3rem + 1.5vw, 1.875rem);    /* page headings */
+  --t-3xl: clamp(1.8rem, 1.5rem + 2vw, 2.25rem);       /* hero sub */
+  --t-4xl: clamp(2.2rem, 1.8rem + 3vw, 3rem);          /* hero titles */
+  --t-5xl: clamp(2.8rem, 2.2rem + 4vw, 3.75rem);       /* massive display */
 
   /* Typography: Configuration */
   --font-sans: 'Outfit', system-ui, -apple-system, sans-serif;
-  --lh-none: 1;
-  --lh-tight: 1.1;
-  --lh-base: 1.5;
-  --lh-loose: 1.7;
-  --ls-tight: -0.02em;
-  --ls-base: 0em;
-  --ls-wide: 0.05em;
-  --fw-light: 500;
-  --fw-reg: 600;
-  --fw-med: 700;
-  --fw-semi: 800;
+  
+  --fw-light: 300;
+  --fw-reg:   400;
+  --fw-med:   500;
+  --fw-semi:  600;
+  --fw-bold:  700;
+
+  --lh-none:    1;
+  --lh-tight:   1.15;
+  --lh-snug:    1.3;
+  --lh-base:    1.5;
+  --lh-relaxed: 1.65;
+  --lh-loose:   2;
+
+  --ls-tightest: -0.04em;
+  --ls-tighter:  -0.02em;
+  --ls-tight:    -0.01em;
+  --ls-base:      0em;
+  --ls-wide:      0.02em;
+  --ls-wider:     0.05em;
+  --ls-widest:    0.1em;
+
+  /* Typography: Composite Role Tokens */
+  --ts-hero-f: var(--font-sans); --ts-hero-s: var(--t-4xl); --ts-hero-w: var(--fw-reg); --ts-hero-l: var(--lh-none); --ts-hero-t: var(--ls-tightest);
+  --ts-heading-f: var(--font-sans); --ts-heading-s: var(--t-2xl); --ts-heading-w: var(--fw-reg); --ts-heading-l: var(--lh-tight); --ts-heading-t: var(--ls-tighter);
+  --ts-section-f: var(--font-sans); --ts-section-s: var(--t-lg); --ts-section-w: var(--fw-semi); --ts-section-l: var(--lh-tight); --ts-section-t: var(--ls-tight);
+  --ts-card-title-f: var(--font-sans); --ts-card-title-s: var(--t-md); --ts-card-title-w: var(--fw-bold); --ts-card-title-l: var(--lh-snug); --ts-card-title-t: var(--ls-base);
+  --ts-card-sub-f: var(--font-sans); --ts-card-sub-s: var(--t-sm); --ts-card-sub-w: var(--fw-reg); --ts-card-sub-l: var(--lh-base); --ts-card-sub-t: var(--ls-wide);
+  --ts-body-f: var(--font-sans); --ts-body-s: var(--t-base); --ts-body-w: var(--fw-reg); --ts-body-l: var(--lh-base); --ts-body-t: var(--ls-base);
+  --ts-label-f: var(--font-sans); --ts-label-s: var(--t-sm); --ts-label-w: var(--fw-med); --ts-label-l: var(--lh-none); --ts-label-t: var(--ls-wide);
+  --ts-overline-f: var(--font-sans); --ts-overline-s: var(--t-xs); --ts-overline-w: var(--fw-med); --ts-overline-l: var(--lh-none); --ts-overline-t: var(--ls-widest);
+  --ts-caption-f: var(--font-sans); --ts-caption-s: var(--t-xs); --ts-caption-w: var(--fw-reg); --ts-caption-l: var(--lh-base); --ts-caption-t: var(--ls-wide);
+  --ts-micro-f: var(--font-sans); --ts-micro-s: var(--t-2xs); --ts-micro-w: var(--fw-semi); --ts-micro-l: var(--lh-none); --ts-micro-t: var(--ls-wider);
+  --ts-quote-f: var(--font-sans); --ts-quote-s: var(--t-lg); --ts-quote-w: var(--fw-reg); --ts-quote-l: var(--lh-relaxed); --ts-quote-t: var(--ls-base);
+  --ts-stat-f: var(--font-sans); --ts-stat-s: var(--t-3xl); --ts-stat-w: var(--fw-light); --ts-stat-l: var(--lh-none); --ts-stat-t: var(--ls-tightest);
 
   /* Geometry Tokens (Atomic Scale) */
   --r-0: 0px;

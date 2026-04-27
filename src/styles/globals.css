@@ -104,3 +104,105 @@ body {
 [data-theme="voltage"] { --bg: #000000; --fg: #ffffff; --acc: #f0ff00; --ui: #1a1a1a; --glow-rgb: 240, 255, 0; }
 [data-theme="hydra"] { --bg: #f0f7ff; --fg: #001a33; --acc: #0066ff; --ui: #e1efff; --glow-rgb: 0, 102, 255; }
 
+/* 4. Typography Utility Classes */
+.ts-hero {
+  font-family: var(--ts-hero-f);
+  font-size: var(--ts-hero-s);
+  font-weight: var(--ts-hero-w);
+  line-height: var(--ts-hero-l);
+  letter-spacing: var(--ts-hero-t);
+}
+
+.ts-heading {
+  font-family: var(--ts-heading-f);
+  font-size: var(--ts-heading-s);
+  font-weight: var(--ts-heading-w);
+  line-height: var(--ts-heading-l);
+  letter-spacing: var(--ts-heading-t);
+}
+
+.ts-section {
+  font-family: var(--ts-section-f);
+  font-size: var(--ts-section-s);
+  font-weight: var(--ts-section-w);
+  line-height: var(--ts-section-l);
+  letter-spacing: var(--ts-section-t);
+}
+
+.ts-card-title {
+  font-family: var(--ts-card-title-f);
+  font-size: var(--ts-card-title-s);
+  font-weight: var(--ts-card-title-w);
+  line-height: var(--ts-card-title-l);
+  letter-spacing: var(--ts-card-title-t);
+}
+
+.ts-card-sub {
+  font-family: var(--ts-card-sub-f);
+  font-size: var(--ts-card-sub-s);
+  font-weight: var(--ts-card-sub-w);
+  line-height: var(--ts-card-sub-l);
+  letter-spacing: var(--ts-card-sub-t);
+}
+
+.ts-body {
+  font-family: var(--ts-body-f);
+  font-size: var(--ts-body-s);
+  font-weight: var(--ts-body-w);
+  line-height: var(--ts-body-l);
+  letter-spacing: var(--ts-body-t);
+}
+
+.ts-label {
+  font-family: var(--ts-label-f);
+  font-size: var(--ts-label-s);
+  font-weight: var(--ts-label-w);
+  line-height: var(--ts-label-l);
+  letter-spacing: var(--ts-label-t);
+}
+
+.ts-overline {
+  font-family: var(--ts-overline-f);
+  font-size: var(--ts-overline-s);
+  font-weight: var(--ts-overline-w);
+  line-height: var(--ts-overline-l);
+  letter-spacing: var(--ts-overline-t);
+}
+
+.ts-caption {
+  font-family: var(--ts-caption-f);
+  font-size: var(--ts-caption-s);
+  font-weight: var(--ts-caption-w);
+  line-height: var(--ts-caption-l);
+  letter-spacing: var(--ts-caption-t);
+}
+
+.ts-micro {
+  font-family: var(--ts-micro-f);
+  font-size: var(--ts-micro-s);
+  font-weight: var(--ts-micro-w);
+  line-height: var(--ts-micro-l);
+  letter-spacing: var(--ts-micro-t);
+}
+
+.ts-quote {
+  font-family: var(--ts-quote-f);
+  font-size: var(--ts-quote-s);
+  font-weight: var(--ts-quote-w);
+  line-height: var(--ts-quote-l);
+  letter-spacing: var(--ts-quote-t);
+}
+
+.ts-stat {
+  font-family: var(--ts-stat-f);
+  font-size: var(--ts-stat-s);
+  font-weight: var(--ts-stat-w);
+  line-height: var(--ts-stat-l);
+  letter-spacing: var(--ts-stat-t);
+}
+
+.text-upper { text-transform: uppercase !important; }
+.text-lower { text-transform: lowercase !important; }
+.italic { font-style: italic; }
+
+
