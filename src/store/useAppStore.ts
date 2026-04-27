@@ -2,13 +2,13 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { getTodayKey } from '../lib/utils';
 
-export const THEMES = ['midnight', 'parchment', 'ink', 'moss', 'void', 'sand', 'ocean', 'ruby', 'amethyst', 'frost', 'sakura', 'birch', 'linen', 'voltage', 'hydra'];
+export const THEMES = ['carbon', 'midnight', 'parchment', 'ink', 'moss', 'sand', 'ocean', 'ruby', 'amethyst', 'frost', 'sakura', 'birch', 'linen'];
 export const THEME_COLORS: Record<string, { bg: string, border: string, acc: string }> = {
+  carbon: { bg: '#f0f7ff', border: '#b3d4ff', acc: '#0066ff' },
   midnight: { bg: '#12100e', border: '#332d28', acc: '#8ca379' },
   parchment: { bg: '#f4edd8', border: '#cfc1a5', acc: '#4a5d8c' },
   ink: { bg: '#0b101a', border: '#2a364d', acc: '#c4a97d' },
   moss: { bg: '#141712', border: '#364031', acc: '#d4a373' },
-  void: { bg: '#050507', border: '#22222c', acc: '#ff1a6e' },
   sand: { bg: '#1a1510', border: '#3d3226', acc: '#e8956d' },
   ocean: { bg: '#0c1420', border: '#223d54', acc: '#7ec8e3' },
   ruby: { bg: '#0f0c0e', border: '#30222c', acc: '#e8607a' },
@@ -16,13 +16,11 @@ export const THEME_COLORS: Record<string, { bg: string, border: string, acc: str
   frost: { bg: '#f2f6fa', border: '#b4c8d8', acc: '#1a7abf' },
   sakura: { bg: '#fff5f7', border: '#f48fb1', acc: '#ff80ab' },
   birch: { bg: '#f7f7f5', border: '#d4d4d1', acc: '#5c8c6d' },
-  linen: { bg: '#f8f9fa', border: '#cfd4da', acc: '#5885af' },
-  voltage: { bg: '#000000', border: '#f0ff00', acc: '#f0ff00' },
-  hydra: { bg: '#f0f7ff', border: '#b3d4ff', acc: '#0066ff' }
+  linen: { bg: '#f8f9fa', border: '#cfd4da', acc: '#5885af' }
 };
 
 export type Profile = { name: string; bio: string };
-export type Settings = { theme: string; style: number };
+export type Settings = { theme: string; style: 'lists' | 'cards' };
 
 export interface HabitStyleProps {
   habit: import('../hooks/useHabits').Habit;
@@ -58,7 +56,7 @@ export const useAppStore = create<AppState>()(
   persist(
     (set) => ({
       profile: { name: 'wanderer', bio: 'taking it one day at a time.' },
-      settings: { theme: 'midnight', style: 1 },
+      settings: { theme: 'carbon', style: 'cards' },
       habits: [
         { id: 1, name: 'morning movement', days: {} },
         { id: 2, name: 'read a little', days: {} }
@@ -67,7 +65,11 @@ export const useAppStore = create<AppState>()(
       selectedDay: null,
 
       setProfile: (profile) => set({ profile }),
-      setSettings: (settings) => set({ settings }),
+      setSettings: (settings) => {
+        const validatedTheme = THEMES.includes(settings.theme) ? settings.theme : 'carbon';
+        const validatedStyle = ['lists', 'cards'].includes(settings.style) ? settings.style : 'cards';
+        set({ settings: { ...settings, theme: validatedTheme, style: validatedStyle } });
+      },
       setHabits: (habits) => set({ habits }),
       setCurrentPage: (currentPage) => set({ currentPage }),
       setSelectedDay: (selectedDay) => set({ selectedDay }),

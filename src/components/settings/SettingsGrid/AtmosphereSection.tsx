@@ -11,6 +11,9 @@ export function AtmosphereSection() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<'theme' | 'cards'>('theme');
 
+  // Safety fallback for legacy theme names
+  const safeTheme = THEME_COLORS[settings.theme] || THEME_COLORS['carbon'];
+
   return (
     <>
       <motion.div
@@ -26,7 +29,7 @@ export function AtmosphereSection() {
         <div className="bs-info">
           <div className="bs-title">atmosphere</div>
           <div className="bs-val">
-            <svg width="12" height="12" viewBox="0 0 12 12" className="theme-dot" style={{ '--theme-acc': THEME_COLORS[settings.theme].acc } as React.CSSProperties}>
+            <svg width="12" height="12" viewBox="0 0 12 12" className="theme-dot" style={{ '--theme-acc': safeTheme.acc } as React.CSSProperties}>
               <circle cx="6" cy="6" r="5" />
             </svg>
             {settings.theme}
@@ -78,17 +81,20 @@ export function AtmosphereSection() {
 
         {activeTab === 'cards' && (
           <div className="theme-grid">
-            {[1, 2].map(styleId => (
+            {[
+              { id: 'lists', label: 'lists' },
+              { id: 'cards', label: 'cards' }
+            ].map(style => (
               <button
-                key={styleId}
-                className={cn("theme-btn", settings.style === styleId && "active")}
-                style={{ '--theme-acc': THEME_COLORS[settings.theme].acc } as React.CSSProperties}
-                onClick={() => setSettings({ ...settings, style: styleId })}
-                aria-label={`Switch to style ${styleId}`}
-                aria-pressed={settings.style === styleId}
+                key={style.id}
+                className={cn("theme-btn", settings.style === style.id && "active")}
+                style={{ '--theme-acc': safeTheme.acc } as React.CSSProperties}
+                onClick={() => setSettings({ ...settings, style: style.id as 'lists' | 'cards' })}
+                aria-label={`Switch to ${style.label} style`}
+                aria-pressed={settings.style === style.id}
               >
                 <span className="theme-btn-label">
-                  <span className="t-name">style {styleId}</span>
+                  <span className="t-name">{style.label}</span>
                 </span>
               </button>
             ))}

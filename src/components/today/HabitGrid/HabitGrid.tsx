@@ -10,7 +10,7 @@ export function HabitGrid() {
 
   return (
     <motion.div 
-      className={`habits-grid grid-s${settings.style}`}
+      className={`habits-grid grid-${settings.style}`}
       variants={GRID_VARIANTS}
       initial="hidden"
       animate="visible"

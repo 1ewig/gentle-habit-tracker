@@ -145,7 +145,12 @@
   width: 100%;
 }
 
-.habits-grid.grid-s2 {
+.habits-grid.grid-lists {
+  display: flex;
+  flex-direction: column;
+}
+
+.habits-grid.grid-cards {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
 }

@@ -92,7 +92,6 @@ body {
 [data-theme="parchment"] { --bg: #f4edd8; --fg: #3d3522; --acc: #4a5d8c; --ui: #e8deca; --glow-rgb: 74, 93, 140; }
 [data-theme="ink"] { --bg: #0b101a; --fg: #d4def2; --acc: #c4a97d; --ui: #131a28; --glow-rgb: 196, 169, 125; }
 [data-theme="moss"] { --bg: #141712; --fg: #d9e0d5; --acc: #d4a373; --ui: #1e241b; --glow-rgb: 212, 163, 115; }
-[data-theme="void"] { --bg: #050507; --fg: #eeeeff; --acc: #ff1a6e; --ui: #0e0e12; --glow-rgb: 255, 26, 110; }
 [data-theme="sand"] { --bg: #1a1510; --fg: #f0dfc0; --acc: #e8956d; --ui: #231c15; --glow-rgb: 232, 149, 109; }
 [data-theme="ocean"] { --bg: #0c1420; --fg: #d5e8f5; --acc: #7ec8e3; --ui: #11202e; --glow-rgb: 126, 200, 227; }
 [data-theme="ruby"] { --bg: #0f0c0e; --fg: #f5eaed; --acc: #e8607a; --ui: #181318; --glow-rgb: 232, 96, 122; }
@@ -101,8 +100,7 @@ body {
 [data-theme="sakura"] { --bg: #fff5f7; --fg: #5c2a3e; --acc: #ff80ab; --ui: #fce4ec; --glow-rgb: 255, 128, 171; }
 [data-theme="birch"] { --bg: #f7f7f5; --fg: #4a4a48; --acc: #5c8c6d; --ui: #ececea; --glow-rgb: 92, 140, 109; }
 [data-theme="linen"] { --bg: #f8f9fa; --fg: #1a1d21; --acc: #5885af; --ui: #eff1f3; --glow-rgb: 88, 133, 175; }
-[data-theme="voltage"] { --bg: #000000; --fg: #ffffff; --acc: #f0ff00; --ui: #1a1a1a; --glow-rgb: 240, 255, 0; }
-[data-theme="hydra"] { --bg: #f0f7ff; --fg: #001a33; --acc: #0066ff; --ui: #e1efff; --glow-rgb: 0, 102, 255; }
+[data-theme="carbon"] { --bg: #f0f7ff; --fg: #001a33; --acc: #0066ff; --ui: #e1efff; --glow-rgb: 0, 102, 255; }
 
 /* 4. Typography Utility Classes */
 .ts-hero {

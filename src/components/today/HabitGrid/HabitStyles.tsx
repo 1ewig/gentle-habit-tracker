@@ -4,8 +4,8 @@ import { HabitStyleProps } from '../../../store/useAppStore';
 import { BloomEffect } from './BloomEffect';
 import { WeekRow } from './WeekRow';
 
-// --- Style 1: Classic ---
-export const StyleClassic: React.FC<HabitStyleProps> = ({ habit, handleToggle, justChecked }) => {
+// --- Style 1: Lists (Classic) ---
+export const StyleLists: React.FC<HabitStyleProps> = ({ habit, handleToggle, justChecked }) => {
   const isDoneToday = !!habit.days[getTodayKey()];
   return (
     <>
@@ -30,17 +30,17 @@ export const StyleClassic: React.FC<HabitStyleProps> = ({ habit, handleToggle, j
 };
 
 
-// --- Style 2: Grid (3:4 ratio) ---
-export const StyleGrid: React.FC<HabitStyleProps> = ({ habit, justChecked }) => {
+// --- Style 2: Cards (Grid) ---
+export const StyleCards: React.FC<HabitStyleProps> = ({ habit, justChecked }) => {
   return (
     <>
-      <div className="s2-top">
-        <div className="s2-check">
+      <div className="scard-top">
+        <div className="scard-check">
           <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" /></svg>
         </div>
       </div>
 
-      <div className="s2-bottom">
+      <div className="scard-bottom">
         <div className="hcard-name">{habit.name}</div>
       </div>
     </>
@@ -49,8 +49,8 @@ export const StyleGrid: React.FC<HabitStyleProps> = ({ habit, justChecked }) => 
 
 // --- Style Map Configuration ---
 // Maps the user setting (ID) to the corresponding style component.
-export const STYLE_MAP: Record<number, React.FC<HabitStyleProps>> = {
-  1: StyleClassic,
-  2: StyleGrid,
+export const STYLE_MAP: Record<string, React.FC<HabitStyleProps>> = {
+  lists: StyleLists,
+  cards: StyleCards,
 };
 

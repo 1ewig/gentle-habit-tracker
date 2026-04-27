@@ -17,7 +17,7 @@ export const HabitCard: React.FC<HabitCardProps> = ({ habit, index }) => {
   const { justChecked, handleToggle } = useHabitToggle(habit);
   
   const isDoneToday = !!habit.days[getTodayKey()];
-  const StyleComponent = STYLE_MAP[settings.style] || STYLE_MAP[1];
+  const StyleComponent = STYLE_MAP[settings.style] || STYLE_MAP.lists;
 
   return (
     <motion.div
@@ -27,14 +27,14 @@ export const HabitCard: React.FC<HabitCardProps> = ({ habit, index }) => {
       whileTap={HOVER_TAP.tap}
       custom={index}
       className={cn(
-        `hcard s${settings.style}`, 
+        `hcard style-${settings.style}`, 
         isDoneToday && 'checked', 
         justChecked && 'just-checked'
       )}
-      onClick={settings.style === 2 ? () => handleToggle() : undefined}
-      onKeyDown={settings.style === 2 ? (e) => (e.key === 'Enter' || e.key === ' ') && handleToggle() : undefined}
-      role={settings.style === 2 ? "button" : undefined}
-      tabIndex={settings.style === 2 ? 0 : undefined}
+      onClick={settings.style === 'cards' ? () => handleToggle() : undefined}
+      onKeyDown={settings.style === 'cards' ? (e) => (e.key === 'Enter' || e.key === ' ') && handleToggle() : undefined}
+      role={settings.style === 'cards' ? "button" : undefined}
+      tabIndex={settings.style === 'cards' ? 0 : undefined}
     >
       <StyleComponent 
         habit={habit} 
