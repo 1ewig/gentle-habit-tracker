@@ -98,6 +98,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 .bs-val {
@@ -109,7 +110,7 @@
   color: var(--muted);
   display: flex;
   align-items: center;
-  gap: var(--s-8);
+  justify-content: center;
   transition: color 0.3s var(--bezier);
 }
 
@@ -204,7 +205,7 @@
   background: var(--bg);
   color: var(--text);
   font-weight: var(--ts-label-w-bold);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 /* Customization Grid & Theme Buttons */
@@ -238,8 +239,8 @@
 .theme-btn-label {
   display: flex;
   align-items: center;
-  gap: var(--s-16);
-  width: 100%;
+  justify-content: center;
+  gap: var(--s-8);
   color: var(--text);
   z-index: 1;
   opacity: 0.6;

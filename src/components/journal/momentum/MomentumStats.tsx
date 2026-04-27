@@ -18,7 +18,7 @@ export const MomentumStats: React.FC = () => {
       </div>
       <div className="stats-divider" />
       <div className="stat-block">
-        <div className="stat-big accent">{perfectDays}</div>
+        <div className="stat-big">{perfectDays}</div>
         <div className="stat-lbl">perfect days</div>
       </div>
     </div>

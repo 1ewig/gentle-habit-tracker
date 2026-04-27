@@ -94,16 +94,16 @@
   --ls-widest:    0.1em;
 
   /* Typography: Composite Role Tokens */
-  --ts-hero-f: var(--font-sans); --ts-hero-s: var(--t-4xl); --ts-hero-w: var(--fw-reg); --ts-hero-l: var(--lh-none); --ts-hero-t: var(--ls-tightest);
+  --ts-hero-f: var(--font-sans); --ts-hero-s: var(--t-4xl); --ts-hero-w: var(--fw-light); --ts-hero-l: var(--lh-none); --ts-hero-t: var(--ls-tightest);
   --ts-heading-f: var(--font-sans); --ts-heading-s: var(--t-2xl); --ts-heading-w: var(--fw-reg); --ts-heading-l: var(--lh-tight); --ts-heading-t: var(--ls-tighter);
   --ts-section-f: var(--font-sans); --ts-section-s: var(--t-lg); --ts-section-w: var(--fw-semi); --ts-section-l: var(--lh-tight); --ts-section-t: var(--ls-tight);
   --ts-card-title-f: var(--font-sans); --ts-card-title-s: var(--t-md); --ts-card-title-w: var(--fw-bold); --ts-card-title-l: var(--lh-snug); --ts-card-title-t: var(--ls-base);
   --ts-card-sub-f: var(--font-sans); --ts-card-sub-s: var(--t-sm); --ts-card-sub-w: var(--fw-reg); --ts-card-sub-l: var(--lh-base); --ts-card-sub-t: var(--ls-wide);
   --ts-body-f: var(--font-sans); --ts-body-s: var(--t-base); --ts-body-w: var(--fw-reg); --ts-body-l: var(--lh-base); --ts-body-t: var(--ls-base);
-  --ts-label-f: var(--font-sans); --ts-label-s: var(--t-sm); --ts-label-w: var(--fw-med); --ts-label-l: var(--lh-none); --ts-label-t: var(--ls-wide);
-  --ts-overline-f: var(--font-sans); --ts-overline-s: var(--t-xs); --ts-overline-w: var(--fw-med); --ts-overline-l: var(--lh-none); --ts-overline-t: var(--ls-widest);
+  --ts-label-f: var(--font-sans); --ts-label-s: var(--t-sm); --ts-label-w: var(--fw-med); --ts-label-l: var(--lh-tight); --ts-label-t: var(--ls-wide);
+  --ts-overline-f: var(--font-sans); --ts-overline-s: var(--t-xs); --ts-overline-w: var(--fw-semi); --ts-overline-l: var(--lh-none); --ts-overline-t: var(--ls-widest);
   --ts-caption-f: var(--font-sans); --ts-caption-s: var(--t-xs); --ts-caption-w: var(--fw-reg); --ts-caption-l: var(--lh-base); --ts-caption-t: var(--ls-wide);
-  --ts-micro-f: var(--font-sans); --ts-micro-s: var(--t-2xs); --ts-micro-w: var(--fw-semi); --ts-micro-l: var(--lh-none); --ts-micro-t: var(--ls-wider);
+  --ts-micro-f: var(--font-sans); --ts-micro-s: var(--t-2xs); --ts-micro-w: var(--fw-bold); --ts-micro-l: var(--lh-none); --ts-micro-t: var(--ls-wider);
   --ts-quote-f: var(--font-sans); --ts-quote-s: var(--t-lg); --ts-quote-w: var(--fw-reg); --ts-quote-l: var(--lh-relaxed); --ts-quote-t: var(--ls-base);
   --ts-stat-f: var(--font-sans); --ts-stat-s: var(--t-3xl); --ts-stat-w: var(--fw-light); --ts-stat-l: var(--lh-none); --ts-stat-t: var(--ls-tightest);
 
