@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Typography Token System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════════════
+     TYPOGRAPHY TOKEN SYSTEM — COMPLETE SPECIFICATION
+     habit. / gentlehabits — Design Language v1.0
+  ═══════════════════════════════════════════════════════════ */
+
+  :root {
+
+    /* ── FONT FAMILIES ────────────────────────────────────── */
+    --font-display:    'DM Serif Display', Georgia, serif;
+    --font-body:       'DM Sans', -apple-system, sans-serif;
+    --font-mono:       'SF Mono', 'Fira Code', monospace;
+
+    /* ── FONT SIZES (fluid, rem-based) ────────────────────── */
+    --text-2xs:   0.625rem;   /* 10px — micro labels, badges          */
+    --text-xs:    0.75rem;    /* 12px — captions, timestamps, meta    */
+    --text-sm:    0.875rem;   /* 14px — secondary body, helper text   */
+    --text-base:  1rem;       /* 16px — primary body text             */
+    --text-md:    1.125rem;   /* 18px — large body, card titles       */
+    --text-lg:    1.25rem;    /* 20px — section headings              */
+    --text-xl:    1.5rem;     /* 24px — page sub-headings             */
+    --text-2xl:   1.875rem;   /* 30px — page headings                 */
+    --text-3xl:   2.25rem;    /* 36px — hero sub-titles               */
+    --text-4xl:   3rem;       /* 48px — hero titles, display          */
+    --text-5xl:   3.75rem;    /* 60px — massive display               */
+
+    /* ── FONT WEIGHTS ─────────────────────────────────────── */
+    --weight-light:     300;
+    --weight-regular:   400;
+    --weight-medium:    500;
+    --weight-semibold:  600;
+    --weight-bold:      700;
+
+    /* ── LINE HEIGHTS ─────────────────────────────────────── */
+    --leading-none:     1;       /* display, large numbers, counters  */
+    --leading-tight:    1.15;    /* headings, short labels            */
+    --leading-snug:     1.3;     /* card titles, subheadings          */
+    --leading-normal:   1.5;     /* body text, paragraphs             */
+    --leading-relaxed:  1.65;    /* long-form reading                 */
+    --leading-loose:    2;       /* spaced list items, meta rows      */
+
+    /* ── LETTER SPACING ───────────────────────────────────── */
+    --tracking-tightest:  -0.04em;   /* large display text            */
+    --tracking-tighter:   -0.02em;   /* headings 24px+                */
+    --tracking-tight:     -0.01em;   /* headings 18–24px              */
+    --tracking-normal:     0em;      /* body text                     */
+    --tracking-wide:       0.02em;   /* small labels, UI text         */
+    --tracking-wider:      0.05em;   /* caps labels, badges           */
+    --tracking-widest:     0.1em;    /* all-caps metadata, overlines  */
+
+    /* ── TEXT TRANSFORMS ──────────────────────────────────── */
+    /* Use via class: .text-upper / .text-lower / .text-caps  */
+
+    /* ── OPTICAL SIZING ───────────────────────────────────── */
+    --optical-auto:   auto;    /* let browser decide                  */
+    --optical-body:   9;       /* 9pt optical size for small text     */
+    --optical-display: 40;     /* 40pt optical size for display text  */
+
+    /* ── TEXT DECORATION ──────────────────────────────────── */
+    --underline-offset-sm:  2px;
+    --underline-offset-md:  4px;
+    --underline-offset-lg:  6px;
+    --underline-thickness:  1px;
+
+    /* ── PARAGRAPH SPACING ────────────────────────────────── */
+    --prose-spacing-sm:  0.75em;
+    --prose-spacing-md:  1em;
+    --prose-spacing-lg:  1.5em;
+
+    /* ── COLOR ROLES (semantic) ───────────────────────────── */
+    --text-primary:     #0d1117;
+    --text-secondary:   #3d4450;
+    --text-tertiary:    #6b7280;
+    --text-quaternary:  #9ca3af;
+    --text-disabled:    #d1d5db;
+    --text-inverse:     #f9fafb;
+    --text-inverse-secondary: rgba(249,250,251,0.65);
+    --text-accent:      #7dd3fc;   /* sky-300 — matches app palette   */
+    --text-accent-strong: #0ea5e9; /* sky-500                         */
+    --text-danger:      #f87171;
+    --text-success:     #4ade80;
+    --text-warning:     #fbbf24;
+
+    /* ── COMPOSITE TEXT STYLES (role-based) ──────────────────
+       Each composite defines: family + size + weight + leading + tracking
+       These are the ONLY combinations that should appear in UI.
+    ─────────────────────────────────────────────────────────── */
+
+    /* Role: Display Hero */
+    --ts-hero-family:    var(--font-display);
+    --ts-hero-size:      var(--text-4xl);
+    --ts-hero-weight:    var(--weight-regular);   /* serif carries weight visually */
+    --ts-hero-leading:   var(--leading-none);
+    --ts-hero-tracking:  var(--tracking-tightest);
+
+    /* Role: Page Heading */
+    --ts-heading-family:    var(--font-display);
+    --ts-heading-size:      var(--text-2xl);
+    --ts-heading-weight:    var(--weight-regular);
+    --ts-heading-leading:   var(--leading-tight);
+    --ts-heading-tracking:  var(--tracking-tighter);
+
+    /* Role: Section Title */
+    --ts-section-family:    var(--font-body);
+    --ts-section-size:      var(--text-xl);
+    --ts-section-weight:    var(--weight-semibold);
+    --ts-section-leading:   var(--leading-tight);
+    --ts-section-tracking:  var(--tracking-tight);
+
+    /* Role: Card Title (primary label on a card) */
+    --ts-card-title-family:    var(--font-body);
+    --ts-card-title-size:      var(--text-md);
+    --ts-card-title-weight:    var(--weight-bold);
+    --ts-card-title-leading:   var(--leading-snug);
+    --ts-card-title-tracking:  var(--tracking-normal);
+
+    /* Role: Card Subtitle / Supporting */
+    --ts-card-sub-family:    var(--font-body);
+    --ts-card-sub-size:      var(--text-sm);
+    --ts-card-sub-weight:    var(--weight-regular);
+    --ts-card-sub-leading:   var(--leading-normal);
+    --ts-card-sub-tracking:  var(--tracking-wide);
+
+    /* Role: Body Text */
+    --ts-body-family:    var(--font-body);
+    --ts-body-size:      var(--text-base);
+    --ts-body-weight:    var(--weight-regular);
+    --ts-body-leading:   var(--leading-normal);
+    --ts-body-tracking:  var(--tracking-normal);
+
+    /* Role: UI Label (buttons, tabs, nav items) */
+    --ts-label-family:    var(--font-body);
+    --ts-label-size:      var(--text-sm);
+    --ts-label-weight:    var(--weight-medium);
+    --ts-label-leading:   var(--leading-none);
+    --ts-label-tracking:  var(--tracking-wide);
+
+    /* Role: Overline (small category label above heading) */
+    --ts-overline-family:    var(--font-body);
+    --ts-overline-size:      var(--text-xs);
+    --ts-overline-weight:    var(--weight-medium);
+    --ts-overline-leading:   var(--leading-none);
+    --ts-overline-tracking:  var(--tracking-widest);
+
+    /* Role: Caption / Timestamp / Meta */
+    --ts-caption-family:    var(--font-body);
+    --ts-caption-size:      var(--text-xs);
+    --ts-caption-weight:    var(--weight-regular);
+    --ts-caption-leading:   var(--leading-normal);
+    --ts-caption-tracking:  var(--tracking-wide);
+
+    /* Role: Micro (badges, counts, tiny status) */
+    --ts-micro-family:    var(--font-body);
+    --ts-micro-size:      var(--text-2xs);
+    --ts-micro-weight:    var(--weight-semibold);
+    --ts-micro-leading:   var(--leading-none);
+    --ts-micro-tracking:  var(--tracking-wider);
+
+    /* Role: Quote / Pullquote */
+    --ts-quote-family:    var(--font-display);
+    --ts-quote-size:      var(--text-lg);
+    --ts-quote-weight:    var(--weight-regular);
+    --ts-quote-leading:   var(--leading-relaxed);
+    --ts-quote-tracking:  var(--tracking-normal);
+
+    /* Role: Numeric / Stat Display */
+    --ts-stat-family:    var(--font-body);
+    --ts-stat-size:      var(--text-3xl);
+    --ts-stat-weight:    var(--weight-light);
+    --ts-stat-leading:   var(--leading-none);
+    --ts-stat-tracking:  var(--tracking-tightest);
+
+    /* ── UI TOKENS ────────────────────────────────────────── */
+    --bg:        #0d1117;
+    --bg-card:   #111827;
+    --bg-card-active: #7dd3fc;
+    --border:    rgba(255,255,255,0.07);
+    --radius:    18px;
+  }
+
+  /* ── BASE RESET ─────────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text-inverse);
+    padding: 2rem 1.25rem 4rem;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: var(--leading-normal);
+  }
+
+  /* ── UTILITY CLASSES ────────────────────────────────────── */
+  .text-upper  { text-transform: uppercase; }
+  .text-lower  { text-transform: lowercase; }
+  .text-caps   { font-variant-caps: small-caps; }
+  .italic      { font-style: italic; }
+
+  /* ── APPLIED TEXT STYLE CLASSES ─────────────────────────── */
+  .ts-hero {
+    font-family: var(--ts-hero-family);
+    font-size: var(--ts-hero-size);
+    font-weight: var(--ts-hero-weight);
+    line-height: var(--ts-hero-leading);
+    letter-spacing: var(--ts-hero-tracking);
+  }
+  .ts-heading {
+    font-family: var(--ts-heading-family);
+    font-size: var(--ts-heading-size);
+    font-weight: var(--ts-heading-weight);
+    line-height: var(--ts-heading-leading);
+    letter-spacing: var(--ts-heading-tracking);
+  }
+  .ts-section {
+    font-family: var(--ts-section-family);
+    font-size: var(--ts-section-size);
+    font-weight: var(--ts-section-weight);
+    line-height: var(--ts-section-leading);
+    letter-spacing: var(--ts-section-tracking);
+  }
+  .ts-card-title {
+    font-family: var(--ts-card-title-family);
+    font-size: var(--ts-card-title-size);
+    font-weight: var(--ts-card-title-weight);
+    line-height: var(--ts-card-title-leading);
+    letter-spacing: var(--ts-card-title-tracking);
+  }
+  .ts-card-sub {
+    font-family: var(--ts-card-sub-family);
+    font-size: var(--ts-card-sub-size);
+    font-weight: var(--ts-card-sub-weight);
+    line-height: var(--ts-card-sub-leading);
+    letter-spacing: var(--ts-card-sub-tracking);
+  }
+  .ts-body {
+    font-family: var(--ts-body-family);
+    font-size: var(--ts-body-size);
+    font-weight: var(--ts-body-weight);
+    line-height: var(--ts-body-leading);
+    letter-spacing: var(--ts-body-tracking);
+  }
+  .ts-label {
+    font-family: var(--ts-label-family);
+    font-size: var(--ts-label-size);
+    font-weight: var(--ts-label-weight);
+    line-height: var(--ts-label-leading);
+    letter-spacing: var(--ts-label-tracking);
+  }
+  .ts-overline {
+    font-family: var(--ts-overline-family);
+    font-size: var(--ts-overline-size);
+    font-weight: var(--ts-overline-weight);
+    line-height: var(--ts-overline-leading);
+    letter-spacing: var(--ts-overline-tracking);
+  }
+  .ts-caption {
+    font-family: var(--ts-caption-family);
+    font-size: var(--ts-caption-size);
+    font-weight: var(--ts-caption-weight);
+    line-height: var(--ts-caption-leading);
+    letter-spacing: var(--ts-caption-tracking);
+  }
+  .ts-micro {
+    font-family: var(--ts-micro-family);
+    font-size: var(--ts-micro-size);
+    font-weight: var(--ts-micro-weight);
+    line-height: var(--ts-micro-leading);
+    letter-spacing: var(--ts-micro-tracking);
+  }
+  .ts-quote {
+    font-family: var(--ts-quote-family);
+    font-size: var(--ts-quote-size);
+    font-weight: var(--ts-quote-weight);
+    line-height: var(--ts-quote-leading);
+    letter-spacing: var(--ts-quote-tracking);
+  }
+  .ts-stat {
+    font-family: var(--ts-stat-family);
+    font-size: var(--ts-stat-size);
+    font-weight: var(--ts-stat-weight);
+    line-height: var(--ts-stat-leading);
+    letter-spacing: var(--ts-stat-tracking);
+  }
+
+  /* ── PAGE LAYOUT ────────────────────────────────────────── */
+  .section {
+    margin-bottom: 3rem;
+  }
+  .section-label {
+    font-family: var(--font-body);
+    font-size: var(--text-2xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: var(--text-quaternary);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .token-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.875rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .token-row:last-child { border-bottom: none; }
+  .token-name {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--text-accent);
+    white-space: nowrap;
+    flex-shrink: 0;
+    min-width: 200px;
+  }
+  .token-value {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--text-tertiary);
+    white-space: nowrap;
+  }
+  .token-preview {
+    color: var(--text-inverse);
+    flex-grow: 1;
+    text-align: right;
+  }
+
+  /* ── HIERARCHY DEMO ─────────────────────────────────────── */
+  .hierarchy-demo {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2rem 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .hierarchy-demo .overline {
+    font-family: var(--ts-overline-family);
+    font-size: var(--ts-overline-size);
+    font-weight: var(--ts-overline-weight);
+    letter-spacing: var(--ts-overline-tracking);
+    text-transform: uppercase;
+    color: var(--text-accent);
+    margin-bottom: 0.5rem;
+  }
+  .hierarchy-demo .page-heading {
+    font-family: var(--ts-heading-family);
+    font-size: var(--ts-heading-size);
+    font-weight: var(--ts-heading-weight);
+    line-height: var(--ts-heading-leading);
+    letter-spacing: var(--ts-heading-tracking);
+    color: var(--text-inverse);
+    margin-bottom: 0.4rem;
+  }
+  .hierarchy-demo .page-sub {
+    font-family: var(--ts-caption-family);
+    font-size: var(--ts-caption-size);
+    letter-spacing: var(--ts-caption-tracking);
+    color: var(--text-tertiary);
+    margin-bottom: 2rem;
+  }
+  .hierarchy-demo .section-heading {
+    font-family: var(--ts-section-family);
+    font-size: var(--ts-section-size);
+    font-weight: var(--ts-section-weight);
+    letter-spacing: var(--ts-section-tracking);
+    color: var(--text-inverse);
+    margin-bottom: 0.25rem;
+  }
+  .hierarchy-demo .section-sub {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-regular);
+    color: var(--text-secondary);
+    margin-bottom: 1.25rem;
+  }
+
+  /* ── CARD DEMO ──────────────────────────────────────────── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+  .card {
+    background: var(--bg-card);
+    border-radius: 16px;
+    padding: 1rem;
+    border: 1px solid var(--border);
+    position: relative;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .card.active {
+    background: var(--bg-card-active);
+  }
+  .card .card-check {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-end;
+    font-size: 14px;
+  }
+  .card .card-streak {
+    font-family: var(--ts-micro-family);
+    font-size: var(--ts-micro-size);
+    font-weight: var(--ts-micro-weight);
+    letter-spacing: var(--ts-micro-tracking);
+    text-transform: uppercase;
+    color: rgba(0,0,0,0.4);
+    margin-bottom: 0.2rem;
+  }
+  .card .card-streak.light {
+    color: var(--text-quaternary);
+  }
+  .card .card-name {
+    font-family: var(--ts-card-title-family);
+    font-size: var(--ts-card-title-size);
+    font-weight: var(--ts-card-title-weight);
+    line-height: var(--ts-card-title-leading);
+    color: #0d1117;
+  }
+  .card .card-name.light {
+    color: var(--text-inverse);
+  }
+  .card .card-status {
+    font-family: var(--ts-caption-family);
+    font-size: var(--ts-caption-size);
+    letter-spacing: var(--ts-caption-tracking);
+    color: rgba(0,0,0,0.5);
+    margin-top: 0.25rem;
+  }
+  .card .card-status.light {
+    color: var(--text-tertiary);
+  }
+
+  /* ── RULE CARDS ─────────────────────────────────────────── */
+  .rules-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+  @media (max-width: 480px) {
+    .rules-grid { grid-template-columns: 1fr; }
+    .token-name { min-width: 150px; font-size: 10px; }
+    .token-row { flex-wrap: wrap; }
+    .token-preview { text-align: left; }
+  }
+  .rule-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1rem;
+  }
+  .rule-title {
+    font-family: var(--font-body);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-wide);
+    color: var(--text-accent);
+    margin-bottom: 0.5rem;
+  }
+  .rule-body {
+    font-family: var(--font-body);
+    font-size: var(--text-xs);
+    line-height: var(--leading-relaxed);
+    color: var(--text-secondary);
+  }
+  .rule-body code {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--text-accent);
+    background: rgba(125,211,252,0.08);
+    padding: 1px 4px;
+    border-radius: 4px;
+  }
+
+  .page-title {
+    font-family: var(--font-display);
+    font-size: var(--text-3xl);
+    font-weight: var(--weight-regular);
+    letter-spacing: var(--tracking-tightest);
+    line-height: var(--leading-none);
+    color: var(--text-inverse);
+    margin-bottom: 0.5rem;
+  }
+  .page-subtitle {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    color: var(--text-tertiary);
+    letter-spacing: var(--tracking-wide);
+    margin-bottom: 3rem;
+  }
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2.5rem 0;
+  }
+  .badge {
+    display: inline-block;
+    font-family: var(--ts-micro-family);
+    font-size: var(--ts-micro-size);
+    font-weight: var(--ts-micro-weight);
+    letter-spacing: var(--ts-micro-tracking);
+    text-transform: uppercase;
+    background: rgba(125,211,252,0.12);
+    color: var(--text-accent);
+    padding: 3px 8px;
+    border-radius: 100px;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+  }
+  .scale-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 1.5rem;
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    margin-bottom: 1.5rem;
+  }
+  .scale-item {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .scale-item:last-child { border-bottom: none; }
+  .scale-meta {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--text-quaternary);
+    white-space: nowrap;
+    min-width: 110px;
+  }
+</style>
+</head>
+<body>
+
+<div class="page-title">Typography<br>Token System</div>
+<p class="page-subtitle">habit. / gentlehabits design language — complete specification</p>
+
+<!-- ═══════════════════════════════════ -->
+<!-- SECTION 1: HIERARCHY DEMO          -->
+<!-- ═══════════════════════════════════ -->
+<div class="section">
+  <div class="section-label">01 — Hierarchy In Context</div>
+
+  <div class="hierarchy-demo">
+    <div class="overline">saturday, april 25</div>
+    <div class="page-heading">your day,<br><em>your pace.</em></div>
+    <div class="page-sub">4 of 6 habits complete · 12-day streak</div>
+
+    <div class="section-heading">Daily Habits</div>
+    <div class="section-sub">Tap to mark complete</div>
+
+    <div class="card-grid">
+      <div class="card active">
+        <div class="card-check">✓</div>
+        <div>
+          <div class="card-streak">12 days</div>
+          <div class="card-name">morning movement</div>
+          <div class="card-status">done · 7:14 am</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-check" style="background:rgba(255,255,255,0.07)"></div>
+        <div>
+          <div class="card-streak light">5 days</div>
+          <div class="card-name light">read a little</div>
+          <div class="card-status light">not yet today</div>
+        </div>
+      </div>
+      <div class="card active">
+        <div class="card-check">✓</div>
+        <div>
+          <div class="card-streak">8 days</div>
+          <div class="card-name">no instagram</div>
+          <div class="card-status">done · all day</div>
+        </div>
+      </div>
+      <div class="card active">
+        <div class="card-check">✓</div>
+        <div>
+          <div class="card-streak">3 days</div>
+          <div class="card-name">meditate</div>
+          <div class="card-status">done · 8:02 am</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ts-quote italic" style="color: var(--text-inverse-secondary); border-left: 2px solid rgba(125,211,252,0.3); padding-left: 1rem; margin-top: 1rem;">
+      Small acts, practiced daily, become the architecture of a life.
+    </div>
+  </div>
+  <p style="font-size:var(--text-xs); color:var(--text-quaternary); letter-spacing:var(--tracking-wide);">
+    ↑ Same data as your screenshot — with hierarchy applied. Notice overline → heading → subtitle → section → card title → caption → streak micro + quote.
+  </p>
+</div>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════ -->
+<!-- SECTION 2: TYPE SCALE              -->
+<!-- ═══════════════════════════════════ -->
+<div class="section">
+  <div class="section-label">02 — Type Scale</div>
+
+  <div class="scale-row">
+    <div class="scale-item">
+      <div class="scale-meta">--text-5xl · 60px</div>
+      <div style="font-family:var(--font-body);font-size:var(--text-5xl);font-weight:var(--weight-light);letter-spacing:var(--tracking-tightest);line-height:1;color:var(--text-inverse)">60</div>
+    </div>
+    <div class="scale-item">
+      <div class="scale-meta">--text-4xl · 48px</div>
+      <div style="font-family:var(--font-display);font-size:var(--text-4xl);letter-spacing:var(--tracking-tightest);line-height:1;color:var(--text-inverse)">Display Hero</div>
+    </div>
+    <div class="scale-item">
+      <div class="scale-meta">--text-3xl · 36px</div>
+      <div style="font-family:var(--font-body);font-size:var(--text-3xl);font-weight:var(--weight-light);letter-spacing:var(--tracking-tightest);line-height:1;color:var(--text-inverse)">Stat / Number</div>
+    </div>
+    <div class="scale-item">
+      <div class="scale-meta">--text-2xl · 30px</div>
+      <div style="font-family:var(--font-display);font-size:var(--text-2xl);letter-spacing:var(--tracking-tighter);line-height:1.15;color:var(--text-inverse)">Page Heading</div>
+    </div>
+    <div class="scale-item">
+      <div class="scale-meta">--text-xl · 24px</div>
+      <div style="font-family:var(--font-body);font-size:var(--text-xl);font-weight:var(--weight-semibold);letter-spacing:var(--tracking-tight);line-height:1.15;color:var(--text-inverse)">Section Title</div>
+    </div>
+    <div class="scale-item">
+      <div class="scale-meta">--text-lg · 20px</div>
+      <div style="font-family:var(--font-display);font-size:var(--text-lg);font-style:italic;line-height:1.5;color:var(--text-inverse-secondary)">Quote / Pullquote italic</div>
+    </div>
+    <div class="scale-item">
+      <div class="scale-meta">--text-md · 18px</div>
+      <div style="font-family:var(--font-body);font-size:var(--text-md);font-weight:var(--weight-bold);line-height:1.3;color:var(--text-inverse)">Card Title Bold</div>
+    </div>
+    <div class="scale-item">
+      <div class="scale-meta">--text-base · 16px</div>
+      <div style="font-family:var(--font-body);font-size:var(--text-base);font-weight:var(--weight-regular);line-height:1.5;color:var(--text-inverse)">Body text, primary reading size</div>
+    </div>
+    <div class="scale-item">
+      <div class="scale-meta">--text-sm · 14px</div>
+      <div style="font-family:var(--font-body);font-size:var(--text-sm);font-weight:var(--weight-regular);line-height:1.5;color:var(--text-secondary)">Secondary body, helper text, card sub</div>
+    </div>
+    <div class="scale-item">
+      <div class="scale-meta">--text-xs · 12px</div>
+      <div style="font-family:var(--font-body);font-size:var(--text-xs);font-weight:var(--weight-medium);letter-spacing:var(--tracking-wide);color:var(--text-tertiary)">Caption · Timestamp · Meta label</div>
+    </div>
+    <div class="scale-item">
+      <div class="scale-meta">--text-2xs · 10px</div>
+      <div style="font-family:var(--font-body);font-size:var(--text-2xs);font-weight:var(--weight-semibold);letter-spacing:var(--tracking-widest);text-transform:uppercase;color:var(--text-accent)">OVERLINE / MICRO BADGE</div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════ -->
+<!-- SECTION 3: TOKEN REFERENCE         -->
+<!-- ═══════════════════════════════════ -->
+<div class="section">
+  <div class="section-label">03 — Token Reference</div>
+
+  <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;margin-bottom:1rem;">
+    <div style="font-family:var(--font-body);font-size:var(--text-xs);font-weight:var(--weight-semibold);color:var(--text-accent);letter-spacing:var(--tracking-wide);margin-bottom:0.75rem;">FONT FAMILIES</div>
+    <div class="token-row"><span class="token-name">--font-display</span><span class="token-value">'DM Serif Display'</span></div>
+    <div class="token-row"><span class="token-name">--font-body</span><span class="token-value">'DM Sans'</span></div>
+    <div class="token-row"><span class="token-name">--font-mono</span><span class="token-value">'SF Mono', 'Fira Code'</span></div>
+  </div>
+
+  <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;margin-bottom:1rem;">
+    <div style="font-family:var(--font-body);font-size:var(--text-xs);font-weight:var(--weight-semibold);color:var(--text-accent);letter-spacing:var(--tracking-wide);margin-bottom:0.75rem;">FONT WEIGHTS</div>
+    <div class="token-row"><span class="token-name">--weight-light</span><span class="token-value">300</span><span class="token-preview" style="font-weight:300;font-size:var(--text-sm)">stats, large numbers</span></div>
+    <div class="token-row"><span class="token-name">--weight-regular</span><span class="token-value">400</span><span class="token-preview" style="font-weight:400;font-size:var(--text-sm)">body, display serif</span></div>
+    <div class="token-row"><span class="token-name">--weight-medium</span><span class="token-value">500</span><span class="token-preview" style="font-weight:500;font-size:var(--text-sm)">labels, UI elements</span></div>
+    <div class="token-row"><span class="token-name">--weight-semibold</span><span class="token-value">600</span><span class="token-preview" style="font-weight:600;font-size:var(--text-sm)">section heads, overlines</span></div>
+    <div class="token-row"><span class="token-name">--weight-bold</span><span class="token-value">700</span><span class="token-preview" style="font-weight:700;font-size:var(--text-sm)">card titles, emphasis</span></div>
+  </div>
+
+  <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;margin-bottom:1rem;">
+    <div style="font-family:var(--font-body);font-size:var(--text-xs);font-weight:var(--weight-semibold);color:var(--text-accent);letter-spacing:var(--tracking-wide);margin-bottom:0.75rem;">LINE HEIGHTS</div>
+    <div class="token-row"><span class="token-name">--leading-none</span><span class="token-value">1</span><span class="token-preview" style="font-size:var(--text-xs);color:var(--text-tertiary)">display, numbers</span></div>
+    <div class="token-row"><span class="token-name">--leading-tight</span><span class="token-value">1.15</span><span class="token-preview" style="font-size:var(--text-xs);color:var(--text-tertiary)">headings, labels</span></div>
+    <div class="token-row"><span class="token-name">--leading-snug</span><span class="token-value">1.3</span><span class="token-preview" style="font-size:var(--text-xs);color:var(--text-tertiary)">card titles, subheadings</span></div>
+    <div class="token-row"><span class="token-name">--leading-normal</span><span class="token-value">1.5</span><span class="token-preview" style="font-size:var(--text-xs);color:var(--text-tertiary)">body text</span></div>
+    <div class="token-row"><span class="token-name">--leading-relaxed</span><span class="token-value">1.65</span><span class="token-preview" style="font-size:var(--text-xs);color:var(--text-tertiary)">long-form reading</span></div>
+    <div class="token-row"><span class="token-name">--leading-loose</span><span class="token-value">2</span><span class="token-preview" style="font-size:var(--text-xs);color:var(--text-tertiary)">list rows, spaced items</span></div>
+  </div>
+
+  <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;margin-bottom:1rem;">
+    <div style="font-family:var(--font-body);font-size:var(--text-xs);font-weight:var(--weight-semibold);color:var(--text-accent);letter-spacing:var(--tracking-wide);margin-bottom:0.75rem;">LETTER SPACING</div>
+    <div class="token-row"><span class="token-name">--tracking-tightest</span><span class="token-value">-0.04em</span><span class="token-preview" style="font-size:var(--text-sm);letter-spacing:-0.04em">Display text 48px+</span></div>
+    <div class="token-row"><span class="token-name">--tracking-tighter</span><span class="token-value">-0.02em</span><span class="token-preview" style="font-size:var(--text-sm);letter-spacing:-0.02em">Headings 24px+</span></div>
+    <div class="token-row"><span class="token-name">--tracking-tight</span><span class="token-value">-0.01em</span><span class="token-preview" style="font-size:var(--text-sm);letter-spacing:-0.01em">Subheadings 18–24px</span></div>
+    <div class="token-row"><span class="token-name">--tracking-normal</span><span class="token-value">0</span><span class="token-preview" style="font-size:var(--text-sm);letter-spacing:0">Body text</span></div>
+    <div class="token-row"><span class="token-name">--tracking-wide</span><span class="token-value">0.02em</span><span class="token-preview" style="font-size:var(--text-sm);letter-spacing:0.02em">Labels, UI text</span></div>
+    <div class="token-row"><span class="token-name">--tracking-wider</span><span class="token-value">0.05em</span><span class="token-preview" style="font-size:var(--text-sm);letter-spacing:0.05em">CAPS labels</span></div>
+    <div class="token-row"><span class="token-name">--tracking-widest</span><span class="token-value">0.1em</span><span class="token-preview" style="font-size:var(--text-sm);letter-spacing:0.1em;text-transform:uppercase">OVERLINES</span></div>
+  </div>
+
+  <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;margin-bottom:1rem;">
+    <div style="font-family:var(--font-body);font-size:var(--text-xs);font-weight:var(--weight-semibold);color:var(--text-accent);letter-spacing:var(--tracking-wide);margin-bottom:0.75rem;">TEXT COLOR ROLES</div>
+    <div class="token-row"><span class="token-name">--text-primary</span><span class="token-value">#0d1117</span><span class="token-preview" style="color:#0d1117;background:#f9fafb;padding:1px 6px;border-radius:4px;font-size:var(--text-xs)">on light bg</span></div>
+    <div class="token-row"><span class="token-name">--text-inverse</span><span class="token-value">#f9fafb</span><span class="token-preview" style="color:#f9fafb;font-size:var(--text-xs)">primary on dark</span></div>
+    <div class="token-row"><span class="token-name">--text-inverse-secondary</span><span class="token-value">rgba(249,250,251,0.65)</span><span class="token-preview" style="color:rgba(249,250,251,0.65);font-size:var(--text-xs)">muted on dark</span></div>
+    <div class="token-row"><span class="token-name">--text-tertiary</span><span class="token-value">#6b7280</span><span class="token-preview" style="color:#6b7280;font-size:var(--text-xs)">placeholder, hint text</span></div>
+    <div class="token-row"><span class="token-name">--text-quaternary</span><span class="token-value">#9ca3af</span><span class="token-preview" style="color:#9ca3af;font-size:var(--text-xs)">disabled-adjacent, meta</span></div>
+    <div class="token-row"><span class="token-name">--text-accent</span><span class="token-value">#7dd3fc</span><span class="token-preview" style="color:#7dd3fc;font-size:var(--text-xs)">brand accent, links</span></div>
+    <div class="token-row"><span class="token-name">--text-disabled</span><span class="token-value">#d1d5db</span><span class="token-preview" style="color:#d1d5db;font-size:var(--text-xs)">truly disabled</span></div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════ -->
+<!-- SECTION 4: COMPOSITE ROLES         -->
+<!-- ═══════════════════════════════════ -->
+<div class="section">
+  <div class="section-label">04 — Composite Text Style Roles</div>
+
+  <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:1.5rem;">
+    <div style="padding:1.25rem;border-bottom:1px solid var(--border)">
+      <div class="ts-hero" style="color:var(--text-inverse)">Hero Display</div>
+      <div style="font-family:var(--font-mono);font-size:10px;color:var(--text-quaternary);margin-top:0.5rem;">.ts-hero · DM Serif Display · 48px · regular · -0.04em · lh:1</div>
+    </div>
+    <div style="padding:1.25rem;border-bottom:1px solid var(--border)">
+      <div class="ts-heading" style="color:var(--text-inverse)">Page Heading</div>
+      <div style="font-family:var(--font-mono);font-size:10px;color:var(--text-quaternary);margin-top:0.5rem;">.ts-heading · DM Serif Display · 30px · regular · -0.02em · lh:1.15</div>
+    </div>
+    <div style="padding:1.25rem;border-bottom:1px solid var(--border)">
+      <div class="ts-section" style="color:var(--text-inverse)">Section Title</div>
+      <div style="font-family:var(--font-mono);font-size:10px;color:var(--text-quaternary);margin-top:0.5rem;">.ts-section · DM Sans · 24px · semibold · -0.01em · lh:1.15</div>
+    </div>
+    <div style="padding:1.25rem;border-bottom:1px solid var(--border)">
+      <div class="ts-card-title" style="color:var(--text-inverse)">Card Title</div>
+      <div style="font-family:var(--font-mono);font-size:10px;color:var(--text-quaternary);margin-top:0.5rem;">.ts-card-title · DM Sans · 18px · bold · 0em · lh:1.3</div>
+    </div>
+    <div style="padding:1.25rem;border-bottom:1px solid var(--border)">
+      <div class="ts-body" style="color:var(--text-inverse)">Body Text — primary reading size for descriptions and content</div>
+      <div style="font-family:var(--font-mono);font-size:10px;color:var(--text-quaternary);margin-top:0.5rem;">.ts-body · DM Sans · 16px · regular · 0em · lh:1.5</div>
+    </div>
+    <div style="padding:1.25rem;border-bottom:1px solid var(--border)">
+      <div class="ts-card-sub" style="color:var(--text-secondary)">Card subtitle — supporting details and secondary information</div>
+      <div style="font-family:var(--font-mono);font-size:10px;color:var(--text-quaternary);margin-top:0.5rem;">.ts-card-sub · DM Sans · 14px · regular · 0.02em · lh:1.5</div>
+    </div>
+    <div style="padding:1.25rem;border-bottom:1px solid var(--border)">
+      <div class="ts-label" style="color:var(--text-inverse)">UI Label · Button · Tab</div>
+      <div style="font-family:var(--font-mono);font-size:10px;color:var(--text-quaternary);margin-top:0.5rem;">.ts-label · DM Sans · 14px · medium · 0.02em · lh:1</div>
+    </div>
+    <div style="padding:1.25rem;border-bottom:1px solid var(--border)">
+      <div class="ts-overline text-upper" style="color:var(--text-accent)">Overline Category</div>
+      <div style="font-family:var(--font-mono);font-size:10px;color:var(--text-quaternary);margin-top:0.5rem;">.ts-overline · DM Sans · 10px · medium · 0.1em · lh:1 · UPPERCASE</div>
+    </div>
+    <div style="padding:1.25rem;border-bottom:1px solid var(--border)">
+      <div class="ts-caption" style="color:var(--text-tertiary)">Caption · timestamp · 7:14 am · 12 days ago</div>
+      <div style="font-family:var(--font-mono);font-size:10px;color:var(--text-quaternary);margin-top:0.5rem;">.ts-caption · DM Sans · 12px · regular · 0.02em · lh:1.5</div>
+    </div>
+    <div style="padding:1.25rem;border-bottom:1px solid var(--border)">
+      <div class="ts-micro text-upper" style="color:var(--text-accent)">12 DAY STREAK</div>
+      <div style="font-family:var(--font-mono);font-size:10px;color:var(--text-quaternary);margin-top:0.5rem;">.ts-micro · DM Sans · 10px · semibold · 0.05em · lh:1 · UPPERCASE</div>
+    </div>
+    <div style="padding:1.25rem;border-bottom:1px solid var(--border)">
+      <div class="ts-quote italic" style="color:var(--text-inverse-secondary)">"Small acts, practiced daily, become the architecture of a life."</div>
+      <div style="font-family:var(--font-mono);font-size:10px;color:var(--text-quaternary);margin-top:0.5rem;">.ts-quote · DM Serif Display · 20px · regular · 0em · lh:1.65 · italic</div>
+    </div>
+    <div style="padding:1.25rem;">
+      <div class="ts-stat" style="color:var(--text-inverse)">86<span style="font-size:var(--text-xl);color:var(--text-tertiary)">%</span></div>
+      <div style="font-family:var(--font-mono);font-size:10px;color:var(--text-quaternary);margin-top:0.5rem;">.ts-stat · DM Sans · 36px · light · -0.04em · lh:1</div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════ -->
+<!-- SECTION 5: RULES                   -->
+<!-- ═══════════════════════════════════ -->
+<div class="section">
+  <div class="section-label">05 — Hierarchy Rules</div>
+
+  <div class="rules-grid">
+    <div class="rule-card">
+      <div class="rule-title">Size Jumps</div>
+      <div class="rule-body">Consecutive hierarchy levels must differ by at least 1 scale step. Never use <code>--text-md</code> directly above <code>--text-base</code> without a weight or family change to compensate.</div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-title">Max 3 Sizes Per View</div>
+      <div class="rule-body">Any single screen should use no more than 3 distinct size tokens. Add hierarchy via weight, color, or tracking — not more sizes.</div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-title">Negative Tracking Rule</div>
+      <div class="rule-body">Apply negative <code>letter-spacing</code> only at <code>--text-xl</code> and above. Below that, tracking goes neutral or positive.</div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-title">Serif = Display Only</div>
+      <div class="rule-body"><code>--font-display</code> is for page headings, quotes, and hero text only. Never use it for UI labels, body, or captions — that's <code>--font-body</code> territory.</div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-title">Color Contrast Ratio</div>
+      <div class="rule-body">Body text must hit WCAG AA (4.5:1). Large text 18px+ must hit 3:1 minimum. <code>--text-quaternary</code> is below AA — use only for truly decorative text.</div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-title">Italic = Semantic</div>
+      <div class="rule-body">Italic is reserved for quotes, titles of works, and meaningful emphasis. Not for stylistic decoration. DM Serif italic is a design accent — use sparingly.</div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-title">Uppercase Threshold</div>
+      <div class="rule-body">Uppercase text only at <code>--text-xs</code> or smaller. Uppercase body text destroys readability. Pair with <code>--tracking-wider</code> or <code>--tracking-widest</code>.</div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-title">Weight Compression</div>
+      <div class="rule-body">On colored/active card backgrounds (like sky-300), reduce text weight by one step. <code>--weight-bold</code> → <code>--weight-semibold</code> on light surfaces.</div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-title">Overline Before Heading</div>
+      <div class="rule-body">Overline → Heading is the canonical pattern. Overline alone has no meaning. Heading alone is valid. Never put overline after the heading it labels.</div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-title">Line Height + Size</div>
+      <div class="rule-body">Large text needs tight leading. Small text needs open leading. <code>--text-4xl</code> → <code>--leading-none</code>. <code>--text-sm</code> → <code>--leading-normal</code> minimum.</div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<div class="section">
+  <div class="section-label">06 — Hierarchy Ladder (Quick Reference)</div>
+  <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;">
+    <div style="display:flex;flex-direction:column;gap:0.5rem;">
+      <div style="display:flex;align-items:center;gap:1rem;padding:0.5rem 0;border-bottom:1px solid var(--border)">
+        <div style="font-family:var(--font-mono);font-size:10px;color:var(--text-quaternary);min-width:60px;">L1</div>
+        <div style="font-family:var(--font-display);font-size:var(--text-2xl);letter-spacing:var(--tracking-tighter);line-height:1;">Page Heading</div>
+        <div style="font-family:var(--font-mono);font-size:10px;color:var(--text-quaternary);margin-left:auto;">.ts-heading</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:1rem;padding:0.5rem 0;border-bottom:1px solid var(--border)">
+        <div style="font-family:var(--font-mono);font-size:10px;color:var(--text-quaternary);min-width:60px;">L2</div>
+        <div style="font-family:var(--font-body);font-size:var(--text-xl);font-weight:var(--weight-semibold);letter-spacing:var(--tracking-tight);">Section Title</div>
+        <div style="font-family:var(--font-mono);font-size:10px;color:var(--text-quaternary);margin-left:auto;">.ts-section</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:1rem;padding:0.5rem 0;border-bottom:1px solid var(--border)">
+        <div style="font-family:var(--font-mono);font-size:10px;color:var(--text-quaternary);min-width:60px;">L3</div>
+        <div style="font-family:var(--font-body);font-size:var(--text-md);font-weight:var(--weight-bold);">Card Title</div>
+        <div style="font-family:var(--font-mono);font-size:10px;color:var(--text-quaternary);margin-left:auto;">.ts-card-title</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:1rem;padding:0.5rem 0;border-bottom:1px solid var(--border)">
+        <div style="font-family:var(--font-mono);font-size:10px;color:var(--text-quaternary);min-width:60px;">L4</div>
+        <div style="font-family:var(--font-body);font-size:var(--text-base);color:var(--text-inverse);">Body Text</div>
+        <div style="font-family:var(--font-mono);font-size:10px;color:var(--text-quaternary);margin-left:auto;">.ts-body</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:1rem;padding:0.5rem 0;border-bottom:1px solid var(--border)">
+        <div style="font-family:var(--font-mono);font-size:10px;color:var(--text-quaternary);min-width:60px;">L5</div>
+        <div style="font-family:var(--font-body);font-size:var(--text-sm);color:var(--text-secondary);">Supporting / Card Sub</div>
+        <div style="font-family:var(--font-mono);font-size:10px;color:var(--text-quaternary);margin-left:auto;">.ts-card-sub</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:1rem;padding:0.5rem 0;border-bottom:1px solid var(--border)">
+        <div style="font-family:var(--font-mono);font-size:10px;color:var(--text-quaternary);min-width:60px;">L6</div>
+        <div style="font-family:var(--font-body);font-size:var(--text-xs);color:var(--text-tertiary);letter-spacing:0.02em;">Caption · Timestamp</div>
+        <div style="font-family:var(--font-mono);font-size:10px;color:var(--text-quaternary);margin-left:auto;">.ts-caption</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:1rem;padding:0.5rem 0;">
+        <div style="font-family:var(--font-mono);font-size:10px;color:var(--text-quaternary);min-width:60px;">L7</div>
+        <div style="font-family:var(--font-body);font-size:var(--text-2xs);color:var(--text-accent);letter-spacing:0.1em;text-transform:uppercase;font-weight:600;">MICRO · BADGE · STREAK</div>
+        <div style="font-family:var(--font-mono);font-size:10px;color:var(--text-quaternary);margin-left:auto;">.ts-micro</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

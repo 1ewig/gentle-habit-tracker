@@ -74,9 +74,9 @@ body {
   -webkit-overflow-scrolling: touch;
   position: relative;
   z-index: 1;
-  padding-bottom: var(--nav-height); /* Offset for Bottom Navigation */
   scrollbar-width: none;
 }
+
 
 /* Fixed-viewport pages (no scroll) */
 #body:has(.page.journal.active),
@@ -102,3 +102,5 @@ body {
 [data-theme="birch"] { --bg: #f7f7f5; --fg: #4a4a48; --acc: #5c8c6d; --ui: #ececea; --glow-rgb: 92, 140, 109; }
 [data-theme="linen"] { --bg: #f8f9fa; --fg: #1a1d21; --acc: #5885af; --ui: #eff1f3; --glow-rgb: 88, 133, 175; }
 [data-theme="voltage"] { --bg: #000000; --fg: #ffffff; --acc: #f0ff00; --ui: #1a1a1a; --glow-rgb: 240, 255, 0; }
+[data-theme="hydra"] { --bg: #f0f7ff; --fg: #001a33; --acc: #0066ff; --ui: #e1efff; --glow-rgb: 0, 102, 255; }
+

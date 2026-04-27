@@ -17,8 +17,7 @@
   min-height: 100vh;
   min-height: 100dvh;
   width: 100%;
-  padding-bottom: calc(var(--nav-height) + var(--safe-b));
-  /* Offset for Navigation */
+  padding: calc(var(--safe-t) + var(--s-32)) var(--s-24) calc(var(--nav-height) + var(--safe-b)) var(--s-24);
   position: relative;
 }
 
@@ -128,15 +127,13 @@
    Orchestration for the habit tracking dashboard.
    ========================================================================== */
 
-.page.today {
-  padding-top: calc(var(--safe-t) + var(--s-32));
-}
+
 
 /* Today Header Placement */
 .page.today .today-header {
   align-items: center;
   justify-content: center;
-  padding: 0 var(--s-24) var(--s-16);
+  padding-bottom: var(--s-16);
   text-align: center;
 }
 
@@ -145,7 +142,6 @@
   display: flex;
   flex-direction: column;
   gap: var(--s-16);
-  padding: 0 var(--s-24);
   width: 100%;
 }
 
@@ -160,9 +156,7 @@
    Orchestration for the particle canvas and momentum charts.
    ========================================================================== */
 
-.page.journal {
-  padding-top: calc(var(--safe-t) + var(--s-32));
-}
+
 
 
 
@@ -190,16 +184,13 @@
    Orchestration for the bento grid and customization matrices.
    ========================================================================== */
 
-.page.settings {
-  padding-top: calc(var(--safe-t) + var(--s-32));
-}
+
 
 /* Bento Dashboard Blueprint */
 .settings-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: var(--s-16);
-  padding: 0 var(--s-24);
   width: 100%;
 }
 

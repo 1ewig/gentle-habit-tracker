@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { getTodayKey } from '../lib/utils';
 
-export const THEMES = ['midnight', 'parchment', 'ink', 'moss', 'void', 'sand', 'ocean', 'ruby', 'amethyst', 'frost', 'sakura', 'birch', 'linen', 'voltage'];
+export const THEMES = ['midnight', 'parchment', 'ink', 'moss', 'void', 'sand', 'ocean', 'ruby', 'amethyst', 'frost', 'sakura', 'birch', 'linen', 'voltage', 'hydra'];
 export const THEME_COLORS: Record<string, { bg: string, border: string, acc: string }> = {
   midnight: { bg: '#12100e', border: '#332d28', acc: '#8ca379' },
   parchment: { bg: '#f4edd8', border: '#cfc1a5', acc: '#4a5d8c' },
@@ -17,7 +17,8 @@ export const THEME_COLORS: Record<string, { bg: string, border: string, acc: str
   sakura: { bg: '#fff5f7', border: '#f48fb1', acc: '#ff80ab' },
   birch: { bg: '#f7f7f5', border: '#d4d4d1', acc: '#5c8c6d' },
   linen: { bg: '#f8f9fa', border: '#cfd4da', acc: '#5885af' },
-  voltage: { bg: '#000000', border: '#f0ff00', acc: '#f0ff00' }
+  voltage: { bg: '#000000', border: '#f0ff00', acc: '#f0ff00' },
+  hydra: { bg: '#f0f7ff', border: '#b3d4ff', acc: '#0066ff' }
 };
 
 export type Profile = { name: string; bio: string };
