@@ -58,8 +58,10 @@ export const useAppStore = create<AppState>()(
       profile: { name: 'wanderer', bio: 'taking it one day at a time.' },
       settings: { theme: 'carbon', style: 'cards' },
       habits: [
-        { id: 1, name: 'morning movement', days: {} },
-        { id: 2, name: 'read a little', days: {} }
+        { id: 1, name: 'drink some water', days: {} },
+        { id: 2, name: 'morning movement', days: {} },
+        { id: 3, name: 'read a little', days: {} },
+        { id: 4, name: 'mindful minute', days: {} }
       ],
       currentPage: 'today',
       selectedDay: null,
