@@ -21,7 +21,7 @@
   gap: var(--s-24);
 }
 
-.card-appearance,
+.card-customization,
 .card-habits {
   min-height: 120px;
   align-items: center;

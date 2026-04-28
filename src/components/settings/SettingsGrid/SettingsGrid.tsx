@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { ProfileSection } from './ProfileSection';
-import { AtmosphereSection } from './AtmosphereSection';
+import { CustomizationSection } from './CustomizationSection';
 import { HabitSection } from './HabitSection';
 import { GRID_VARIANTS } from '../../../lib/motion';
 
@@ -14,7 +14,7 @@ export function SettingsGrid() {
       animate="visible"
     >
       <ProfileSection />
-      <AtmosphereSection />
+      <CustomizationSection />
       <HabitSection />
     </motion.div>
   );

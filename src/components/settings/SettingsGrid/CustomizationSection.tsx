@@ -6,10 +6,10 @@ import { cn } from '../../../lib/utils';
 import { GRID_ITEM_VARIANTS, HOVER_TAP } from '../../../lib/motion';
 
 
-export function AtmosphereSection() {
+export function CustomizationSection() {
   const { settings, setSettings } = useAppStore();
   const [isOpen, setIsOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState<'theme' | 'cards'>('theme');
+  const [activeTab, setActiveTab] = useState<'theme' | 'habits'>('theme');
 
   // Safety fallback for legacy theme names
   const safeTheme = THEME_COLORS[settings.theme] || THEME_COLORS['carbon'];
@@ -17,17 +17,17 @@ export function AtmosphereSection() {
   return (
     <>
       <motion.div
-        className="settings-card card-appearance"
+        className="settings-card card-customization"
         variants={GRID_ITEM_VARIANTS}
         onClick={() => setIsOpen(true)}
         onKeyDown={e => (e.key === 'Enter' || e.key === ' ') && setIsOpen(true)}
         role="button"
         tabIndex={0}
-        aria-label="Customize interface atmosphere"
+        aria-label="Customize interface"
         whileTap={HOVER_TAP.tap}
       >
         <div className="bs-info">
-          <div className="bs-title">atmosphere</div>
+          <div className="bs-title">customization</div>
           <div className="bs-val">
             <svg width="12" height="12" viewBox="0 0 12 12" className="theme-dot" style={{ '--theme-acc': safeTheme.acc } as React.CSSProperties}>
               <circle cx="6" cy="6" r="5" />
@@ -47,10 +47,10 @@ export function AtmosphereSection() {
               theme
             </button>
             <button 
-              className={cn("dtab", activeTab === 'cards' && "active")}
-              onClick={() => setActiveTab('cards')}
+              className={cn("dtab", activeTab === 'habits' && "active")}
+              onClick={() => setActiveTab('habits')}
             >
-              cards
+              habits
             </button>
           </div>
         </div>
@@ -79,7 +79,7 @@ export function AtmosphereSection() {
           </div>
         )}
 
-        {activeTab === 'cards' && (
+        {activeTab === 'habits' && (
           <div className="theme-grid">
             {[
               { id: 'lists', label: 'lists' },
@@ -100,6 +100,7 @@ export function AtmosphereSection() {
             ))}
           </div>
         )}
+
 
 
 
