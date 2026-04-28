@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { getWeek, getToday, dateKey, DAY_LABELS, cn } from '../../../lib/utils';
+import { getToday, dateKey, DAY_LABELS, cn } from '../../../lib/utils';
 import { useHabitStats } from '../../../hooks/useHabitStats';
 import { useAppStore } from '../../../store/useAppStore';
 import { MOMENTUM_TRANSITIONS } from '../../../lib/motion';
@@ -9,8 +9,13 @@ export const MomentumWeekly: React.FC = () => {
   const { totalHabits, getDayStats } = useHabitStats();
   const { setSelectedDay } = useAppStore();
   const today = getToday();
-  const week = getWeek(today);
-  const todayIdx = today.getDay();
+  
+  // Rolling 7-day window ending on Tomorrow (Today + 1)
+  const week = Array.from({ length: 7 }, (_, i) => {
+    const d = new Date(today);
+    d.setDate(today.getDate() - 5 + i);
+    return d;
+  });
 
   return (
     <div className="weekly-chart">
@@ -18,7 +23,7 @@ export const MomentumWeekly: React.FC = () => {
         const key = dateKey(d);
         const isFuture = d > today;
         const { pct } = getDayStats(key);
-        const isToday = i === todayIdx;
+        const isToday = i === 5;
         
         // Mathematical constant for minimal visibility
         const MIN_VISIBILITY_PCT = totalHabits > 0 ? 10 : 2;
@@ -46,7 +51,7 @@ export const MomentumWeekly: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={MOMENTUM_TRANSITIONS.label(i)}
             >
-              {DAY_LABELS[i]}
+              {DAY_LABELS[d.getDay()]}
             </motion.div>
           </div>
         );
@@ -54,3 +59,4 @@ export const MomentumWeekly: React.FC = () => {
     </div>
   );
 };
+
