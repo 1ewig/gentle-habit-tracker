@@ -55,3 +55,12 @@
 .nav-btn.active svg {
   stroke: var(--accent);
 }
+
+.nav-btn.is-done {
+  background: var(--accent);
+}
+
+.nav-btn.is-done svg {
+  stroke: var(--bg);
+  fill: var(--bg);
+}

@@ -1,17 +1,22 @@
 import { memo } from 'react';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { useAppStore } from '../../store/useAppStore';
-import { cn } from '../../lib/utils';
+import { useHabitStats } from '../../hooks/useHabitStats';
+import { cn, getTodayKey } from '../../lib/utils';
 import { NAV_BUTTON_VARIANTS } from '../../lib/motion';
 
 export const Navigation = memo(function Navigation() {
   const { currentPage, setCurrentPage } = useAppStore();
+  const { getDayStats } = useHabitStats();
+  
+  const { pct } = getDayStats(getTodayKey());
+  const isDone = pct === 100;
 
   return (
     <div id="nav" style={{ isolation: 'isolate' }}>
       <div className="nav-pill">
         <motion.button
-          className={cn("nav-btn", currentPage === 'today' && "active")}
+          className={cn("nav-btn", currentPage === 'today' && "active", isDone && "is-done")}
           onClick={() => setCurrentPage('today')}
           whileHover={NAV_BUTTON_VARIANTS.hover}
           whileTap={NAV_BUTTON_VARIANTS.tap}
@@ -20,12 +25,34 @@ export const Navigation = memo(function Navigation() {
           aria-current={currentPage === 'today' ? 'page' : undefined}
           title="Today"
         >
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <rect x="3" y="3" width="7" height="7" rx="1.5" />
-            <rect x="14" y="3" width="7" height="7" rx="1.5" />
-            <rect x="14" y="14" width="7" height="7" rx="1.5" />
-            <rect x="3" y="14" width="7" height="7" rx="1.5" />
-          </svg>
+          <AnimatePresence mode="wait">
+            {isDone ? (
+              <motion.svg 
+                key="star"
+                viewBox="0 0 24 24" 
+                fill="currentColor"
+                initial={{ scale: 0.5, opacity: 0, rotate: -45 }}
+                animate={{ scale: 1, opacity: 1, rotate: 0 }}
+                exit={{ scale: 0.5, opacity: 0, rotate: 45 }}
+              >
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+              </motion.svg>
+            ) : (
+              <motion.svg 
+                key="grid"
+                viewBox="0 0 24 24" 
+                aria-hidden="true"
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.8, opacity: 0 }}
+              >
+                <rect x="3" y="3" width="7" height="7" rx="1.5" />
+                <rect x="14" y="3" width="7" height="7" rx="1.5" />
+                <rect x="14" y="14" width="7" height="7" rx="1.5" />
+                <rect x="3" y="14" width="7" height="7" rx="1.5" />
+              </motion.svg>
+            )}
+          </AnimatePresence>
         </motion.button>
         <motion.button
           className={cn("nav-btn", currentPage === 'journal' && "active")}
