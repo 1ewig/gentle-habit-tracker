@@ -1,8 +1,10 @@
 <div align="center">
   <img src="./banner.png" alt="Gentle Banner" width="100%" />
+  [![Project Status: In Progress](https://img.shields.io/badge/Status-In%20Progress-orange)](#)
   <br />
   <h1>Gentle</h1>
   <p><b>A minimalistic, ADHD-friendly habit tracker built for kindness, not pressure.</b></p>
+  <p><i>Note: This project is currently in active development. Features and architecture are being refined.</i></p>
   <br />
   
   [![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)](#)
