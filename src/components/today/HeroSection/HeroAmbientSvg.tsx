@@ -17,39 +17,9 @@ export const HeroAmbientSvg: React.FC = () => {
     strokeLinejoin: "round" as const,
   };
 
-  const DrawGroup = ({ stroke, strokeWidth, animate }: { stroke: string; strokeWidth: number; animate?: boolean }) => {
-    const motionProps = animate ? {
-      initial: { pathLength: 0 },
-      animate: { pathLength: progress },
-      transition: { duration: 1, ease: "easeInOut" as const }
-    } : {};
-
-    const Path = animate ? motion.path : 'path';
-    const Circle = animate ? motion.circle : 'circle';
-    const Line = animate ? motion.line : 'line';
-
-    return (
-      <g stroke={stroke} strokeWidth={strokeWidth} {...sharedProps}>
-        {/* Horizon Line */}
-        <Line x1="12" y1="76" x2="88" y2="76" {...motionProps} />
-        
-        {/* Cloud */}
-        <Path d="M 25 76 A 6 6 0 0 1 30 66 A 8 8 0 0 1 46 68 A 6 6 0 0 1 45 76 Z" {...motionProps} />
-        
-        {/* Sun Circle */}
-        <Circle cx="50" cy="42" r="14" {...motionProps} />
-        
-        {/* Sun Rays (Inner to Outer) */}
-        <Line x1="50" y1="22" x2="50" y2="16" {...motionProps} /> {/* Top */}
-        <Line x1="50" y1="62" x2="50" y2="68" {...motionProps} /> {/* Bottom */}
-        <Line x1="30" y1="42" x2="24" y2="42" {...motionProps} /> {/* Left */}
-        <Line x1="70" y1="42" x2="76" y2="42" {...motionProps} /> {/* Right */}
-        <Line x1="36" y1="28" x2="32" y2="24" {...motionProps} /> {/* TL */}
-        <Line x1="64" y1="28" x2="68" y2="24" {...motionProps} /> {/* TR */}
-        <Line x1="36" y1="56" x2="32" y2="60" {...motionProps} /> {/* BL */}
-        <Line x1="64" y1="56" x2="68" y2="60" {...motionProps} /> {/* BR */}
-      </g>
-    );
+  const transitionProps = {
+    duration: 0.8,
+    ease: "easeInOut" as const
   };
 
   return (
@@ -59,10 +29,56 @@ export const HeroAmbientSvg: React.FC = () => {
       aria-label={`Daily Progress: ${Math.round(pct)}%`}
     >
       {/* Background Track (Faint Outline) */}
-      <DrawGroup stroke="var(--rim)" strokeWidth={3} animate={false} />
+      <g stroke="var(--rim)" strokeWidth="3" {...sharedProps}>
+        <line x1="12" y1="76" x2="88" y2="76" />
+        <path d="M 25 76 A 6 6 0 0 1 30 66 A 8 8 0 0 1 46 68 A 6 6 0 0 1 45 76 Z" />
+        <circle cx="50" cy="42" r="14" />
+        <line x1="50" y1="22" x2="50" y2="16" />
+        <line x1="50" y1="62" x2="50" y2="68" />
+        <line x1="30" y1="42" x2="24" y2="42" />
+        <line x1="70" y1="42" x2="76" y2="42" />
+        <line x1="36" y1="28" x2="32" y2="24" />
+        <line x1="64" y1="28" x2="68" y2="24" />
+        <line x1="36" y1="56" x2="32" y2="60" />
+        <line x1="64" y1="56" x2="68" y2="60" />
+      </g>
       
-      {/* Foreground Progress (Accent Outline that draws itself) */}
-      <DrawGroup stroke="var(--accent)" strokeWidth={3} animate={true} />
+      {/* Foreground Progress (Accent Outline that draws itself smoothly) */}
+      <g stroke="var(--accent)" strokeWidth="3" {...sharedProps}>
+        {/* Horizon Line */}
+        <motion.line 
+          x1="12" y1="76" x2="88" y2="76" 
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: progress }}
+          transition={transitionProps}
+        />
+        
+        {/* Cloud */}
+        <motion.path 
+          d="M 25 76 A 6 6 0 0 1 30 66 A 8 8 0 0 1 46 68 A 6 6 0 0 1 45 76 Z" 
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: progress }}
+          transition={transitionProps}
+        />
+        
+        {/* Sun Circle */}
+        <motion.circle 
+          cx="50" cy="42" r="14" 
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: progress }}
+          transition={transitionProps}
+        />
+        
+        {/* Sun Rays */}
+        <motion.line x1="50" y1="22" x2="50" y2="16" initial={{ pathLength: 0 }} animate={{ pathLength: progress }} transition={transitionProps} />
+        <motion.line x1="50" y1="62" x2="50" y2="68" initial={{ pathLength: 0 }} animate={{ pathLength: progress }} transition={transitionProps} />
+        <motion.line x1="30" y1="42" x2="24" y2="42" initial={{ pathLength: 0 }} animate={{ pathLength: progress }} transition={transitionProps} />
+        <motion.line x1="70" y1="42" x2="76" y2="42" initial={{ pathLength: 0 }} animate={{ pathLength: progress }} transition={transitionProps} />
+        <motion.line x1="36" y1="28" x2="32" y2="24" initial={{ pathLength: 0 }} animate={{ pathLength: progress }} transition={transitionProps} />
+        <motion.line x1="64" y1="28" x2="68" y2="24" initial={{ pathLength: 0 }} animate={{ pathLength: progress }} transition={transitionProps} />
+        <motion.line x1="36" y1="56" x2="32" y2="60" initial={{ pathLength: 0 }} animate={{ pathLength: progress }} transition={transitionProps} />
+        <motion.line x1="64" y1="56" x2="68" y2="60" initial={{ pathLength: 0 }} animate={{ pathLength: progress }} transition={transitionProps} />
+      </g>
     </svg>
   );
 };
