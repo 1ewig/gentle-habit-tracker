@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useState } from 'react';
 import { useAppStore } from '../store/useAppStore';
 import { useHabitStats } from './useHabitStats';
 import { getToday, dateKey } from '../lib/utils';
@@ -6,8 +6,7 @@ import {
   GREETING_POOL,
   GreetingCategory,
   PerformanceBracket,
-  TimeOfDay,
-  Greeting
+  TimeOfDay
 } from '../lib/greetings';
 
 const getDeterministicIndex = (str: string, max: number): number => {
@@ -25,9 +24,11 @@ export function useHeroGreeting() {
   
   const today = getToday();
   const todayKey = dateKey(today);
-  const { pct } = getDayStats(todayKey);
 
-  return useMemo(() => {
+  // Freeze the greeting on mount by computing it exactly once inside useState
+  const [frozenGreeting] = useState(() => {
+    const { pct } = getDayStats(todayKey);
+
     // 1. Determine Time of Day
     const hour = new Date().getHours();
     let timeOfDay: TimeOfDay = 'night';
@@ -65,17 +66,27 @@ export function useHeroGreeting() {
     const index = getDeterministicIndex(seed, pool.length);
     const selectedGreeting = pool[index];
 
-    // 6. Format templates with user name
-    const format = (text: string) => text.replace(/{name}/g, profile.name);
-
     return {
-      title: format(selectedGreeting.title),
-      subtitle: format(selectedGreeting.subtitle),
+      titleTemplate: selectedGreeting.title,
+      subtitleTemplate: selectedGreeting.subtitle,
       pct,
       totalTrackedDays,
       category,
       timeOfDay,
       bracket
     };
-  }, [profile.name, habits, pct, todayKey]);
+  });
+
+  // Format templates with the user name during render to stay responsive to profile changes
+  const format = (text: string) => text.replace(/{name}/g, profile.name);
+
+  return {
+    title: format(frozenGreeting.titleTemplate),
+    subtitle: format(frozenGreeting.subtitleTemplate),
+    pct: frozenGreeting.pct,
+    totalTrackedDays: frozenGreeting.totalTrackedDays,
+    category: frozenGreeting.category,
+    timeOfDay: frozenGreeting.timeOfDay,
+    bracket: frozenGreeting.bracket
+  };
 }
