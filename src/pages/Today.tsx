@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { TodayHeader } from '../components/today/TodayHeader';
+import { HeroSection } from '../components/today/HeroSection/HeroSection';
 import { HabitGrid } from '../components/today/HabitGrid';
 import { PAGE_VARIANTS } from '../lib/motion';
 
@@ -13,7 +13,7 @@ export function Today() {
       animate="enter"
       exit="exit"
     >
-      <TodayHeader />
+      <HeroSection />
       <HabitGrid />
     </motion.div>
   );

@@ -21,7 +21,7 @@
 @import "./components/shared/error-boundary.css";
 
 /* --- FEATURE-SPECIFIC --- */
-@import "./components/today/today-header.css";
+@import "./components/today/HeroSection/hero-section.css";
 @import "./components/today/HabitGrid/habit-cards.css";
 @import "./components/journal/NeuralWeb/neural-web.css";
 @import "./components/journal/momentum/momentum.css";

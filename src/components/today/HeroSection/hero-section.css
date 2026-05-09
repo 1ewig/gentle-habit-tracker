@@ -1,10 +1,10 @@
 /**
- * TODAY HEADER
- * Component-specific styles for the Today view header.
- * Co-located with TodayHeader.tsx.
+ * HERO SECTION
+ * Component-specific styles for the Today view Hero Section.
+ * Co-located with HeroSection.tsx.
  */
 
-.today-header {
+.hero-section {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -14,7 +14,7 @@
   width: 100%;
 }
 
-.today-header__pfp-container {
+.hero-section__ambient-container {
   width: 80px;
   height: 80px;
   border-radius: var(--r-full);
@@ -28,13 +28,13 @@
   transition: border-color 0.4s var(--bezier);
 }
 
-.today-header__pfp {
+.hero-section__ambient-svg {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  display: block;
 }
 
-.today-header__intro {
+.hero-section__intro {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -42,7 +42,7 @@
   margin-top: calc(var(--s-8) * -0.5);
 }
 
-.today-header__greeting {
+.hero-section__greeting {
   font-family: var(--font-sans);
   font-size: var(--t-3xl);
   font-weight: var(--fw-bold);
@@ -55,7 +55,7 @@
   transition: color 0.4s var(--bezier);
 }
 
-.today-header__subtext {
+.hero-section__subtext {
   font-family: var(--font-sans);
   font-size: var(--t-sm);
   font-weight: var(--fw-reg);
@@ -68,21 +68,21 @@
   transition: color 0.4s var(--bezier);
 }
 
-.today-header__timeline {
+.hero-section__timeline {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: var(--s-8);
   width: 100%;
 }
 
-.today-header__timeline-day {
+.hero-section__timeline-day {
   height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.today-header__timeline-label {
+.hero-section__timeline-label {
   font-family: var(--font-sans);
   font-size: var(--t-sm);
   font-weight: var(--fw-bold);
@@ -90,7 +90,7 @@
   text-transform: uppercase;
 }
 
-.today-header__timeline-circle {
+.hero-section__timeline-circle {
   width: 36px;
   height: 36px;
   border-radius: var(--r-full);
@@ -107,7 +107,7 @@
   transition: background-color 0.4s var(--bezier), color 0.4s var(--bezier), box-shadow 0.4s var(--bezier);
 }
 
-.today-header__timeline-outline {
+.hero-section__timeline-outline {
   width: 36px;
   height: 36px;
   border-radius: var(--r-full);
@@ -125,6 +125,6 @@
 }
 
 /* Today highlight indicator if not completed yet */
-.today-header__timeline-day.is-today:not(.is-done) .today-header__timeline-label {
+.hero-section__timeline-day.is-today:not(.is-done) .hero-section__timeline-label {
   color: var(--accent);
 }
