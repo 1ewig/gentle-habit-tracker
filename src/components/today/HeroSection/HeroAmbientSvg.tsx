@@ -1,100 +1,69 @@
-import React, { useEffect, useState } from 'react';
-
-type TimeOfDay = 'sunrise' | 'daytime' | 'sunset' | 'nighttime';
-
-const getTimeOfDay = (hour: number): TimeOfDay => {
-  if (hour >= 5 && hour < 9) return 'sunrise';
-  if (hour >= 9 && hour < 17) return 'daytime';
-  if (hour >= 17 && hour < 20) return 'sunset';
-  return 'nighttime';
-};
+import React from 'react';
+import { motion } from 'motion/react';
+import { useHabitStats } from '../../../hooks/useHabitStats';
+import { getToday, dateKey } from '../../../lib/utils';
 
 export const HeroAmbientSvg: React.FC = () => {
-  const [timeOfDay, setTimeOfDay] = useState<TimeOfDay>('daytime');
+  const { getDayStats } = useHabitStats();
+  const todayKey = dateKey(getToday());
+  const { pct } = getDayStats(todayKey);
+  
+  // Progress from 0 to 1 based on today's habit completion
+  const progress = pct / 100;
 
-  useEffect(() => {
-    const updateTime = () => {
-      const hour = new Date().getHours();
-      setTimeOfDay(getTimeOfDay(hour));
-    };
-    updateTime();
-    // Update every minute to check for transitions
-    const interval = setInterval(updateTime, 60000);
-    return () => clearInterval(interval);
-  }, []);
+  const sharedProps = {
+    fill: "none",
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
+  };
 
-  if (timeOfDay === 'sunrise') {
+  const DrawGroup = ({ stroke, strokeWidth, animate }: { stroke: string; strokeWidth: number; animate?: boolean }) => {
+    const motionProps = animate ? {
+      initial: { pathLength: 0 },
+      animate: { pathLength: progress },
+      transition: { duration: 1, ease: "easeInOut" as const }
+    } : {};
+
+    const Path = animate ? motion.path : 'path';
+    const Circle = animate ? motion.circle : 'circle';
+    const Line = animate ? motion.line : 'line';
+
     return (
-      <svg viewBox="0 0 100 100" className="hero-section__ambient-svg sunrise" aria-label="Sunrise">
-        <defs>
-          <linearGradient id="sunriseSky" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="#FF9E7D" />
-            <stop offset="50%" stopColor="#FFD3A5" />
-            <stop offset="100%" stopColor="#FFF2E6" />
-          </linearGradient>
-        </defs>
-        <circle cx="50" cy="50" r="48" fill="url(#sunriseSky)" />
-        <circle cx="50" cy="45" r="14" fill="#FFA500" />
-        <circle cx="50" cy="45" r="14" fill="#FFD700" opacity="0.6" style={{ filter: 'blur(2px)' }} />
-        <path d="M15 75 c5 -8, 25 -8, 30 0 c10 -10, 30 -10, 40 0" fill="#FFFFFF" opacity="0.4" />
-      </svg>
+      <g stroke={stroke} strokeWidth={strokeWidth} {...sharedProps}>
+        {/* Horizon Line */}
+        <Line x1="12" y1="76" x2="88" y2="76" {...motionProps} />
+        
+        {/* Cloud */}
+        <Path d="M 25 76 A 6 6 0 0 1 30 66 A 8 8 0 0 1 46 68 A 6 6 0 0 1 45 76 Z" {...motionProps} />
+        
+        {/* Sun Circle */}
+        <Circle cx="50" cy="42" r="14" {...motionProps} />
+        
+        {/* Sun Rays (Inner to Outer) */}
+        <Line x1="50" y1="22" x2="50" y2="16" {...motionProps} /> {/* Top */}
+        <Line x1="50" y1="62" x2="50" y2="68" {...motionProps} /> {/* Bottom */}
+        <Line x1="30" y1="42" x2="24" y2="42" {...motionProps} /> {/* Left */}
+        <Line x1="70" y1="42" x2="76" y2="42" {...motionProps} /> {/* Right */}
+        <Line x1="36" y1="28" x2="32" y2="24" {...motionProps} /> {/* TL */}
+        <Line x1="64" y1="28" x2="68" y2="24" {...motionProps} /> {/* TR */}
+        <Line x1="36" y1="56" x2="32" y2="60" {...motionProps} /> {/* BL */}
+        <Line x1="64" y1="56" x2="68" y2="60" {...motionProps} /> {/* BR */}
+      </g>
     );
-  }
+  };
 
-  if (timeOfDay === 'sunset') {
-    return (
-      <svg viewBox="0 0 100 100" className="hero-section__ambient-svg sunset" aria-label="Sunset">
-        <defs>
-          <linearGradient id="sunsetSky" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="#4C1D95" />
-            <stop offset="40%" stopColor="#9D174D" />
-            <stop offset="80%" stopColor="#F59E0B" />
-            <stop offset="100%" stopColor="#FEF3C7" />
-          </linearGradient>
-        </defs>
-        <circle cx="50" cy="50" r="48" fill="url(#sunsetSky)" />
-        <circle cx="50" cy="65" r="15" fill="#EF4444" />
-        <circle cx="50" cy="65" r="15" fill="#F59E0B" opacity="0.5" />
-        <path d="M5 80 h90 v-4 h-90 z" fill="#F43F5E" opacity="0.4" />
-        <path d="M15 72 h70 v-2 h-70 z" fill="#8B5CF6" opacity="0.3" />
-      </svg>
-    );
-  }
-
-  if (timeOfDay === 'nighttime') {
-    return (
-      <svg viewBox="0 0 100 100" className="hero-section__ambient-svg nighttime" aria-label="Nighttime">
-        <defs>
-          <linearGradient id="nighttimeSky" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="#0F172A" />
-            <stop offset="70%" stopColor="#1E1B4B" />
-            <stop offset="100%" stopColor="#311042" />
-          </linearGradient>
-        </defs>
-        <circle cx="50" cy="50" r="48" fill="url(#nighttimeSky)" />
-        <circle cx="25" cy="30" r="1" fill="#FFFFFF" opacity="0.8" />
-        <circle cx="75" cy="25" r="1" fill="#FFFFFF" opacity="0.5" />
-        <circle cx="35" cy="60" r="1.5" fill="#FFFFFF" opacity="0.7" />
-        <circle cx="65" cy="50" r="0.8" fill="#FFFFFF" opacity="0.9" />
-        <path d="M55 25 c-10 0, -18 8, -18 18 c0 10, 8 18, 18 18 c3 0, 6 -0.8, 9 -2 c-6 -1, -11 -7, -11 -14 c0 -7, 5 -13, 11 -14 c-3 -1.2, -6 -2, -9 -2 z" fill="#FEF08A" />
-      </svg>
-    );
-  }
-
-  // Default to daytime
   return (
-    <svg viewBox="0 0 100 100" className="hero-section__ambient-svg daytime" aria-label="Daytime">
-      <defs>
-        <linearGradient id="daytimeSky" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stopColor="#7DD3FC" />
-          <stop offset="60%" stopColor="#BAE6FD" />
-          <stop offset="100%" stopColor="#F0F9FF" />
-        </linearGradient>
-      </defs>
-      <circle cx="50" cy="50" r="48" fill="url(#daytimeSky)" />
-      <circle cx="65" cy="35" r="13" fill="#F59E0B" />
-      <circle cx="65" cy="35" r="17" fill="#F59E0B" opacity="0.2" />
-      <path d="M20 70 c-4 -4, -12 -2, -14 4 c-2 4, 1 10, 6 10 h45 c5 0, 10 -4, 8 -10 c-2 -4, -7 -5, -9 -3 c-4 -8, -15 -10, -20 -3 c-3 -4, -10 -3, -13 4 z" fill="#FFFFFF" opacity="0.85" />
+    <svg 
+      viewBox="0 0 100 100" 
+      className="hero-section__ambient-svg outlined" 
+      aria-label={`Daily Progress: ${Math.round(pct)}%`}
+    >
+      {/* Background Track (Faint Outline) */}
+      <DrawGroup stroke="var(--rim)" strokeWidth={3} animate={false} />
+      
+      {/* Foreground Progress (Accent Outline that draws itself) */}
+      <DrawGroup stroke="var(--accent)" strokeWidth={3} animate={true} />
     </svg>
   );
 };
+
