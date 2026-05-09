@@ -131,10 +131,7 @@
 
 /* Today Header Placement */
 .page.today .today-header {
-  align-items: center;
-  justify-content: center;
-  padding-bottom: var(--s-16);
-  text-align: center;
+  margin-bottom: var(--s-24);
 }
 
 /* Habit List Orchestration */
