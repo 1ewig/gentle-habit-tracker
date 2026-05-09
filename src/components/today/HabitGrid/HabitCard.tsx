@@ -22,8 +22,6 @@ export const HabitCard: React.FC<HabitCardProps> = ({ habit, index }) => {
   return (
     <motion.div
       variants={GRID_ITEM_VARIANTS}
-      initial="hidden"
-      animate="visible"
       whileTap={HOVER_TAP.tap}
       custom={index}
       className={cn(
