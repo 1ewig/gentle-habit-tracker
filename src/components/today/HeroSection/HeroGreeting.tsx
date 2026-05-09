@@ -1,13 +1,13 @@
 import React from 'react';
-import { useAppStore } from '../../../store/useAppStore';
+import { useHeroGreeting } from '../../../hooks/useHeroGreeting';
 
 export const HeroGreeting: React.FC = () => {
-  const { profile } = useAppStore();
+  const { title, subtitle } = useHeroGreeting();
 
   return (
     <div className="hero-section__intro">
-      <h1 className="hero-section__greeting">Hi, {profile.name}</h1>
-      <p className="hero-section__subtext">{profile.bio}</p>
+      <h1 className="hero-section__greeting">{title}</h1>
+      <p className="hero-section__subtext">{subtitle}</p>
     </div>
   );
 };
