@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useShallow } from 'zustand/react/shallow';
 import { useAppStore } from '../store/useAppStore';
 import { useHabitStats } from './useHabitStats';
 import { getToday, dateKey } from '../lib/utils';
@@ -19,7 +20,9 @@ const getDeterministicIndex = (str: string, max: number): number => {
 };
 
 export function useHeroGreeting() {
-  const { profile, habits } = useAppStore();
+  const { profile, habits } = useAppStore(
+    useShallow((state) => ({ profile: state.profile, habits: state.habits }))
+  );
   const { getDayStats } = useHabitStats();
   
   const today = getToday();

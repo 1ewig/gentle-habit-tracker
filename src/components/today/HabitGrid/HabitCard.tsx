@@ -13,7 +13,7 @@ export interface HabitCardProps {
 }
 
 export const HabitCard: React.FC<HabitCardProps> = ({ habit, index }) => {
-  const { settings } = useAppStore();
+  const settings = useAppStore((state) => state.settings);
   const { justChecked, handleToggle } = useHabitToggle(habit);
   
   const isDoneToday = !!habit.days[getTodayKey()];

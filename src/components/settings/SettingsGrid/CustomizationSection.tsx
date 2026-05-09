@@ -6,8 +6,15 @@ import { cn } from '../../../lib/utils';
 import { GRID_ITEM_VARIANTS, HOVER_TAP } from '../../../lib/motion';
 
 
+import { useShallow } from 'zustand/react/shallow';
+
 export function CustomizationSection() {
-  const { settings, setSettings } = useAppStore();
+  const { settings, setSettings } = useAppStore(
+    useShallow((state) => ({
+      settings: state.settings,
+      setSettings: state.setSettings
+    }))
+  );
   const [isOpen, setIsOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<'theme' | 'habits'>('theme');
 

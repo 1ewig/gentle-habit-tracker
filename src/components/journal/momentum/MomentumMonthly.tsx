@@ -47,7 +47,7 @@ const MonthCell = ({
 
 export const MomentumMonthly: React.FC = () => {
   const { totalHabits, getRollingMonthlyDays } = useHabitStats();
-  const { setSelectedDay } = useAppStore();
+  const setSelectedDay = useAppStore((state) => state.setSelectedDay);
   const today = getToday();
   const rollingDays = getRollingMonthlyDays();
 

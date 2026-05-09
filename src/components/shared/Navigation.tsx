@@ -5,8 +5,15 @@ import { useHabitStats } from '../../hooks/useHabitStats';
 import { cn, getTodayKey } from '../../lib/utils';
 import { NAV_BUTTON_VARIANTS } from '../../lib/motion';
 
+import { useShallow } from 'zustand/react/shallow';
+
 export const Navigation = memo(function Navigation() {
-  const { currentPage, setCurrentPage } = useAppStore();
+  const { currentPage, setCurrentPage } = useAppStore(
+    useShallow((state) => ({
+      currentPage: state.currentPage,
+      setCurrentPage: state.setCurrentPage
+    }))
+  );
   const { getDayStats } = useHabitStats();
   
   const { pct } = getDayStats(getTodayKey());

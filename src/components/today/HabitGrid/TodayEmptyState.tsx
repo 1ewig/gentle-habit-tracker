@@ -4,7 +4,7 @@ import { useAppStore } from '../../../store/useAppStore';
 import { GRID_ITEM_VARIANTS } from '../../../lib/motion';
 
 export function TodayEmptyState() {
-  const { setCurrentPage } = useAppStore();
+  const setCurrentPage = useAppStore((state) => state.setCurrentPage);
 
   return (
     <motion.div

@@ -5,8 +5,15 @@ import { HabitCard } from './HabitCard';
 import { TodayEmptyState } from './TodayEmptyState';
 import { GRID_VARIANTS } from '../../../lib/motion';
 
+import { useShallow } from 'zustand/react/shallow';
+
 export function HabitGrid() {
-  const { habits, settings } = useAppStore();
+  const { habits, settings } = useAppStore(
+    useShallow((state) => ({
+      habits: state.habits,
+      settings: state.settings
+    }))
+  );
 
   return (
     <motion.div 

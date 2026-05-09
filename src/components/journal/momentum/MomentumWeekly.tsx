@@ -7,7 +7,7 @@ import { MOMENTUM_TRANSITIONS } from '../../../lib/motion';
 
 export const MomentumWeekly: React.FC = () => {
   const { totalHabits, getDayStats } = useHabitStats();
-  const { setSelectedDay } = useAppStore();
+  const setSelectedDay = useAppStore((state) => state.setSelectedDay);
   const today = getToday();
   
   // Rolling 7-day window ending on Tomorrow (Today + 1)

@@ -8,8 +8,15 @@ import { AnimatePresence } from 'motion/react';
 import { useDynamicViewportHeight } from './hooks/useDynamicViewportHeight';
 import { ErrorBoundary } from './components/shared/ErrorBoundary';
 
+import { useShallow } from 'zustand/react/shallow';
+
 function AppContent() {
-  const { currentPage, settings } = useAppStore();
+  const { currentPage, settings } = useAppStore(
+    useShallow((state) => ({
+      currentPage: state.currentPage,
+      settings: state.settings
+    }))
+  );
 
   useDynamicViewportHeight();
 

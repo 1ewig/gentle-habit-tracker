@@ -8,7 +8,7 @@ export interface DayStats {
 }
 
 export function useHabitStats() {
-  const { habits } = useAppStore();
+  const habits = useAppStore((state) => state.habits);
   const totalHabits = habits.length;
   const today = getToday();
 

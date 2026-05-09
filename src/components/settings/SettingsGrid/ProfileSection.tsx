@@ -4,8 +4,15 @@ import { useAppStore } from '../../../store/useAppStore';
 import { Dialog } from '../../shared/Dialog';
 import { GRID_ITEM_VARIANTS, HOVER_TAP } from '../../../lib/motion';
 
+import { useShallow } from 'zustand/react/shallow';
+
 export function ProfileSection() {
-  const { profile, setProfile } = useAppStore();
+  const { profile, setProfile } = useAppStore(
+    useShallow((state) => ({
+      profile: state.profile,
+      setProfile: state.setProfile
+    }))
+  );
   const [isOpen, setIsOpen] = useState(false);
   const [formName, setFormName] = useState(profile.name);
   const [formBio, setFormBio] = useState(profile.bio);

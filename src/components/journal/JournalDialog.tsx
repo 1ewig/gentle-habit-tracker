@@ -5,8 +5,15 @@ import { useHabitStats } from '../../hooks/useHabitStats';
 import { Dialog } from '../shared/Dialog';
 import { FULL_DAYS, MONTHS, dateKey, getToday, getYesterday } from '../../lib/utils';
 
+import { useShallow } from 'zustand/react/shallow';
+
 export const JournalDialog = () => {
-  const { selectedDay, setSelectedDay } = useAppStore();
+  const { selectedDay, setSelectedDay } = useAppStore(
+    useShallow((state) => ({
+      selectedDay: state.selectedDay,
+      setSelectedDay: state.setSelectedDay
+    }))
+  );
   const { habits, handleToggle } = useHabits();
   const { getDayStats } = useHabitStats();
 

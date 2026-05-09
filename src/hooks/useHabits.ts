@@ -8,8 +8,17 @@ export type Habit = {
   days: Record<string, boolean>;
 };
 
+import { useShallow } from 'zustand/react/shallow';
+
 export const useHabits = () => {
-  const { habits, _toggleHabit, _addHabit, _removeHabit } = useAppStore();
+  const { habits, _toggleHabit, _addHabit, _removeHabit } = useAppStore(
+    useShallow((state) => ({
+      habits: state.habits,
+      _toggleHabit: state._toggleHabit,
+      _addHabit: state._addHabit,
+      _removeHabit: state._removeHabit
+    }))
+  );
   const [justCheckedIds, setJustCheckedIds] = useState<Set<number>>(new Set());
 
   const handleToggle = useCallback((habit: Habit, key?: string) => {
