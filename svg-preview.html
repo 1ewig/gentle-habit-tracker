@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gentle Habit Tracker — SVG Ambient Showcase</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #fafafc;
+            --surface: #ffffff;
+            --text: #1a1a24;
+            --muted: #62627a;
+            --border: #e6e6f0;
+            --accent: #6d5dfc;
+            --shadow: rgba(0, 0, 0, 0.05);
+            --r-lg: 24px;
+            --r-md: 16px;
+            --r-full: 9999px;
+            --font: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #0d0d15;
+                --surface: #141420;
+                --text: #f0f0f5;
+                --muted: #a0a0b8;
+                --border: #222234;
+                --accent: #8b7eff;
+                --shadow: rgba(0, 0, 0, 0.2);
+            }
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: var(--font);
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1040px;
+            width: 100%;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 0 0 12px 0;
+            letter-spacing: -0.03em;
+        }
+
+        header p {
+            color: var(--muted);
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin: 40px 0 20px 0;
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background-color: var(--border);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
+            margin-bottom: 48px;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--r-lg);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 10px 30px var(--shadow);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px var(--shadow);
+        }
+
+        .svg-container {
+            width: 120px;
+            height: 120px;
+            border-radius: var(--r-full);
+            overflow: hidden;
+            border: 4px solid var(--surface);
+            box-shadow: 0 8px 32px var(--shadow);
+            margin-bottom: 20px;
+            background: var(--bg);
+        }
+
+        .svg-container.outlined-preview {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 4px solid var(--border);
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 0 0 4px 0;
+            text-transform: capitalize;
+        }
+
+        .card-subtitle {
+            font-size: 0.85rem;
+            color: var(--muted);
+            margin: 0;
+        }
+
+        /* OUTLINED DEMO SECTION */
+        .interactive-section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--r-lg);
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 10px 30px var(--shadow);
+            margin-top: 24px;
+        }
+
+        .interactive-layout {
+            display: flex;
+            align-items: center;
+            gap: 48px;
+            width: 100%;
+            max-width: 600px;
+            margin: 24px 0;
+        }
+
+        @media (max-width: 600px) {
+            .interactive-layout {
+                flex-direction: column;
+                gap: 24px;
+            }
+        }
+
+        .controls {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            width: 100%;
+        }
+
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .slider-value {
+            color: var(--accent);
+        }
+
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: var(--border);
+            outline: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--accent);
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(109, 93, 252, 0.4);
+            transition: transform 0.1s ease;
+        }
+
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.15);
+        }
+
+        .badge {
+            background: var(--border);
+            color: var(--text);
+            padding: 4px 12px;
+            border-radius: var(--r-full);
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Ambient SVG Showcase</h1>
+            <p>Visual preview of daytime states and reactive completion metrics.</p>
+        </header>
+
+        <div class="section-title">🌅 Option 1: Colored Ambient Daytimes</div>
+        <div class="grid">
+            <!-- SUNRISE -->
+            <div class="card">
+                <div class="svg-container">
+                    <svg viewBox="0 0 100 100" width="100%" height="100%">
+                        <defs>
+                            <linearGradient id="sunriseSky" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#FF9E7D" />
+                                <stop offset="50%" stop-color="#FFD3A5" />
+                                <stop offset="100%" stop-color="#FFF2E6" />
+                            </linearGradient>
+                        </defs>
+                        <circle cx="50" cy="50" r="48" fill="url(#sunriseSky)" />
+                        <circle cx="50" cy="45" r="14" fill="#FFA500" />
+                        <circle cx="50" cy="45" r="14" fill="#FFD700" opacity="0.6" style="filter: blur(2px);" />
+                        <path d="M15 75 c5 -8, 25 -8, 30 0 c10 -10, 30 -10, 40 0" fill="#FFFFFF" opacity="0.4" />
+                    </svg>
+                </div>
+                <div class="card-title">sunrise</div>
+                <div class="card-subtitle">5:00 AM – 8:59 AM</div>
+            </div>
+
+            <!-- DAYTIME -->
+            <div class="card">
+                <div class="svg-container">
+                    <svg viewBox="0 0 100 100" width="100%" height="100%">
+                        <defs>
+                            <linearGradient id="daytimeSky" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#7DD3FC" />
+                                <stop offset="60%" stop-color="#BAE6FD" />
+                                <stop offset="100%" stop-color="#F0F9FF" />
+                            </linearGradient>
+                        </defs>
+                        <circle cx="50" cy="50" r="48" fill="url(#daytimeSky)" />
+                        <circle cx="65" cy="35" r="13" fill="#F59E0B" />
+                        <circle cx="65" cy="35" r="17" fill="#F59E0B" opacity="0.2" />
+                        <path d="M20 70 c-4 -4, -12 -2, -14 4 c-2 4, 1 10, 6 10 h45 c5 0, 10 -4, 8 -10 c-2 -4, -7 -5, -9 -3 c-4 -8, -15 -10, -20 -3 c-3 -4, -10 -3, -13 4 z" fill="#FFFFFF" opacity="0.85" />
+                    </svg>
+                </div>
+                <div class="card-title">daytime</div>
+                <div class="card-subtitle">9:00 AM – 4:59 PM</div>
+            </div>
+
+            <!-- SUNSET -->
+            <div class="card">
+                <div class="svg-container">
+                    <svg viewBox="0 0 100 100" width="100%" height="100%">
+                        <defs>
+                            <linearGradient id="sunsetSky" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#4C1D95" />
+                                <stop offset="40%" stop-color="#9D174D" />
+                                <stop offset="80%" stop-color="#F59E0B" />
+                                <stop offset="100%" stop-color="#FEF3C7" />
+                            </linearGradient>
+                        </defs>
+                        <circle cx="50" cy="50" r="48" fill="url(#sunsetSky)" />
+                        <circle cx="50" cy="65" r="15" fill="#EF4444" />
+                        <circle cx="50" cy="65" r="15" fill="#F59E0B" opacity="0.5" />
+                        <path d="M5 80 h90 v-4 h-90 z" fill="#F43F5E" opacity="0.4" />
+                        <path d="M15 72 h70 v-2 h-70 z" fill="#8B5CF6" opacity="0.3" />
+                    </svg>
+                </div>
+                <div class="card-title">sunset</div>
+                <div class="card-subtitle">5:00 PM – 7:59 PM</div>
+            </div>
+
+            <!-- NIGHTTIME -->
+            <div class="card">
+                <div class="svg-container">
+                    <svg viewBox="0 0 100 100" width="100%" height="100%">
+                        <defs>
+                            <linearGradient id="nighttimeSky" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#0F172A" />
+                                <stop offset="70%" stop-color="#1E1B4B" />
+                                <stop offset="100%" stop-color="#311042" />
+                            </linearGradient>
+                        </defs>
+                        <circle cx="50" cy="50" r="48" fill="url(#nighttimeSky)" />
+                        <circle cx="25" cy="30" r="1" fill="#FFFFFF" opacity="0.8" />
+                        <circle cx="75" cy="25" r="1" fill="#FFFFFF" opacity="0.5" />
+                        <circle cx="35" cy="60" r="1.5" fill="#FFFFFF" opacity="0.7" />
+                        <circle cx="65" cy="50" r="0.8" fill="#FFFFFF" opacity="0.9" />
+                        <path d="M55 25 c-10 0, -18 8, -18 18 c0 10, 8 18, 18 18 c3 0, 6 -0.8, 9 -2 c-6 -1, -11 -7, -11 -14 c0 -7, 5 -13, 11 -14 c-3 -1.2, -6 -2, -9 -2 z" fill="#FEF08A" />
+                    </svg>
+                </div>
+                <div class="card-title">nighttime</div>
+                <div class="card-subtitle">8:00 PM – 4:59 AM</div>
+            </div>
+        </div>
+
+        <div class="section-title">✏️ Option 2: Reactive Outlined Illustration</div>
+        <div class="interactive-section">
+            <div class="badge">interactive sandbox</div>
+            <div class="interactive-layout">
+                <div class="svg-container outlined-preview">
+                    <svg viewBox="0 0 100 100" width="100%" height="100%">
+                        <!-- Faint Track -->
+                        <g stroke="var(--border)" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="76" x2="88" y2="76" />
+                            <path d="M 25 76 A 6 6 0 0 1 30 66 A 8 8 0 0 1 46 68 A 6 6 0 0 1 45 76 Z" />
+                            <circle cx="50" cy="42" r="14" />
+                            <line x1="50" y1="22" x2="50" y2="16" />
+                            <line x1="50" y1="62" x2="50" y2="68" />
+                            <line x1="30" y1="42" x2="24" y2="42" />
+                            <line x1="70" y1="42" x2="76" y2="42" />
+                            <line x1="36" y1="28" x2="32" y2="24" />
+                            <line x1="64" y1="28" x2="68" y2="24" />
+                            <line x1="36" y1="56" x2="32" y2="60" />
+                            <line x1="64" y1="56" x2="68" y2="60" />
+                        </g>
+
+                        <!-- Glowing Active Track -->
+                        <g stroke="var(--accent)" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <line id="line1" x1="12" y1="76" x2="88" y2="76" stroke-dasharray="76" stroke-dashoffset="76" style="transition: stroke-dashoffset 0.5s ease-out;" />
+                            <path id="path1" d="M 25 76 A 6 6 0 0 1 30 66 A 8 8 0 0 1 46 68 A 6 6 0 0 1 45 76 Z" stroke-dasharray="50" stroke-dashoffset="50" style="transition: stroke-dashoffset 0.5s ease-out;" />
+                            <circle id="circle1" cx="50" cy="42" r="14" stroke-dasharray="88" stroke-dashoffset="88" style="transition: stroke-dashoffset 0.5s ease-out;" />
+                            
+                            <!-- Rays -->
+                            <line class="ray" x1="50" y1="22" x2="50" y2="16" stroke-dasharray="6" stroke-dashoffset="6" style="transition: stroke-dashoffset 0.5s ease-out;" />
+                            <line class="ray" x1="50" y1="62" x2="50" y2="68" stroke-dasharray="6" stroke-dashoffset="6" style="transition: stroke-dashoffset 0.5s ease-out;" />
+                            <line class="ray" x1="30" y1="42" x2="24" y2="42" stroke-dasharray="6" stroke-dashoffset="6" style="transition: stroke-dashoffset 0.5s ease-out;" />
+                            <line class="ray" x1="70" y1="42" x2="76" y2="42" stroke-dasharray="6" stroke-dashoffset="6" style="transition: stroke-dashoffset 0.5s ease-out;" />
+                            <line class="ray" x1="36" y1="28" x2="32" y2="24" stroke-dasharray="6" stroke-dashoffset="6" style="transition: stroke-dashoffset 0.5s ease-out;" />
+                            <line class="ray" x1="64" y1="28" x2="68" y2="24" stroke-dasharray="6" stroke-dashoffset="6" style="transition: stroke-dashoffset 0.5s ease-out;" />
+                            <line class="ray" x1="36" y1="56" x2="32" y2="60" stroke-dasharray="6" stroke-dashoffset="6" style="transition: stroke-dashoffset 0.5s ease-out;" />
+                            <line class="ray" x1="64" y1="56" x2="68" y2="60" stroke-dasharray="6" stroke-dashoffset="6" style="transition: stroke-dashoffset 0.5s ease-out;" />
+                        </g>
+                    </svg>
+                </div>
+                <div class="controls">
+                    <div class="slider-label">
+                        <span>Habits Completion Progress</span>
+                        <span class="slider-value" id="progressVal">40%</span>
+                    </div>
+                    <input type="range" id="progressSlider" min="0" max="100" value="40">
+                    <p style="font-size: 0.85rem; color: var(--muted); margin: 0; line-height: 1.4;">
+                        Drag the slider to preview how the line-art outlines grow dynamically and trace themselves in real-time as the user finishes their habits!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const slider = document.getElementById('progressSlider');
+        const valText = document.getElementById('progressVal');
+        
+        const line = document.getElementById('line1');
+        const path = document.getElementById('path1');
+        const circle = document.getElementById('circle1');
+        const rays = document.querySelectorAll('.ray');
+
+        function updateSVG(pct) {
+            valText.textContent = pct + '%';
+            const progress = pct / 100;
+
+            // Horizon Line
+            line.style.strokeDashoffset = 76 - (76 * progress);
+            
+            // Cloud path
+            path.style.strokeDashoffset = 50 - (50 * progress);
+            
+            // Sun Circle
+            circle.style.strokeDashoffset = 88 - (88 * progress);
+            
+            // Rays
+            rays.forEach(ray => {
+                ray.style.strokeDashoffset = 6 - (6 * progress);
+            });
+        }
+
+        slider.addEventListener('input', (e) => {
+            updateSVG(e.target.value);
+        });
+
+        // Initialize
+        updateSVG(40);
+    </script>
+</body>
+</html>
