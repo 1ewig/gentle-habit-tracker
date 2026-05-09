@@ -54,12 +54,9 @@ export function useHabitStats() {
   };
 
   const getRollingMonthlyDays = () => {
-    // 1. Calculate Sun-aligned starting point
-    const currentWeekSunday = new Date(today);
-    currentWeekSunday.setDate(today.getDate() - today.getDay());
-
-    const startDate = new Date(currentWeekSunday);
-    startDate.setDate(startDate.getDate() - 21);
+    // 1. Anchor Today at index 26 (2nd-to-last slot of a 28-day grid)
+    const startDate = new Date(today);
+    startDate.setDate(today.getDate() - 26);
 
     const todayKey = dateKey(today);
 

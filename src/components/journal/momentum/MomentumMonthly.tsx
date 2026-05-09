@@ -1,19 +1,9 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { getToday, cn } from '../../../lib/utils';
+import { getToday, cn, DAY_LABELS } from '../../../lib/utils';
 import { useHabitStats } from '../../../hooks/useHabitStats';
 import { useAppStore } from '../../../store/useAppStore';
 import { MOMENTUM_TRANSITIONS } from '../../../lib/motion';
-
-const LABELS = [
-  { id: 'sun', label: 's' },
-  { id: 'mon', label: 'm' },
-  { id: 'tue', label: 't' },
-  { id: 'wed', label: 'w' },
-  { id: 'thu', label: 't' },
-  { id: 'fri', label: 'f' },
-  { id: 'sat', label: 's' }
-];
 
 const getMonthDotClass = (isFuture: boolean, isToday: boolean, done: number, total: number) => {
   return cn(
@@ -63,17 +53,21 @@ export const MomentumMonthly: React.FC = () => {
 
   return (
     <div className="monthly-grid">
-      {LABELS.map((item, i) => (
-        <motion.div 
-          key={item.id} 
-          className={cn("month-day-lbl", i === today.getDay() && "is-today")}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: i * 0.02 }}
-        >
-          {item.label}
-        </motion.div>
-      ))}
+      {Array.from({ length: 7 }, (_, i) => {
+        const weekdayIdx = (today.getDay() - 5 + i + 7) % 7;
+        const isColumnToday = i === 5;
+        return (
+          <motion.div 
+            key={`col-${i}`} 
+            className={cn("month-day-lbl", isColumnToday && "is-today")}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: i * 0.02 }}
+          >
+            {DAY_LABELS[weekdayIdx]}
+          </motion.div>
+        );
+      })}
 
       {rollingDays.map((day, i) => (
         <MonthCell 
