@@ -19,7 +19,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
 .momentum-title {
@@ -60,12 +60,12 @@
   background: var(--bg);
   color: var(--text);
   font-weight: var(--ts-label-w-bold);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .mtab-panel {
   display: none;
-  height: 154px;
+  height: 184px;
   overflow: visible;
 }
 
@@ -78,7 +78,7 @@
   display: flex;
   gap: 8px;
   align-items: flex-end;
-  height: 154px;
+  height: 184px;
   padding-top: var(--s-16);
 }
 
@@ -149,7 +149,7 @@
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 8px;
-  height: 154px;
+  height: 184px;
   align-content: end;
 }
 
@@ -224,7 +224,7 @@
   display: grid;
   grid-template-columns: 1fr 1px 1fr;
   align-items: center;
-  height: 154px;
+  height: 184px;
 }
 
 .stats-divider {

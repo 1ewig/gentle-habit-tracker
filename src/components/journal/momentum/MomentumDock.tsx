@@ -3,16 +3,14 @@ import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '../../../lib/utils';
 import { MomentumWeekly } from './MomentumWeekly';
 import { MomentumMonthly } from './MomentumMonthly';
-import { MomentumStats } from './MomentumStats';
 import { PANEL_VARIANTS } from '../../../lib/motion';
 
-type TabType = 'weekly' | 'monthly' | 'stats';
+type TabType = 'weekly' | 'monthly';
 
 const MomentumHeader = ({ activeTab, onTabChange }: { activeTab: TabType; onTabChange: (t: TabType) => void }) => {
   const tabs: { id: TabType; label: string }[] = [
     { id: 'weekly', label: 'weekly' },
     { id: 'monthly', label: 'monthly' },
-    { id: 'stats', label: 'stats' },
   ];
 
   return (
@@ -58,7 +56,6 @@ export function MomentumDock() {
             >
               {activeTab === 'weekly' && <MomentumWeekly />}
               {activeTab === 'monthly' && <MomentumMonthly />}
-              {activeTab === 'stats' && <MomentumStats />}
             </motion.div>
           </AnimatePresence>
         </div>
