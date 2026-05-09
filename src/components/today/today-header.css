@@ -34,6 +34,14 @@
   object-fit: cover;
 }
 
+.today-header__intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s-8);
+  margin-top: calc(var(--s-8) * -0.5);
+}
+
 .today-header__greeting {
   font-family: var(--font-sans);
   font-size: var(--t-3xl);
@@ -41,9 +49,22 @@
   color: var(--text);
   line-height: var(--lh-none);
   letter-spacing: var(--ls-tight);
-  text-transform: capitalize; /* Overrides lowercase global reset */
+  text-transform: capitalize;
+  /* Overrides lowercase global reset */
   margin: 0;
-  margin-top: calc(var(--s-8) * -0.5);
+  transition: color 0.4s var(--bezier);
+}
+
+.today-header__subtext {
+  font-family: var(--font-sans);
+  font-size: var(--t-sm);
+  font-weight: var(--fw-reg);
+  color: var(--muted);
+  line-height: var(--lh-base);
+  letter-spacing: var(--ls-wide);
+  text-transform: none;
+  /* Overrides lowercase global reset */
+  margin: 0;
   transition: color 0.4s var(--bezier);
 }
 
@@ -52,7 +73,6 @@
   grid-template-columns: repeat(7, 1fr);
   gap: var(--s-8);
   width: 100%;
-  margin-top: var(--s-8);
 }
 
 .today-header__timeline-day {
@@ -107,4 +127,4 @@
 /* Today highlight indicator if not completed yet */
 .today-header__timeline-day.is-today:not(.is-done) .today-header__timeline-label {
   color: var(--accent);
-}
+}

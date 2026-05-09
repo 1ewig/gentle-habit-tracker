@@ -20,7 +20,10 @@ export const TodayHeader = () => {
       <div className="today-header__pfp-container">
         <img src={avatarImg} alt={profile.name} className="today-header__pfp" />
       </div>
-      <h1 className="today-header__greeting">Hi, {profile.name}</h1>
+      <div className="today-header__intro">
+        <h1 className="today-header__greeting">Hi, {profile.name}</h1>
+        <p className="today-header__subtext">{profile.bio}</p>
+      </div>
       
       <div className="today-header__timeline" role="group" aria-label="Weekly visual summary">
         {week.map((d, i) => {

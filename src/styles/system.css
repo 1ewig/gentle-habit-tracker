@@ -129,9 +129,9 @@
 
 
 
-/* Today Header Placement */
-.page.today .today-header {
-  margin-bottom: var(--s-24);
+/* Today Page Layout Gap */
+.page.today {
+  gap: var(--s-16);
 }
 
 /* Habit List Orchestration */
@@ -207,4 +207,3 @@
 }
 
 /* Customization Matrix Grid (5-column utility) */
-
