@@ -53,6 +53,32 @@ export function useHabitStats() {
     return { year, month, firstDay, daysInMonth };
   };
 
+  const getRollingMonthlyDays = () => {
+    // 1. Calculate Sun-aligned starting point
+    const currentWeekSunday = new Date(today);
+    currentWeekSunday.setDate(today.getDate() - today.getDay());
+
+    const startDate = new Date(currentWeekSunday);
+    startDate.setDate(startDate.getDate() - 21);
+
+    const todayKey = dateKey(today);
+
+    // 2. Pre-compute cell properties for a 28-day window
+    return Array.from({ length: 28 }, (_, i) => {
+      const dateObj = new Date(startDate);
+      dateObj.setDate(startDate.getDate() + i);
+      const dayKey = dateKey(dateObj);
+      const { done } = getDayStats(dayKey);
+
+      return {
+        dayKey,
+        isFuture: dateObj > today,
+        isToday: dayKey === todayKey,
+        done,
+      };
+    });
+  };
+
   return {
     habits,
     totalHabits,
@@ -60,6 +86,7 @@ export function useHabitStats() {
     countPerfectDays,
     getOverallConsistency,
     getMonthMetadata,
+    getRollingMonthlyDays,
     TODAY: today,
   };
 }

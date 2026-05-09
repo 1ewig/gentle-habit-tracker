@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { dateKey, getToday, cn } from '../../../lib/utils';
+import { getToday, cn } from '../../../lib/utils';
 import { useHabitStats } from '../../../hooks/useHabitStats';
 import { useAppStore } from '../../../store/useAppStore';
 import { MOMENTUM_TRANSITIONS } from '../../../lib/motion';
@@ -56,11 +56,10 @@ const MonthCell = ({
 };
 
 export const MomentumMonthly: React.FC = () => {
-  const { totalHabits, getDayStats, getMonthMetadata } = useHabitStats();
+  const { totalHabits, getRollingMonthlyDays } = useHabitStats();
   const { setSelectedDay } = useAppStore();
-  const { year, month, firstDay, daysInMonth } = getMonthMetadata();
   const today = getToday();
-  const todayKey = dateKey(today);
+  const rollingDays = getRollingMonthlyDays();
 
   return (
     <div className="monthly-grid">
@@ -76,29 +75,19 @@ export const MomentumMonthly: React.FC = () => {
         </motion.div>
       ))}
 
-      {Array.from({ length: firstDay }).map((_, i) => {
-        const padDate = new Date(year, month, -i);
-        return <div key={dateKey(padDate)} className="month-dot empty-cell" />;
-      })}
-
-      {Array.from({ length: daysInMonth }).map((_, i) => {
-        const dateObj = new Date(year, month, i + 1);
-        const dayKey = dateKey(dateObj);
-        const { done } = getDayStats(dayKey);
-
-        return (
-          <MonthCell 
-            key={dayKey}
-            dayKey={dayKey}
-            index={firstDay + i}
-            isFuture={dateObj > today}
-            isToday={dayKey === todayKey}
-            done={done}
-            total={totalHabits}
-            onSelect={setSelectedDay}
-          />
-        );
-      })}
+      {rollingDays.map((day, i) => (
+        <MonthCell 
+          key={day.dayKey}
+          dayKey={day.dayKey}
+          index={i}
+          isFuture={day.isFuture}
+          isToday={day.isToday}
+          done={day.done}
+          total={totalHabits}
+          onSelect={setSelectedDay}
+        />
+      ))}
     </div>
   );
 };
+

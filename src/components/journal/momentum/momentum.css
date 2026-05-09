@@ -65,7 +65,7 @@
 
 .mtab-panel {
   display: none;
-  height: 184px;
+  height: 154px;
   overflow: visible;
 }
 
@@ -78,7 +78,7 @@
   display: flex;
   gap: 8px;
   align-items: flex-end;
-  height: 184px;
+  height: 154px;
   padding-top: var(--s-16);
 }
 
@@ -149,8 +149,9 @@
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 8px;
-  height: 184px;
-  align-content: end;
+  height: 154px;
+  align-content: space-between;
+  padding-top: var(--s-16);
 }
 
 .month-day-lbl {
@@ -219,51 +220,6 @@
   pointer-events: none;
 }
 
-/* Stats Panel */
-.stats-split {
-  display: grid;
-  grid-template-columns: 1fr 1px 1fr;
-  align-items: center;
-  height: 184px;
-}
-
-.stats-divider {
-  height: 60px;
-  background: var(--rim);
-}
-
-.stat-block {
-  text-align: center;
-  padding: var(--s-16);
-}
-
-.stat-big {
-  font-family: var(--ts-stat-f);
-  font-size: var(--ts-stat-s);
-  font-weight: var(--ts-stat-w);
-  line-height: var(--ts-stat-l);
-  letter-spacing: var(--ts-stat-t);
-  color: var(--text);
-  margin-bottom: 8px;
-}
-
-.stat-big .stat-unit {
-  color: var(--muted);
-}
-
-.stat-big.accent {
-  color: var(--accent);
-}
-
-.stat-lbl {
-  font-family: var(--ts-overline-f);
-  font-size: var(--ts-overline-s);
-  font-weight: var(--ts-overline-w);
-  line-height: var(--ts-overline-l);
-  letter-spacing: var(--ts-overline-t);
-  text-transform: uppercase;
-  color: var(--accent);
-}
 
 /* Day Detail Dialog Internal Content Styles */
 .day-habits-list {
