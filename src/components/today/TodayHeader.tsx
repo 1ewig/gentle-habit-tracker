@@ -6,7 +6,7 @@ import avatarImg from '../../assets/avatar.png';
 
 export const TodayHeader = () => {
   const { profile } = useAppStore();
-  const { habits } = useHabitStats();
+  const { getDayStats } = useHabitStats();
   
   const today = getToday();
   const week = Array.from({ length: 7 }, (_, i) => {
@@ -26,7 +26,8 @@ export const TodayHeader = () => {
         {week.map((d, i) => {
           const key = dateKey(d);
           const isToday = i === 5;
-          const done = habits.length > 0 && habits.some(h => !!h.days[key]);
+          const { done: doneCount } = getDayStats(key);
+          const done = doneCount > 0;
           const dayLabel = DAY_LABELS[d.getDay()].toUpperCase();
 
           return (
@@ -40,6 +41,10 @@ export const TodayHeader = () => {
             >
               {done ? (
                 <div className="today-header__timeline-circle">
+                  {dayLabel}
+                </div>
+              ) : isToday ? (
+                <div className="today-header__timeline-outline">
                   {dayLabel}
                 </div>
               ) : (

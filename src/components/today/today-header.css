@@ -87,6 +87,23 @@
   transition: background-color 0.4s var(--bezier), color 0.4s var(--bezier), box-shadow 0.4s var(--bezier);
 }
 
+.today-header__timeline-outline {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--r-full);
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  font-family: var(--font-sans);
+  font-size: var(--t-sm);
+  font-weight: var(--fw-bold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 12px rgba(var(--glow-rgb), 0.15);
+  text-transform: uppercase;
+  transition: border-color 0.4s var(--bezier), color 0.4s var(--bezier), box-shadow 0.4s var(--bezier);
+}
+
 /* Today highlight indicator if not completed yet */
 .today-header__timeline-day.is-today:not(.is-done) .today-header__timeline-label {
   color: var(--accent);
