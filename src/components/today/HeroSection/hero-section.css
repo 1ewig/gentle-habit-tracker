@@ -57,12 +57,14 @@
 
 .hero-section__subtext {
   font-family: var(--font-sans);
-  font-size: var(--t-sm);
+  font-size: var(--t-base);
   font-weight: var(--fw-reg);
-  color: var(--muted);
-  line-height: var(--lh-base);
+  color: var(--soft);
+  line-height: var(--lh-relaxed);
   letter-spacing: var(--ls-wide);
   text-transform: none;
+  text-align: center;
+  max-width: 360px;
   /* Overrides lowercase global reset */
   margin: 0;
   transition: color 0.4s var(--bezier);
