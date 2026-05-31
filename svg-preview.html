@@ -245,6 +245,204 @@
             width: 100%;
             height: 100%;
         }
+
+        /* ── PREVENT TRANSITION FLICKERS & DEFINE KEYFRAMES ── */
+        @keyframes twinkle {
+
+            0%,
+            100% {
+                opacity: 0.2;
+                transform: scale(0.8);
+            }
+
+            50% {
+                opacity: 0.9;
+                transform: scale(1.15);
+            }
+        }
+
+        @keyframes sun-pulse {
+
+            0%,
+            100% {
+                opacity: 0.5;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.85;
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes float-gentle {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-4px);
+            }
+        }
+
+        @keyframes drift-left {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            50% {
+                transform: translateX(-8px);
+            }
+        }
+
+        @keyframes drift-right {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            50% {
+                transform: translateX(8px);
+            }
+        }
+
+        @keyframes rays-rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes bird-glide {
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(5px, -3px);
+            }
+        }
+
+        @keyframes lamp-glow {
+
+            0%,
+            100% {
+                opacity: 0.95;
+            }
+
+            50% {
+                opacity: 0.7;
+            }
+        }
+
+        @keyframes lamp-pulse {
+
+            0%,
+            100% {
+                opacity: 0.12;
+            }
+
+            50% {
+                opacity: 0.22;
+            }
+        }
+
+        @keyframes water-shimmer {
+
+            0%,
+            100% {
+                opacity: 0.35;
+                transform: scaleX(1);
+            }
+
+            50% {
+                opacity: 0.65;
+                transform: scaleX(1.1);
+            }
+        }
+
+        /* ── ANIMATION UTILITIES ── */
+        .twinkle-1 {
+            animation: twinkle 3s ease-in-out infinite;
+            transform-origin: center;
+        }
+
+        .twinkle-2 {
+            animation: twinkle 4s ease-in-out infinite 0.7s;
+            transform-origin: center;
+        }
+
+        .twinkle-3 {
+            animation: twinkle 3.5s ease-in-out infinite 1.4s;
+            transform-origin: center;
+        }
+
+        .twinkle-4 {
+            animation: twinkle 4.5s ease-in-out infinite 2.1s;
+            transform-origin: center;
+        }
+
+        .sun-pulse {
+            animation: sun-pulse 6s ease-in-out infinite;
+            transform-origin: center;
+        }
+
+        .sun-float {
+            animation: float-gentle 8s ease-in-out infinite;
+            transform-origin: center;
+        }
+
+        .moon-float {
+            animation: float-gentle 9s ease-in-out infinite;
+            transform-origin: center;
+        }
+
+        .cloud-drift-left {
+            animation: drift-left 14s ease-in-out infinite;
+            transform-origin: center;
+        }
+
+        .cloud-drift-right {
+            animation: drift-right 16s ease-in-out infinite;
+            transform-origin: center;
+        }
+
+        .rays-rotate-center {
+            animation: rays-rotate 40s linear infinite;
+            transform-origin: 100px 42px;
+        }
+
+        .rays-rotate-mo {
+            animation: rays-rotate 35s linear infinite;
+            transform-origin: 148px 60px;
+        }
+
+        .bird-fly {
+            animation: bird-glide 7s ease-in-out infinite;
+        }
+
+        .lamp-flicker {
+            animation: lamp-glow 4s ease-in-out infinite;
+        }
+
+        .lamp-pulse {
+            animation: lamp-pulse 4s ease-in-out infinite;
+        }
+
+        .water-shimmer {
+            animation: water-shimmer 5s ease-in-out infinite;
+            transform-origin: center;
+        }
     </style>
 </head>
 
@@ -253,10 +451,10 @@
 
         <header>
             <h1>Ambient SVG Showcase</h1>
-            <p>Eight times-of-day, rendered with depth — and a reactive outlined illustration.</p>
+            <p>Eight times-of-day, rendered with depth and pure CSS micro-animations.</p>
         </header>
 
-        <div class="section-title">🌅 Option 1 — Colored Ambient Daytimes</div>
+        <div class="section-title">🌅 Colored Ambient Daytimes (Dynamic & Animated)</div>
         <div class="grid">
 
             <!-- ══ 1. DEEP NIGHT ══════════════════════════════════════════ -->
@@ -290,26 +488,28 @@
                             transform="rotate(-30 130 70)" filter="url(#dn-soft)" />
                         <!-- Stars -->
                         <g filter="url(#dn-star-glow)" fill="#FFFFFF">
-                            <circle cx="38" cy="28" r="1.4" opacity="0.95" />
-                            <circle cx="68" cy="18" r="1.0" opacity="0.75" />
-                            <circle cx="95" cy="34" r="0.7" opacity="0.60" />
-                            <circle cx="120" cy="22" r="1.2" opacity="0.90" />
-                            <circle cx="155" cy="40" r="0.9" opacity="0.70" />
-                            <circle cx="170" cy="28" r="1.5" opacity="0.95" />
-                            <circle cx="148" cy="62" r="0.7" opacity="0.55" />
-                            <circle cx="30" cy="55" r="0.8" opacity="0.65" />
-                            <circle cx="52" cy="75" r="1.1" opacity="0.80" />
-                            <circle cx="80" cy="50" r="0.6" opacity="0.50" />
-                            <circle cx="110" cy="48" r="1.0" opacity="0.85" />
-                            <circle cx="178" cy="55" r="0.8" opacity="0.60" />
-                            <circle cx="22" cy="88" r="1.3" opacity="0.90" />
-                            <circle cx="160" cy="82" r="1.0" opacity="0.70" />
+                            <circle cx="38" cy="28" r="1.4" opacity="0.95" class="twinkle-1" />
+                            <circle cx="68" cy="18" r="1.0" opacity="0.75" class="twinkle-2" />
+                            <circle cx="95" cy="34" r="0.7" opacity="0.60" class="twinkle-3" />
+                            <circle cx="120" cy="22" r="1.2" opacity="0.90" class="twinkle-4" />
+                            <circle cx="155" cy="40" r="0.9" opacity="0.70" class="twinkle-1" />
+                            <circle cx="170" cy="28" r="1.5" opacity="0.95" class="twinkle-2" />
+                            <circle cx="148" cy="62" r="0.7" opacity="0.55" class="twinkle-3" />
+                            <circle cx="30" cy="55" r="0.8" opacity="0.65" class="twinkle-4" />
+                            <circle cx="52" cy="75" r="1.1" opacity="0.80" class="twinkle-1" />
+                            <circle cx="80" cy="50" r="0.6" opacity="0.50" class="twinkle-2" />
+                            <circle cx="110" cy="48" r="1.0" opacity="0.85" class="twinkle-3" />
+                            <circle cx="178" cy="55" r="0.8" opacity="0.60" class="twinkle-4" />
+                            <circle cx="22" cy="88" r="1.3" opacity="0.90" class="twinkle-1" />
+                            <circle cx="160" cy="82" r="1.0" opacity="0.70" class="twinkle-2" />
                         </g>
                         <!-- Moon glow halo -->
-                        <circle cx="68" cy="55" r="30" fill="url(#dn-moon-glow)" />
+                        <circle cx="68" cy="55" r="30" fill="url(#dn-moon-glow)" class="sun-pulse" />
                         <!-- Moon crescent -->
-                        <circle cx="68" cy="55" r="20" fill="#CDD9F4" />
-                        <circle cx="78" cy="49" r="17" fill="#0B0C2A" />
+                        <g class="moon-float">
+                            <circle cx="68" cy="55" r="20" fill="#CDD9F4" />
+                            <circle cx="78" cy="49" r="17" fill="#0B0C2A" />
+                        </g>
                         <!-- Ground silhouette -->
                         <rect x="0" y="158" width="200" height="42" fill="#06061A" />
                         <!-- Trees -->
@@ -359,17 +559,19 @@
                         <ellipse cx="100" cy="200" rx="100" ry="55" fill="url(#pd-glow)" />
                         <!-- Fading stars -->
                         <g filter="url(#pd-starfx)" fill="#FFFFFF">
-                            <circle cx="30" cy="22" r="1.0" opacity="0.55" />
-                            <circle cx="75" cy="15" r="0.8" opacity="0.45" />
-                            <circle cx="130" cy="25" r="1.2" opacity="0.65" />
-                            <circle cx="165" cy="18" r="0.7" opacity="0.40" />
-                            <circle cx="50" cy="50" r="0.9" opacity="0.35" />
-                            <circle cx="110" cy="42" r="0.7" opacity="0.30" />
-                            <circle cx="155" cy="55" r="1.0" opacity="0.40" />
+                            <circle cx="30" cy="22" r="1.0" opacity="0.55" class="twinkle-1" />
+                            <circle cx="75" cy="15" r="0.8" opacity="0.45" class="twinkle-2" />
+                            <circle cx="130" cy="25" r="1.2" opacity="0.65" class="twinkle-3" />
+                            <circle cx="165" cy="18" r="0.7" opacity="0.40" class="twinkle-4" />
+                            <circle cx="50" cy="50" r="0.9" opacity="0.35" class="twinkle-1" />
+                            <circle cx="110" cy="42" r="0.7" opacity="0.30" class="twinkle-2" />
+                            <circle cx="155" cy="55" r="1.0" opacity="0.40" class="twinkle-3" />
                         </g>
                         <!-- Crescent moon, fading -->
-                        <circle cx="145" cy="42" r="14" fill="#E8D5F5" opacity="0.50" />
-                        <circle cx="152" cy="37" r="11" fill="#1A0D3A" opacity="0.95" />
+                        <g class="moon-float">
+                            <circle cx="145" cy="42" r="14" fill="#E8D5F5" opacity="0.50" />
+                            <circle cx="152" cy="37" r="11" fill="#1A0D3A" opacity="0.95" />
+                        </g>
                         <!-- Thin horizon line glow -->
                         <ellipse cx="100" cy="168" rx="88" ry="6" fill="#FF4081" opacity="0.22"
                             filter="url(#pd-blur)" />
@@ -419,12 +621,13 @@
                         <!-- Sky -->
                         <circle cx="100" cy="100" r="100" fill="url(#sr-sky)" />
                         <!-- Sun halo -->
-                        <circle cx="100" cy="148" r="52" fill="url(#sr-halo)" clip-path="url(#sr-clip)" />
+                        <circle cx="100" cy="148" r="52" fill="url(#sr-halo)" class="sun-pulse"
+                            clip-path="url(#sr-clip)" />
                         <!-- Sun disc, half risen -->
                         <clipPath id="sr-sunclip">
                             <rect x="0" y="0" width="200" height="155" />
                         </clipPath>
-                        <circle cx="100" cy="155" r="28" fill="url(#sr-sun)" filter="url(#sr-glow)"
+                        <circle cx="100" cy="155" r="28" fill="url(#sr-sun)" filter="url(#sr-glow)" class="sun-float"
                             clip-path="url(#sr-sunclip)" />
                         <!-- Horizon shimmer rays -->
                         <g opacity="0.25" clip-path="url(#sr-clip)">
@@ -433,15 +636,19 @@
                             <polygon points="100,127 110,200 126,200" fill="#FFD740" opacity="0.6" />
                         </g>
                         <!-- Clouds blushed pink -->
-                        <ellipse cx="40" cy="95" rx="30" ry="10" fill="#FF8A65" opacity="0.55" />
-                        <ellipse cx="25" cy="98" rx="18" ry="7" fill="#FFCCBC" opacity="0.45" />
-                        <ellipse cx="160" cy="88" rx="28" ry="9" fill="#EF9A9A" opacity="0.50" />
-                        <ellipse cx="175" cy="91" rx="16" ry="6" fill="#FFCCBC" opacity="0.40" />
+                        <ellipse cx="40" cy="95" rx="30" ry="10" fill="#FF8A65" opacity="0.55"
+                            class="cloud-drift-left" />
+                        <ellipse cx="25" cy="98" rx="18" ry="7" fill="#FFCCBC" opacity="0.45"
+                            class="cloud-drift-left" />
+                        <ellipse cx="160" cy="88" rx="28" ry="9" fill="#EF9A9A" opacity="0.50"
+                            class="cloud-drift-right" />
+                        <ellipse cx="175" cy="91" rx="16" ry="6" fill="#FFCCBC" opacity="0.40"
+                            class="cloud-drift-right" />
                         <!-- Ground -->
                         <rect x="0" y="155" width="200" height="45" fill="#1A0A02" opacity="0.85"
                             clip-path="url(#sr-clip)" />
                         <!-- Water reflection strip -->
-                        <rect x="60" y="155" width="80" height="6" fill="#FFB300" opacity="0.35"
+                        <rect x="60" y="155" width="80" height="6" fill="#FFB300" opacity="0.35" class="water-shimmer"
                             clip-path="url(#sr-clip)" />
                     </svg>
                 </div>
@@ -478,10 +685,11 @@
                         </defs>
                         <circle cx="100" cy="100" r="100" fill="url(#mo-sky)" />
                         <!-- Sun -->
-                        <circle cx="148" cy="60" r="36" fill="url(#mo-halo)" />
-                        <circle cx="148" cy="60" r="22" fill="url(#mo-sun)" filter="url(#mo-sunfx)" />
+                        <circle cx="148" cy="60" r="36" fill="url(#mo-halo)" class="sun-pulse" />
+                        <circle cx="148" cy="60" r="22" fill="url(#mo-sun)" filter="url(#mo-sunfx)" class="sun-float" />
                         <!-- Soft rays -->
-                        <g stroke="#FFF9C4" stroke-width="1.5" opacity="0.6" stroke-linecap="round">
+                        <g stroke="#FFF9C4" stroke-width="1.5" opacity="0.6" stroke-linecap="round"
+                            class="rays-rotate-mo">
                             <line x1="148" y1="30" x2="148" y2="20" />
                             <line x1="148" y1="90" x2="148" y2="100" />
                             <line x1="118" y1="60" x2="108" y2="60" />
@@ -493,14 +701,14 @@
                         </g>
                         <!-- Fluffy clouds -->
                         <!-- Cloud 1 -->
-                        <g fill="white">
+                        <g fill="white" class="cloud-drift-left">
                             <ellipse cx="52" cy="82" rx="26" ry="12" />
                             <ellipse cx="38" cy="87" rx="16" ry="9" />
                             <ellipse cx="68" cy="88" rx="18" ry="9" />
                             <ellipse cx="52" cy="91" rx="28" ry="9" />
                         </g>
                         <!-- Cloud 2 (smaller) -->
-                        <g fill="white" opacity="0.85">
+                        <g fill="white" opacity="0.85" class="cloud-drift-right">
                             <ellipse cx="30" cy="115" rx="18" ry="8" />
                             <ellipse cx="18" cy="119" rx="12" ry="6" />
                             <ellipse cx="42" cy="120" rx="14" ry="6" />
@@ -509,7 +717,7 @@
                         <ellipse cx="100" cy="175" rx="105" ry="32" fill="#A5D6A7" />
                         <ellipse cx="100" cy="185" rx="105" ry="25" fill="#81C784" />
                         <!-- Birds -->
-                        <g stroke="#5C6BC0" stroke-width="1.5" fill="none" stroke-linecap="round">
+                        <g stroke="#5C6BC0" stroke-width="1.5" fill="none" stroke-linecap="round" class="bird-fly">
                             <path d="M60,60 Q65,54 70,60" />
                             <path d="M74,55 Q79,49 84,55" />
                         </g>
@@ -548,10 +756,11 @@
                         </defs>
                         <circle cx="100" cy="100" r="100" fill="url(#md-sky)" />
                         <!-- Sun overhead, full brightness -->
-                        <circle cx="100" cy="42" r="50" fill="url(#md-halo)" />
-                        <circle cx="100" cy="42" r="26" fill="url(#md-sun)" filter="url(#md-glow)" />
+                        <circle cx="100" cy="42" r="50" fill="url(#md-halo)" class="sun-pulse" />
+                        <circle cx="100" cy="42" r="26" fill="url(#md-sun)" filter="url(#md-glow)" class="sun-float" />
                         <!-- Crisp rays -->
-                        <g stroke="#FFF59D" stroke-width="2" opacity="0.75" stroke-linecap="round">
+                        <g stroke="#FFF59D" stroke-width="2" opacity="0.75" stroke-linecap="round"
+                            class="rays-rotate-center">
                             <line x1="100" y1="8" x2="100" y2="0" />
                             <line x1="123" y1="19" x2="130" y2="12" />
                             <line x1="134" y1="42" x2="144" y2="42" />
@@ -567,12 +776,12 @@
                         <ellipse cx="100" cy="130" rx="22" ry="22" fill="#388E3C" />
                         <ellipse cx="100" cy="185" rx="14" ry="3" fill="#1B5E20" opacity="0.35" />
                         <!-- Clouds almost white, high -->
-                        <g fill="#F5F5F5" opacity="0.7">
+                        <g fill="#F5F5F5" opacity="0.7" class="cloud-drift-left">
                             <ellipse cx="30" cy="90" rx="22" ry="8" />
                             <ellipse cx="16" cy="94" rx="12" ry="6" />
                             <ellipse cx="44" cy="94" rx="14" ry="6" />
                         </g>
-                        <g fill="#F5F5F5" opacity="0.65">
+                        <g fill="#F5F5F5" opacity="0.65" class="cloud-drift-right">
                             <ellipse cx="168" cy="96" rx="20" ry="7" />
                             <ellipse cx="154" cy="100" rx="12" ry="5" />
                             <ellipse cx="182" cy="100" rx="12" ry="5" />
@@ -612,8 +821,8 @@
                         </defs>
                         <circle cx="100" cy="100" r="100" fill="url(#af-sky)" />
                         <!-- Sun, lower in sky, warm cast -->
-                        <circle cx="155" cy="80" r="40" fill="url(#af-halo)" />
-                        <circle cx="155" cy="80" r="22" fill="url(#af-sun)" filter="url(#af-glow)" />
+                        <circle cx="155" cy="80" r="40" fill="url(#af-halo)" class="sun-pulse" />
+                        <circle cx="155" cy="80" r="22" fill="url(#af-sun)" filter="url(#af-glow)" class="sun-float" />
                         <!-- Long shadow on ground -->
                         <ellipse cx="100" cy="178" rx="105" ry="26" fill="#8BC34A" />
                         <rect x="96" y="140" width="8" height="40" fill="#558B2F" />
@@ -622,7 +831,7 @@
                         <ellipse cx="68" cy="183" rx="32" ry="4" fill="#1B5E20" opacity="0.28"
                             transform="rotate(-8 68 183)" />
                         <!-- Cumulus clouds, warm underside -->
-                        <g>
+                        <g class="cloud-drift-left">
                             <ellipse cx="42" cy="105" rx="28" ry="11" fill="#FFFFFF" />
                             <ellipse cx="22" cy="110" rx="18" ry="8" fill="#FFFFFF" />
                             <ellipse cx="62" cy="111" rx="20" ry="8" fill="#FFFFFF" />
@@ -673,14 +882,15 @@
                         </clipPath>
                         <circle cx="100" cy="100" r="100" fill="url(#gh-sky)" />
                         <!-- Sun touching horizon -->
-                        <circle cx="100" cy="150" r="62" fill="url(#gh-halo)" clip-path="url(#gh-clip)" />
+                        <circle cx="100" cy="150" r="62" fill="url(#gh-halo)" class="sun-pulse"
+                            clip-path="url(#gh-clip)" />
                         <clipPath id="gh-sunclip">
                             <rect x="0" y="0" width="200" height="156" />
                         </clipPath>
-                        <circle cx="100" cy="156" r="30" fill="url(#gh-sun)" filter="url(#gh-glow)"
+                        <circle cx="100" cy="156" r="30" fill="url(#gh-sun)" filter="url(#gh-glow)" class="sun-float"
                             clip-path="url(#gh-sunclip)" />
                         <!-- Dramatic cloud silhouettes lit from below -->
-                        <g clip-path="url(#gh-clip)">
+                        <g clip-path="url(#gh-clip)" class="cloud-drift-left">
                             <!-- Cloud 1 -->
                             <ellipse cx="38" cy="108" rx="28" ry="10" fill="#B71C1C" opacity="0.7" />
                             <ellipse cx="22" cy="113" rx="16" ry="7" fill="#4A148C" opacity="0.6" />
@@ -702,7 +912,7 @@
                         <ellipse cx="50" cy="168" rx="58" ry="22" fill="#12060A" clip-path="url(#gh-clip)" />
                         <ellipse cx="160" cy="172" rx="55" ry="18" fill="#120608" clip-path="url(#gh-clip)" />
                         <!-- Silhouette bird flock -->
-                        <g fill="#0D0015" clip-path="url(#gh-clip)" opacity="0.75">
+                        <g fill="#0D0015" clip-path="url(#gh-clip)" opacity="0.75" class="bird-fly">
                             <path d="M75,122 Q78,117 81,122" />
                             <path d="M85,118 Q88,113 91,118" />
                             <path d="M65,127 Q68,122 71,127" />
@@ -747,15 +957,15 @@
                         <!-- Horizon warm glow (sun just set) -->
                         <ellipse cx="100" cy="200" rx="100" ry="60" fill="url(#dusk-glow)" />
                         <!-- Venus / bright planet -->
-                        <circle cx="148" cy="38" r="2.5" fill="#FFFDE7" filter="url(#dusk-sf)" />
+                        <circle cx="148" cy="38" r="2.5" fill="#FFFDE7" filter="url(#dusk-sf)" class="twinkle-1" />
                         <!-- Early stars -->
                         <g fill="#FFFFFF" filter="url(#dusk-sf)">
-                            <circle cx="40" cy="28" r="1.2" opacity="0.70" />
-                            <circle cx="72" cy="18" r="0.9" opacity="0.55" />
-                            <circle cx="110" cy="30" r="1.0" opacity="0.60" />
-                            <circle cx="168" cy="22" r="1.1" opacity="0.65" />
-                            <circle cx="55" cy="52" r="0.7" opacity="0.40" />
-                            <circle cx="130" cy="48" r="0.8" opacity="0.45" />
+                            <circle cx="40" cy="28" r="1.2" opacity="0.70" class="twinkle-2" />
+                            <circle cx="72" cy="18" r="0.9" opacity="0.55" class="twinkle-3" />
+                            <circle cx="110" cy="30" r="1.0" opacity="0.60" class="twinkle-4" />
+                            <circle cx="168" cy="22" r="1.1" opacity="0.65" class="twinkle-1" />
+                            <circle cx="55" cy="52" r="0.7" opacity="0.40" class="twinkle-2" />
+                            <circle cx="130" cy="48" r="0.8" opacity="0.45" class="twinkle-3" />
                         </g>
                         <!-- Horizon glow line -->
                         <ellipse cx="100" cy="160" rx="90" ry="7" fill="#FF7043" opacity="0.30"
@@ -774,7 +984,6 @@
                             <rect x="125" y="126" width="20" height="34" />
                             <rect x="148" y="140" width="12" height="20" />
                             <rect x="162" y="133" width="16" height="27" />
-                            <!-- Lit windows -->
                         </g>
                         <!-- Tiny lit windows -->
                         <g fill="#FFD740" clip-path="url(#dusk-clip)" opacity="0.85">
@@ -826,25 +1035,25 @@
                         <circle cx="100" cy="100" r="100" fill="url(#ev-bg)" />
                         <!-- Stars -->
                         <g fill="#FFFFFF" filter="url(#ev-sf)">
-                            <circle cx="25" cy="22" r="1.3" opacity="0.90" />
-                            <circle cx="55" cy="14" r="0.9" opacity="0.70" />
-                            <circle cx="82" cy="28" r="1.5" opacity="0.95" />
-                            <circle cx="112" cy="18" r="1.0" opacity="0.75" />
-                            <circle cx="140" cy="32" r="0.8" opacity="0.60" />
-                            <circle cx="168" cy="20" r="1.2" opacity="0.85" />
-                            <circle cx="178" cy="52" r="0.9" opacity="0.65" />
-                            <circle cx="145" cy="65" r="1.4" opacity="0.90" />
-                            <circle cx="35" cy="60" r="1.0" opacity="0.75" />
-                            <circle cx="62" cy="48" r="0.7" opacity="0.55" />
-                            <circle cx="18" cy="85" r="1.1" opacity="0.80" />
+                            <circle cx="25" cy="22" r="1.3" opacity="0.90" class="twinkle-1" />
+                            <circle cx="55" cy="14" r="0.9" opacity="0.70" class="twinkle-2" />
+                            <circle cx="82" cy="28" r="1.5" opacity="0.95" class="twinkle-3" />
+                            <circle cx="112" cy="18" r="1.0" opacity="0.75" class="twinkle-4" />
+                            <circle cx="140" cy="32" r="0.8" opacity="0.60" class="twinkle-1" />
+                            <circle cx="168" cy="20" r="1.2" opacity="0.85" class="twinkle-2" />
+                            <circle cx="178" cy="52" r="0.9" opacity="0.65" class="twinkle-3" />
+                            <circle cx="145" cy="65" r="1.4" opacity="0.90" class="twinkle-4" />
+                            <circle cx="35" cy="60" r="1.0" opacity="0.75" class="twinkle-1" />
+                            <circle cx="62" cy="48" r="0.7" opacity="0.55" class="twinkle-2" />
+                            <circle cx="18" cy="85" r="1.1" opacity="0.80" class="twinkle-3" />
                         </g>
                         <!-- Moon halo -->
-                        <circle cx="62" cy="55" r="32" fill="url(#ev-moonhalo)" />
-                        <!-- Full moon with craters -->
-                        <circle cx="62" cy="55" r="20" fill="url(#ev-moon)" />
-                        <circle cx="56" cy="50" r="4" fill="#B8AFA0" opacity="0.45" />
-                        <circle cx="70" cy="58" r="3" fill="#B8AFA0" opacity="0.35" />
-                        <circle cx="62" cy="64" r="2.5" fill="#B8AFA0" opacity="0.30" />
+                        <circle cx="62" cy="55" r="32" fill="url(#ev-moonhalo)" class="sun-pulse" />
+                        <!-- Moon with craters -->
+                        <circle cx="62" cy="55" r="20" fill="url(#ev-moon)" class="moon-float" />
+                        <circle cx="56" cy="50" r="4" fill="#B8AFA0" opacity="0.45" class="moon-float" />
+                        <circle cx="70" cy="58" r="3" fill="#B8AFA0" opacity="0.35" class="moon-float" />
+                        <circle cx="62" cy="64" r="2.5" fill="#B8AFA0" opacity="0.30" class="moon-float" />
                         <!-- Ground + lamp glow -->
                         <rect x="0" y="162" width="200" height="38" fill="#060614" clip-path="url(#ev-clip)" />
                         <!-- Street lamp -->
@@ -852,10 +1061,11 @@
                             clip-path="url(#ev-clip)" />
                         <ellipse cx="155" cy="128" rx="8" ry="3" fill="#8888AA" clip-path="url(#ev-clip)" />
                         <!-- Lamp light cone -->
-                        <path d="M147,130 L138,170 L172,170 L163,130 Z" fill="#FFD740" opacity="0.12"
+                        <path d="M147,130 L138,170 L172,170 L163,130 Z" fill="#FFD740" opacity="0.12" class="lamp-pulse"
                             clip-path="url(#ev-clip)" />
                         <!-- Lamp bulb -->
-                        <circle cx="155" cy="128" r="3.5" fill="#FFEE58" opacity="0.95" clip-path="url(#ev-clip)" />
+                        <circle cx="155" cy="128" r="3.5" fill="#FFEE58" opacity="0.95" class="lamp-flicker"
+                            clip-path="url(#ev-clip)" />
                         <!-- Moon reflection on ground -->
                         <ellipse cx="62" cy="167" rx="30" ry="4" fill="#4A6080" opacity="0.15" />
                     </svg>
@@ -866,165 +1076,7 @@
 
         </div><!-- /grid -->
 
-        <!-- ═══════════════════════════════════════════════════════════════
-         OPTION 2 — INTERACTIVE OUTLINED ILLUSTRATION
-    ════════════════════════════════════════════════════════════════════ -->
-        <div class="section-title">✏️ Option 2 — Reactive Outlined Illustration</div>
-        <div class="interactive-section">
-            <div class="badge">interactive sandbox</div>
-            <div class="interactive-layout">
-
-                <div class="outlined-preview">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Ghost / track layer -->
-                        <g stroke="var(--border)" stroke-width="2.5" fill="none" stroke-linecap="round"
-                            stroke-linejoin="round">
-                            <!-- Ground line -->
-                            <line x1="16" y1="152" x2="184" y2="152" />
-                            <!-- Hill -->
-                            <path d="M16,152 Q60,108 100,140 Q140,108 184,152" />
-                            <!-- Cloud -->
-                            <ellipse cx="56" cy="92" rx="22" ry="9" />
-                            <ellipse cx="40" cy="96" rx="13" ry="7" />
-                            <ellipse cx="72" cy="96" rx="14" ry="7" />
-                            <!-- Sun circle -->
-                            <circle cx="142" cy="62" r="20" />
-                            <!-- Rays -->
-                            <line x1="142" y1="34" x2="142" y2="26" />
-                            <line x1="142" y1="90" x2="142" y2="98" />
-                            <line x1="114" y1="62" x2="106" y2="62" />
-                            <line x1="170" y1="62" x2="178" y2="62" />
-                            <line x1="122" y1="42" x2="116" y2="36" />
-                            <line x1="162" y1="42" x2="168" y2="36" />
-                            <line x1="122" y1="82" x2="116" y2="88" />
-                            <line x1="162" y1="82" x2="168" y2="88" />
-                            <!-- Tree trunk -->
-                            <line x1="80" y1="152" x2="80" y2="122" />
-                            <!-- Tree canopy -->
-                            <path d="M60,130 Q80,104 100,130" />
-                            <path d="M65,120 Q80,100 95,120" />
-                            <!-- Bird 1 -->
-                            <path d="M30,70 Q36,62 42,70" />
-                            <!-- Bird 2 -->
-                            <path d="M46,64 Q52,56 58,64" />
-                        </g>
-
-                        <!-- Live / filled layer (strokes in) -->
-                        <g id="live-layer" stroke="var(--accent)" stroke-width="2.5" fill="none" stroke-linecap="round"
-                            stroke-linejoin="round">
-                            <!-- Ground line  DA=168 -->
-                            <line id="el-ground" x1="16" y1="152" x2="184" y2="152" stroke-dasharray="168"
-                                stroke-dashoffset="168" />
-                            <!-- Hill  DA≈220 -->
-                            <path id="el-hill" d="M16,152 Q60,108 100,140 Q140,108 184,152" stroke-dasharray="220"
-                                stroke-dashoffset="220" />
-                            <!-- Cloud ellipses -->
-                            <ellipse id="el-cloud1" cx="56" cy="92" rx="22" ry="9" stroke-dasharray="98"
-                                stroke-dashoffset="98" />
-                            <ellipse id="el-cloud2" cx="40" cy="96" rx="13" ry="7" stroke-dasharray="64"
-                                stroke-dashoffset="64" />
-                            <ellipse id="el-cloud3" cx="72" cy="96" rx="14" ry="7" stroke-dasharray="67"
-                                stroke-dashoffset="67" />
-                            <!-- Sun -->
-                            <circle id="el-sun" cx="142" cy="62" r="20" stroke-dasharray="126"
-                                stroke-dashoffset="126" />
-                            <!-- 8 rays -->
-                            <line class="el-ray" x1="142" y1="34" x2="142" y2="26" stroke-dasharray="8"
-                                stroke-dashoffset="8" />
-                            <line class="el-ray" x1="142" y1="90" x2="142" y2="98" stroke-dasharray="8"
-                                stroke-dashoffset="8" />
-                            <line class="el-ray" x1="114" y1="62" x2="106" y2="62" stroke-dasharray="8"
-                                stroke-dashoffset="8" />
-                            <line class="el-ray" x1="170" y1="62" x2="178" y2="62" stroke-dasharray="8"
-                                stroke-dashoffset="8" />
-                            <line class="el-ray" x1="122" y1="42" x2="116" y2="36" stroke-dasharray="9"
-                                stroke-dashoffset="9" />
-                            <line class="el-ray" x1="162" y1="42" x2="168" y2="36" stroke-dasharray="9"
-                                stroke-dashoffset="9" />
-                            <line class="el-ray" x1="122" y1="82" x2="116" y2="88" stroke-dasharray="9"
-                                stroke-dashoffset="9" />
-                            <line class="el-ray" x1="162" y1="82" x2="168" y2="88" stroke-dasharray="9"
-                                stroke-dashoffset="9" />
-                            <!-- Tree trunk DA=30 -->
-                            <line id="el-trunk" x1="80" y1="152" x2="80" y2="122" stroke-dasharray="30"
-                                stroke-dashoffset="30" />
-                            <!-- Canopy paths DA≈60 each -->
-                            <path id="el-canopy1" d="M60,130 Q80,104 100,130" stroke-dasharray="60"
-                                stroke-dashoffset="60" />
-                            <path id="el-canopy2" d="M65,120 Q80,100 95,120" stroke-dasharray="55"
-                                stroke-dashoffset="55" />
-                            <!-- Birds -->
-                            <path id="el-bird1" d="M30,70 Q36,62 42,70" stroke-dasharray="22" stroke-dashoffset="22" />
-                            <path id="el-bird2" d="M46,64 Q52,56 58,64" stroke-dasharray="22" stroke-dashoffset="22" />
-                        </g>
-                    </svg>
-                </div>
-
-                <div class="controls">
-                    <div class="slider-label">
-                        <span>Habits Completion</span>
-                        <span class="slider-value" id="progressVal">40%</span>
-                    </div>
-                    <input type="range" id="progressSlider" min="0" max="100" value="40">
-                    <p style="font-size:0.85rem;color:var(--muted);margin:0;line-height:1.6;">
-                        Each element draws itself in as you complete more habits.
-                        Ground → hills → clouds → sun & rays → tree → birds.
-                        The scene fully reveals at 100 %.
-                    </p>
-                </div>
-            </div>
-        </div>
-
     </div><!-- /container -->
-
-    <script>
-        // Elements with their dash-array lengths (must match SVG attributes)
-        const elements = [
-            { id: 'el-ground', da: 168, threshold: 0 },
-            { id: 'el-hill', da: 220, threshold: 0.08 },
-            { id: 'el-cloud1', da: 98, threshold: 0.20 },
-            { id: 'el-cloud2', da: 64, threshold: 0.26 },
-            { id: 'el-cloud3', da: 67, threshold: 0.30 },
-            { id: 'el-sun', da: 126, threshold: 0.38 },
-            { id: 'el-trunk', da: 30, threshold: 0.62 },
-            { id: 'el-canopy1', da: 60, threshold: 0.68 },
-            { id: 'el-canopy2', da: 55, threshold: 0.74 },
-            { id: 'el-bird1', da: 22, threshold: 0.86 },
-            { id: 'el-bird2', da: 22, threshold: 0.92 },
-        ];
-        const rays = document.querySelectorAll('.el-ray');
-        const RAY_DA = 9;
-        const RAY_THRESHOLD = 0.50;
-
-        // Apply CSS transitions once (avoids inline repetition in SVG)
-        [...document.querySelectorAll('#live-layer line, #live-layer ellipse, #live-layer circle, #live-layer path')]
-            .forEach(el => {
-                el.style.transition = 'stroke-dashoffset 0.55s cubic-bezier(0.16,1,0.3,1)';
-            });
-
-        function updateSVG(pct) {
-            document.getElementById('progressVal').textContent = pct + '%';
-            const p = pct / 100;
-
-            elements.forEach(({ id, da, threshold }) => {
-                const el = document.getElementById(id);
-                if (!el) return;
-                const localProgress = Math.max(0, Math.min(1, (p - threshold) / (1 - threshold)));
-                el.style.strokeDashoffset = da - da * localProgress;
-            });
-
-            // Rays
-            const rayProgress = Math.max(0, Math.min(1, (p - RAY_THRESHOLD) / (1 - RAY_THRESHOLD)));
-            rays.forEach(r => {
-                const da = parseFloat(r.getAttribute('stroke-dasharray')) || RAY_DA;
-                r.style.strokeDashoffset = da - da * rayProgress;
-            });
-        }
-
-        const slider = document.getElementById('progressSlider');
-        slider.addEventListener('input', e => updateSVG(Number(e.target.value)));
-        updateSVG(40);
-    </script>
 </body>
 
 </html>
